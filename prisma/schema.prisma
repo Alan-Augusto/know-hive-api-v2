@@ -24,11 +24,55 @@ model User {
 }
 
 model Collection {
-  id          String   @id @default(uuid())
+  id          String               @id @default(uuid())
   title       String
   description String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  created_at  DateTime             @default(now())
+  updated_at  DateTime             @updatedAt
   author_id   String
-  author      User     @relation(fields: [author_id], references: [id])
+  author      User                 @relation(fields: [author_id], references: [id])
+  questions   QuestionCollection[]
+}
+
+model Question {
+  id           String               @id @default(uuid())
+  statement    String
+  type_id      Int
+  type         QuestionType         @relation(fields: [type_id], references: [id])
+  created_at   DateTime             @default(now())
+  updated_at   DateTime             @updatedAt
+  collections  QuestionCollection[]
+  alternatives Alternative[] // Relação um-para-muitos com as alternativas
+  // Adicione outros campos que você achar necessário para uma questão
+  // ex: difficulty String?, subject String?
+}
+
+model QuestionType {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String?
+  questions   Question[]
+}
+
+model Alternative {
+  id          String   @id @default(uuid())
+  text        String // Texto da alternativa
+  is_correct  Boolean  @default(false) // Indica se esta é a alternativa correta
+  question_id String
+  question    Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now()) // Opcional: se quiser saber quando a alternativa foi criada
+  updated_at DateTime @updatedAt // Opcional: se quiser saber quando foi atualizada
+
+  @@index([question_id]) // Index para otimizar a busca de alternativas por questão
+}
+
+model QuestionCollection {
+  question_id   String
+  collection_id String
+  question      Question   @relation(fields: [question_id], references: [id], onDelete: Cascade) // Adicionei onDelete: Cascade
+  collection    Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade) // Adicionei onDelete: Cascade
+  assigned_at   DateTime   @default(now())
+
+  @@id([question_id, collection_id])
 }

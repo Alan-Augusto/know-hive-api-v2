@@ -137,6 +137,35 @@ exports.Prisma.CollectionScalarFieldEnum = {
   author_id: 'author_id'
 };
 
+exports.Prisma.QuestionScalarFieldEnum = {
+  id: 'id',
+  statement: 'statement',
+  type_id: 'type_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.QuestionTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.AlternativeScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  is_correct: 'is_correct',
+  question_id: 'question_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.QuestionCollectionScalarFieldEnum = {
+  question_id: 'question_id',
+  collection_id: 'collection_id',
+  assigned_at: 'assigned_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -155,7 +184,11 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Collection: 'Collection'
+  Collection: 'Collection',
+  Question: 'Question',
+  QuestionType: 'QuestionType',
+  Alternative: 'Alternative',
+  QuestionCollection: 'QuestionCollection'
 };
 
 /**
