@@ -142,7 +142,8 @@ exports.Prisma.QuestionScalarFieldEnum = {
   statement: 'statement',
   type_id: 'type_id',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  author_id: 'author_id'
 };
 
 exports.Prisma.QuestionTypeScalarFieldEnum = {
