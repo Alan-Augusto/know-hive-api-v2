@@ -15,24 +15,26 @@ datasource db {
 }
 
 model User {
-  id                  String       @id @default(uuid())
-  email               String       @unique
+  id                  String                 @id @default(uuid())
+  email               String                 @unique
   password            String
   name                String?
   profile_picture     String?
   collections_created Collection[]
-  questions_created  Question[]
+  questions_created   Question[]
+  collections_access  CollectionUserAccess[]
 }
 
 model Collection {
-  id          String               @id @default(uuid())
+  id          String                 @id @default(uuid())
   title       String
   description String
-  created_at  DateTime             @default(now())
-  updated_at  DateTime             @updatedAt
+  created_at  DateTime               @default(now())
+  updated_at  DateTime               @updatedAt
   author_id   String
-  author      User                 @relation(fields: [author_id], references: [id])
+  author      User                   @relation(fields: [author_id], references: [id])
   questions   QuestionCollection[]
+  permissions CollectionUserAccess[]
 }
 
 model Question {
@@ -76,4 +78,27 @@ model QuestionCollection {
   assigned_at   DateTime   @default(now())
 
   @@id([question_id, collection_id])
+}
+
+model CollectionPermissionType {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  description String?
+  collections CollectionUserAccess[]
+}
+
+model CollectionUserAccess {
+  id                 String                   @id @default(uuid())
+  user_id            String
+  collection_id      String
+  permission_type_id Int
+  user               User                     @relation(fields: [user_id], references: [id])
+  collection         Collection               @relation(fields: [collection_id], references: [id])
+  permission_type    CollectionPermissionType @relation(fields: [permission_type_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([user_id, collection_id]) // Garante que um usuário só pode ter uma permissão por coleção
+  @@index([collection_id]) // Index para otimizar a busca de permissões por coleção
 }

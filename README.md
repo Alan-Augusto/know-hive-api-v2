@@ -48,3 +48,8 @@ Para gera uma nova migration aplicando todas as alteraçoes pendentes no s model
 ```bash
 npx prisma migrate dev --name <nome-migration>
 ```
+
+Para formatar o arquivo de esquema do Prisma, utilize o comando:
+```bash
+npx prisma format
+```

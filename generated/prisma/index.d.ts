@@ -43,6 +43,16 @@ export type Alternative = $Result.DefaultSelection<Prisma.$AlternativePayload>
  * 
  */
 export type QuestionCollection = $Result.DefaultSelection<Prisma.$QuestionCollectionPayload>
+/**
+ * Model CollectionPermissionType
+ * 
+ */
+export type CollectionPermissionType = $Result.DefaultSelection<Prisma.$CollectionPermissionTypePayload>
+/**
+ * Model CollectionUserAccess
+ * 
+ */
+export type CollectionUserAccess = $Result.DefaultSelection<Prisma.$CollectionUserAccessPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -228,6 +238,26 @@ export class PrismaClient<
     * ```
     */
   get questionCollection(): Prisma.QuestionCollectionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.collectionPermissionType`: Exposes CRUD operations for the **CollectionPermissionType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CollectionPermissionTypes
+    * const collectionPermissionTypes = await prisma.collectionPermissionType.findMany()
+    * ```
+    */
+  get collectionPermissionType(): Prisma.CollectionPermissionTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.collectionUserAccess`: Exposes CRUD operations for the **CollectionUserAccess** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CollectionUserAccesses
+    * const collectionUserAccesses = await prisma.collectionUserAccess.findMany()
+    * ```
+    */
+  get collectionUserAccess(): Prisma.CollectionUserAccessDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -673,7 +703,9 @@ export namespace Prisma {
     Question: 'Question',
     QuestionType: 'QuestionType',
     Alternative: 'Alternative',
-    QuestionCollection: 'QuestionCollection'
+    QuestionCollection: 'QuestionCollection',
+    CollectionPermissionType: 'CollectionPermissionType',
+    CollectionUserAccess: 'CollectionUserAccess'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "collection" | "question" | "questionType" | "alternative" | "questionCollection"
+      modelProps: "user" | "collection" | "question" | "questionType" | "alternative" | "questionCollection" | "collectionPermissionType" | "collectionUserAccess"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1140,6 +1172,154 @@ export namespace Prisma {
           }
         }
       }
+      CollectionPermissionType: {
+        payload: Prisma.$CollectionPermissionTypePayload<ExtArgs>
+        fields: Prisma.CollectionPermissionTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CollectionPermissionTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CollectionPermissionTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>
+          }
+          findFirst: {
+            args: Prisma.CollectionPermissionTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CollectionPermissionTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>
+          }
+          findMany: {
+            args: Prisma.CollectionPermissionTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>[]
+          }
+          create: {
+            args: Prisma.CollectionPermissionTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>
+          }
+          createMany: {
+            args: Prisma.CollectionPermissionTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CollectionPermissionTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>[]
+          }
+          delete: {
+            args: Prisma.CollectionPermissionTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>
+          }
+          update: {
+            args: Prisma.CollectionPermissionTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.CollectionPermissionTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CollectionPermissionTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CollectionPermissionTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.CollectionPermissionTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionPermissionTypePayload>
+          }
+          aggregate: {
+            args: Prisma.CollectionPermissionTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCollectionPermissionType>
+          }
+          groupBy: {
+            args: Prisma.CollectionPermissionTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CollectionPermissionTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CollectionPermissionTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<CollectionPermissionTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      CollectionUserAccess: {
+        payload: Prisma.$CollectionUserAccessPayload<ExtArgs>
+        fields: Prisma.CollectionUserAccessFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CollectionUserAccessFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CollectionUserAccessFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>
+          }
+          findFirst: {
+            args: Prisma.CollectionUserAccessFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CollectionUserAccessFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>
+          }
+          findMany: {
+            args: Prisma.CollectionUserAccessFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>[]
+          }
+          create: {
+            args: Prisma.CollectionUserAccessCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>
+          }
+          createMany: {
+            args: Prisma.CollectionUserAccessCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CollectionUserAccessCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>[]
+          }
+          delete: {
+            args: Prisma.CollectionUserAccessDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>
+          }
+          update: {
+            args: Prisma.CollectionUserAccessUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>
+          }
+          deleteMany: {
+            args: Prisma.CollectionUserAccessDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CollectionUserAccessUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CollectionUserAccessUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>[]
+          }
+          upsert: {
+            args: Prisma.CollectionUserAccessUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CollectionUserAccessPayload>
+          }
+          aggregate: {
+            args: Prisma.CollectionUserAccessAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCollectionUserAccess>
+          }
+          groupBy: {
+            args: Prisma.CollectionUserAccessGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CollectionUserAccessGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CollectionUserAccessCountArgs<ExtArgs>
+            result: $Utils.Optional<CollectionUserAccessCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1230,6 +1410,8 @@ export namespace Prisma {
     questionType?: QuestionTypeOmit
     alternative?: AlternativeOmit
     questionCollection?: QuestionCollectionOmit
+    collectionPermissionType?: CollectionPermissionTypeOmit
+    collectionUserAccess?: CollectionUserAccessOmit
   }
 
   /* Types for Logging */
@@ -1326,11 +1508,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     collections_created: number
     questions_created: number
+    collections_access: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_created?: boolean | UserCountOutputTypeCountCollections_createdArgs
     questions_created?: boolean | UserCountOutputTypeCountQuestions_createdArgs
+    collections_access?: boolean | UserCountOutputTypeCountCollections_accessArgs
   }
 
   // Custom InputTypes
@@ -1358,6 +1542,13 @@ export namespace Prisma {
     where?: QuestionWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCollections_accessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CollectionUserAccessWhereInput
+  }
+
 
   /**
    * Count Type CollectionCountOutputType
@@ -1365,10 +1556,12 @@ export namespace Prisma {
 
   export type CollectionCountOutputType = {
     questions: number
+    permissions: number
   }
 
   export type CollectionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | CollectionCountOutputTypeCountQuestionsArgs
+    permissions?: boolean | CollectionCountOutputTypeCountPermissionsArgs
   }
 
   // Custom InputTypes
@@ -1387,6 +1580,13 @@ export namespace Prisma {
    */
   export type CollectionCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QuestionCollectionWhereInput
+  }
+
+  /**
+   * CollectionCountOutputType without action
+   */
+  export type CollectionCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CollectionUserAccessWhereInput
   }
 
 
@@ -1458,6 +1658,37 @@ export namespace Prisma {
    */
   export type QuestionTypeCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QuestionWhereInput
+  }
+
+
+  /**
+   * Count Type CollectionPermissionTypeCountOutputType
+   */
+
+  export type CollectionPermissionTypeCountOutputType = {
+    collections: number
+  }
+
+  export type CollectionPermissionTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    collections?: boolean | CollectionPermissionTypeCountOutputTypeCountCollectionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CollectionPermissionTypeCountOutputType without action
+   */
+  export type CollectionPermissionTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionTypeCountOutputType
+     */
+    select?: CollectionPermissionTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CollectionPermissionTypeCountOutputType without action
+   */
+  export type CollectionPermissionTypeCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CollectionUserAccessWhereInput
   }
 
 
@@ -1631,6 +1862,7 @@ export namespace Prisma {
     profile_picture?: boolean
     collections_created?: boolean | User$collections_createdArgs<ExtArgs>
     questions_created?: boolean | User$questions_createdArgs<ExtArgs>
+    collections_access?: boolean | User$collections_accessArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1662,6 +1894,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_created?: boolean | User$collections_createdArgs<ExtArgs>
     questions_created?: boolean | User$questions_createdArgs<ExtArgs>
+    collections_access?: boolean | User$collections_accessArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1672,6 +1905,7 @@ export namespace Prisma {
     objects: {
       collections_created: Prisma.$CollectionPayload<ExtArgs>[]
       questions_created: Prisma.$QuestionPayload<ExtArgs>[]
+      collections_access: Prisma.$CollectionUserAccessPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2075,6 +2309,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     collections_created<T extends User$collections_createdArgs<ExtArgs> = {}>(args?: Subset<T, User$collections_createdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     questions_created<T extends User$questions_createdArgs<ExtArgs> = {}>(args?: Subset<T, User$questions_createdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    collections_access<T extends User$collections_accessArgs<ExtArgs> = {}>(args?: Subset<T, User$collections_accessArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2545,6 +2780,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.collections_access
+   */
+  export type User$collections_accessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    where?: CollectionUserAccessWhereInput
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    cursor?: CollectionUserAccessWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2737,6 +2996,7 @@ export namespace Prisma {
     author_id?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Collection$questionsArgs<ExtArgs>
+    permissions?: boolean | Collection$permissionsArgs<ExtArgs>
     _count?: boolean | CollectionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["collection"]>
 
@@ -2773,6 +3033,7 @@ export namespace Prisma {
   export type CollectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Collection$questionsArgs<ExtArgs>
+    permissions?: boolean | Collection$permissionsArgs<ExtArgs>
     _count?: boolean | CollectionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CollectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2787,6 +3048,7 @@ export namespace Prisma {
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
       questions: Prisma.$QuestionCollectionPayload<ExtArgs>[]
+      permissions: Prisma.$CollectionUserAccessPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3191,6 +3453,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     questions<T extends Collection$questionsArgs<ExtArgs> = {}>(args?: Subset<T, Collection$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionCollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    permissions<T extends Collection$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, Collection$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3643,6 +3906,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: QuestionCollectionScalarFieldEnum | QuestionCollectionScalarFieldEnum[]
+  }
+
+  /**
+   * Collection.permissions
+   */
+  export type Collection$permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    where?: CollectionUserAccessWhereInput
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    cursor?: CollectionUserAccessWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
   }
 
   /**
@@ -8025,6 +8312,2205 @@ export namespace Prisma {
 
 
   /**
+   * Model CollectionPermissionType
+   */
+
+  export type AggregateCollectionPermissionType = {
+    _count: CollectionPermissionTypeCountAggregateOutputType | null
+    _avg: CollectionPermissionTypeAvgAggregateOutputType | null
+    _sum: CollectionPermissionTypeSumAggregateOutputType | null
+    _min: CollectionPermissionTypeMinAggregateOutputType | null
+    _max: CollectionPermissionTypeMaxAggregateOutputType | null
+  }
+
+  export type CollectionPermissionTypeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CollectionPermissionTypeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CollectionPermissionTypeMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    description: string | null
+  }
+
+  export type CollectionPermissionTypeMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    description: string | null
+  }
+
+  export type CollectionPermissionTypeCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    _all: number
+  }
+
+
+  export type CollectionPermissionTypeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type CollectionPermissionTypeSumAggregateInputType = {
+    id?: true
+  }
+
+  export type CollectionPermissionTypeMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+  }
+
+  export type CollectionPermissionTypeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+  }
+
+  export type CollectionPermissionTypeCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    _all?: true
+  }
+
+  export type CollectionPermissionTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CollectionPermissionType to aggregate.
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionPermissionTypes to fetch.
+     */
+    orderBy?: CollectionPermissionTypeOrderByWithRelationInput | CollectionPermissionTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CollectionPermissionTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionPermissionTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionPermissionTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CollectionPermissionTypes
+    **/
+    _count?: true | CollectionPermissionTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CollectionPermissionTypeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CollectionPermissionTypeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CollectionPermissionTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CollectionPermissionTypeMaxAggregateInputType
+  }
+
+  export type GetCollectionPermissionTypeAggregateType<T extends CollectionPermissionTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateCollectionPermissionType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCollectionPermissionType[P]>
+      : GetScalarType<T[P], AggregateCollectionPermissionType[P]>
+  }
+
+
+
+
+  export type CollectionPermissionTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CollectionPermissionTypeWhereInput
+    orderBy?: CollectionPermissionTypeOrderByWithAggregationInput | CollectionPermissionTypeOrderByWithAggregationInput[]
+    by: CollectionPermissionTypeScalarFieldEnum[] | CollectionPermissionTypeScalarFieldEnum
+    having?: CollectionPermissionTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CollectionPermissionTypeCountAggregateInputType | true
+    _avg?: CollectionPermissionTypeAvgAggregateInputType
+    _sum?: CollectionPermissionTypeSumAggregateInputType
+    _min?: CollectionPermissionTypeMinAggregateInputType
+    _max?: CollectionPermissionTypeMaxAggregateInputType
+  }
+
+  export type CollectionPermissionTypeGroupByOutputType = {
+    id: number
+    name: string
+    description: string | null
+    _count: CollectionPermissionTypeCountAggregateOutputType | null
+    _avg: CollectionPermissionTypeAvgAggregateOutputType | null
+    _sum: CollectionPermissionTypeSumAggregateOutputType | null
+    _min: CollectionPermissionTypeMinAggregateOutputType | null
+    _max: CollectionPermissionTypeMaxAggregateOutputType | null
+  }
+
+  type GetCollectionPermissionTypeGroupByPayload<T extends CollectionPermissionTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CollectionPermissionTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CollectionPermissionTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CollectionPermissionTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], CollectionPermissionTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CollectionPermissionTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    collections?: boolean | CollectionPermissionType$collectionsArgs<ExtArgs>
+    _count?: boolean | CollectionPermissionTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["collectionPermissionType"]>
+
+  export type CollectionPermissionTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+  }, ExtArgs["result"]["collectionPermissionType"]>
+
+  export type CollectionPermissionTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+  }, ExtArgs["result"]["collectionPermissionType"]>
+
+  export type CollectionPermissionTypeSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+  }
+
+  export type CollectionPermissionTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["collectionPermissionType"]>
+  export type CollectionPermissionTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    collections?: boolean | CollectionPermissionType$collectionsArgs<ExtArgs>
+    _count?: boolean | CollectionPermissionTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CollectionPermissionTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CollectionPermissionTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CollectionPermissionTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CollectionPermissionType"
+    objects: {
+      collections: Prisma.$CollectionUserAccessPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      description: string | null
+    }, ExtArgs["result"]["collectionPermissionType"]>
+    composites: {}
+  }
+
+  type CollectionPermissionTypeGetPayload<S extends boolean | null | undefined | CollectionPermissionTypeDefaultArgs> = $Result.GetResult<Prisma.$CollectionPermissionTypePayload, S>
+
+  type CollectionPermissionTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CollectionPermissionTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CollectionPermissionTypeCountAggregateInputType | true
+    }
+
+  export interface CollectionPermissionTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CollectionPermissionType'], meta: { name: 'CollectionPermissionType' } }
+    /**
+     * Find zero or one CollectionPermissionType that matches the filter.
+     * @param {CollectionPermissionTypeFindUniqueArgs} args - Arguments to find a CollectionPermissionType
+     * @example
+     * // Get one CollectionPermissionType
+     * const collectionPermissionType = await prisma.collectionPermissionType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CollectionPermissionTypeFindUniqueArgs>(args: SelectSubset<T, CollectionPermissionTypeFindUniqueArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CollectionPermissionType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CollectionPermissionTypeFindUniqueOrThrowArgs} args - Arguments to find a CollectionPermissionType
+     * @example
+     * // Get one CollectionPermissionType
+     * const collectionPermissionType = await prisma.collectionPermissionType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CollectionPermissionTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, CollectionPermissionTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CollectionPermissionType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeFindFirstArgs} args - Arguments to find a CollectionPermissionType
+     * @example
+     * // Get one CollectionPermissionType
+     * const collectionPermissionType = await prisma.collectionPermissionType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CollectionPermissionTypeFindFirstArgs>(args?: SelectSubset<T, CollectionPermissionTypeFindFirstArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CollectionPermissionType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeFindFirstOrThrowArgs} args - Arguments to find a CollectionPermissionType
+     * @example
+     * // Get one CollectionPermissionType
+     * const collectionPermissionType = await prisma.collectionPermissionType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CollectionPermissionTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, CollectionPermissionTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CollectionPermissionTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CollectionPermissionTypes
+     * const collectionPermissionTypes = await prisma.collectionPermissionType.findMany()
+     * 
+     * // Get first 10 CollectionPermissionTypes
+     * const collectionPermissionTypes = await prisma.collectionPermissionType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const collectionPermissionTypeWithIdOnly = await prisma.collectionPermissionType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CollectionPermissionTypeFindManyArgs>(args?: SelectSubset<T, CollectionPermissionTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CollectionPermissionType.
+     * @param {CollectionPermissionTypeCreateArgs} args - Arguments to create a CollectionPermissionType.
+     * @example
+     * // Create one CollectionPermissionType
+     * const CollectionPermissionType = await prisma.collectionPermissionType.create({
+     *   data: {
+     *     // ... data to create a CollectionPermissionType
+     *   }
+     * })
+     * 
+     */
+    create<T extends CollectionPermissionTypeCreateArgs>(args: SelectSubset<T, CollectionPermissionTypeCreateArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CollectionPermissionTypes.
+     * @param {CollectionPermissionTypeCreateManyArgs} args - Arguments to create many CollectionPermissionTypes.
+     * @example
+     * // Create many CollectionPermissionTypes
+     * const collectionPermissionType = await prisma.collectionPermissionType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CollectionPermissionTypeCreateManyArgs>(args?: SelectSubset<T, CollectionPermissionTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CollectionPermissionTypes and returns the data saved in the database.
+     * @param {CollectionPermissionTypeCreateManyAndReturnArgs} args - Arguments to create many CollectionPermissionTypes.
+     * @example
+     * // Create many CollectionPermissionTypes
+     * const collectionPermissionType = await prisma.collectionPermissionType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CollectionPermissionTypes and only return the `id`
+     * const collectionPermissionTypeWithIdOnly = await prisma.collectionPermissionType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CollectionPermissionTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, CollectionPermissionTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CollectionPermissionType.
+     * @param {CollectionPermissionTypeDeleteArgs} args - Arguments to delete one CollectionPermissionType.
+     * @example
+     * // Delete one CollectionPermissionType
+     * const CollectionPermissionType = await prisma.collectionPermissionType.delete({
+     *   where: {
+     *     // ... filter to delete one CollectionPermissionType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CollectionPermissionTypeDeleteArgs>(args: SelectSubset<T, CollectionPermissionTypeDeleteArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CollectionPermissionType.
+     * @param {CollectionPermissionTypeUpdateArgs} args - Arguments to update one CollectionPermissionType.
+     * @example
+     * // Update one CollectionPermissionType
+     * const collectionPermissionType = await prisma.collectionPermissionType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CollectionPermissionTypeUpdateArgs>(args: SelectSubset<T, CollectionPermissionTypeUpdateArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CollectionPermissionTypes.
+     * @param {CollectionPermissionTypeDeleteManyArgs} args - Arguments to filter CollectionPermissionTypes to delete.
+     * @example
+     * // Delete a few CollectionPermissionTypes
+     * const { count } = await prisma.collectionPermissionType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CollectionPermissionTypeDeleteManyArgs>(args?: SelectSubset<T, CollectionPermissionTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CollectionPermissionTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CollectionPermissionTypes
+     * const collectionPermissionType = await prisma.collectionPermissionType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CollectionPermissionTypeUpdateManyArgs>(args: SelectSubset<T, CollectionPermissionTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CollectionPermissionTypes and returns the data updated in the database.
+     * @param {CollectionPermissionTypeUpdateManyAndReturnArgs} args - Arguments to update many CollectionPermissionTypes.
+     * @example
+     * // Update many CollectionPermissionTypes
+     * const collectionPermissionType = await prisma.collectionPermissionType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CollectionPermissionTypes and only return the `id`
+     * const collectionPermissionTypeWithIdOnly = await prisma.collectionPermissionType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CollectionPermissionTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, CollectionPermissionTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CollectionPermissionType.
+     * @param {CollectionPermissionTypeUpsertArgs} args - Arguments to update or create a CollectionPermissionType.
+     * @example
+     * // Update or create a CollectionPermissionType
+     * const collectionPermissionType = await prisma.collectionPermissionType.upsert({
+     *   create: {
+     *     // ... data to create a CollectionPermissionType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CollectionPermissionType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CollectionPermissionTypeUpsertArgs>(args: SelectSubset<T, CollectionPermissionTypeUpsertArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CollectionPermissionTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeCountArgs} args - Arguments to filter CollectionPermissionTypes to count.
+     * @example
+     * // Count the number of CollectionPermissionTypes
+     * const count = await prisma.collectionPermissionType.count({
+     *   where: {
+     *     // ... the filter for the CollectionPermissionTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends CollectionPermissionTypeCountArgs>(
+      args?: Subset<T, CollectionPermissionTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CollectionPermissionTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CollectionPermissionType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CollectionPermissionTypeAggregateArgs>(args: Subset<T, CollectionPermissionTypeAggregateArgs>): Prisma.PrismaPromise<GetCollectionPermissionTypeAggregateType<T>>
+
+    /**
+     * Group by CollectionPermissionType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionPermissionTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CollectionPermissionTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CollectionPermissionTypeGroupByArgs['orderBy'] }
+        : { orderBy?: CollectionPermissionTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CollectionPermissionTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCollectionPermissionTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CollectionPermissionType model
+   */
+  readonly fields: CollectionPermissionTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CollectionPermissionType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CollectionPermissionTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    collections<T extends CollectionPermissionType$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, CollectionPermissionType$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CollectionPermissionType model
+   */
+  interface CollectionPermissionTypeFieldRefs {
+    readonly id: FieldRef<"CollectionPermissionType", 'Int'>
+    readonly name: FieldRef<"CollectionPermissionType", 'String'>
+    readonly description: FieldRef<"CollectionPermissionType", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CollectionPermissionType findUnique
+   */
+  export type CollectionPermissionTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionPermissionType to fetch.
+     */
+    where: CollectionPermissionTypeWhereUniqueInput
+  }
+
+  /**
+   * CollectionPermissionType findUniqueOrThrow
+   */
+  export type CollectionPermissionTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionPermissionType to fetch.
+     */
+    where: CollectionPermissionTypeWhereUniqueInput
+  }
+
+  /**
+   * CollectionPermissionType findFirst
+   */
+  export type CollectionPermissionTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionPermissionType to fetch.
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionPermissionTypes to fetch.
+     */
+    orderBy?: CollectionPermissionTypeOrderByWithRelationInput | CollectionPermissionTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CollectionPermissionTypes.
+     */
+    cursor?: CollectionPermissionTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionPermissionTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionPermissionTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CollectionPermissionTypes.
+     */
+    distinct?: CollectionPermissionTypeScalarFieldEnum | CollectionPermissionTypeScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionPermissionType findFirstOrThrow
+   */
+  export type CollectionPermissionTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionPermissionType to fetch.
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionPermissionTypes to fetch.
+     */
+    orderBy?: CollectionPermissionTypeOrderByWithRelationInput | CollectionPermissionTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CollectionPermissionTypes.
+     */
+    cursor?: CollectionPermissionTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionPermissionTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionPermissionTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CollectionPermissionTypes.
+     */
+    distinct?: CollectionPermissionTypeScalarFieldEnum | CollectionPermissionTypeScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionPermissionType findMany
+   */
+  export type CollectionPermissionTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionPermissionTypes to fetch.
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionPermissionTypes to fetch.
+     */
+    orderBy?: CollectionPermissionTypeOrderByWithRelationInput | CollectionPermissionTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CollectionPermissionTypes.
+     */
+    cursor?: CollectionPermissionTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionPermissionTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionPermissionTypes.
+     */
+    skip?: number
+    distinct?: CollectionPermissionTypeScalarFieldEnum | CollectionPermissionTypeScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionPermissionType create
+   */
+  export type CollectionPermissionTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CollectionPermissionType.
+     */
+    data: XOR<CollectionPermissionTypeCreateInput, CollectionPermissionTypeUncheckedCreateInput>
+  }
+
+  /**
+   * CollectionPermissionType createMany
+   */
+  export type CollectionPermissionTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CollectionPermissionTypes.
+     */
+    data: CollectionPermissionTypeCreateManyInput | CollectionPermissionTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CollectionPermissionType createManyAndReturn
+   */
+  export type CollectionPermissionTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many CollectionPermissionTypes.
+     */
+    data: CollectionPermissionTypeCreateManyInput | CollectionPermissionTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CollectionPermissionType update
+   */
+  export type CollectionPermissionTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CollectionPermissionType.
+     */
+    data: XOR<CollectionPermissionTypeUpdateInput, CollectionPermissionTypeUncheckedUpdateInput>
+    /**
+     * Choose, which CollectionPermissionType to update.
+     */
+    where: CollectionPermissionTypeWhereUniqueInput
+  }
+
+  /**
+   * CollectionPermissionType updateMany
+   */
+  export type CollectionPermissionTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CollectionPermissionTypes.
+     */
+    data: XOR<CollectionPermissionTypeUpdateManyMutationInput, CollectionPermissionTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which CollectionPermissionTypes to update
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * Limit how many CollectionPermissionTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CollectionPermissionType updateManyAndReturn
+   */
+  export type CollectionPermissionTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update CollectionPermissionTypes.
+     */
+    data: XOR<CollectionPermissionTypeUpdateManyMutationInput, CollectionPermissionTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which CollectionPermissionTypes to update
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * Limit how many CollectionPermissionTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CollectionPermissionType upsert
+   */
+  export type CollectionPermissionTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CollectionPermissionType to update in case it exists.
+     */
+    where: CollectionPermissionTypeWhereUniqueInput
+    /**
+     * In case the CollectionPermissionType found by the `where` argument doesn't exist, create a new CollectionPermissionType with this data.
+     */
+    create: XOR<CollectionPermissionTypeCreateInput, CollectionPermissionTypeUncheckedCreateInput>
+    /**
+     * In case the CollectionPermissionType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CollectionPermissionTypeUpdateInput, CollectionPermissionTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * CollectionPermissionType delete
+   */
+  export type CollectionPermissionTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+    /**
+     * Filter which CollectionPermissionType to delete.
+     */
+    where: CollectionPermissionTypeWhereUniqueInput
+  }
+
+  /**
+   * CollectionPermissionType deleteMany
+   */
+  export type CollectionPermissionTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CollectionPermissionTypes to delete
+     */
+    where?: CollectionPermissionTypeWhereInput
+    /**
+     * Limit how many CollectionPermissionTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CollectionPermissionType.collections
+   */
+  export type CollectionPermissionType$collectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    where?: CollectionUserAccessWhereInput
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    cursor?: CollectionUserAccessWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionPermissionType without action
+   */
+  export type CollectionPermissionTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionPermissionType
+     */
+    select?: CollectionPermissionTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionPermissionType
+     */
+    omit?: CollectionPermissionTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionPermissionTypeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CollectionUserAccess
+   */
+
+  export type AggregateCollectionUserAccess = {
+    _count: CollectionUserAccessCountAggregateOutputType | null
+    _avg: CollectionUserAccessAvgAggregateOutputType | null
+    _sum: CollectionUserAccessSumAggregateOutputType | null
+    _min: CollectionUserAccessMinAggregateOutputType | null
+    _max: CollectionUserAccessMaxAggregateOutputType | null
+  }
+
+  export type CollectionUserAccessAvgAggregateOutputType = {
+    permission_type_id: number | null
+  }
+
+  export type CollectionUserAccessSumAggregateOutputType = {
+    permission_type_id: number | null
+  }
+
+  export type CollectionUserAccessMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    collection_id: string | null
+    permission_type_id: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type CollectionUserAccessMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    collection_id: string | null
+    permission_type_id: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type CollectionUserAccessCountAggregateOutputType = {
+    id: number
+    user_id: number
+    collection_id: number
+    permission_type_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type CollectionUserAccessAvgAggregateInputType = {
+    permission_type_id?: true
+  }
+
+  export type CollectionUserAccessSumAggregateInputType = {
+    permission_type_id?: true
+  }
+
+  export type CollectionUserAccessMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    collection_id?: true
+    permission_type_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type CollectionUserAccessMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    collection_id?: true
+    permission_type_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type CollectionUserAccessCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    collection_id?: true
+    permission_type_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type CollectionUserAccessAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CollectionUserAccess to aggregate.
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionUserAccesses to fetch.
+     */
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CollectionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionUserAccesses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CollectionUserAccesses
+    **/
+    _count?: true | CollectionUserAccessCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CollectionUserAccessAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CollectionUserAccessSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CollectionUserAccessMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CollectionUserAccessMaxAggregateInputType
+  }
+
+  export type GetCollectionUserAccessAggregateType<T extends CollectionUserAccessAggregateArgs> = {
+        [P in keyof T & keyof AggregateCollectionUserAccess]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCollectionUserAccess[P]>
+      : GetScalarType<T[P], AggregateCollectionUserAccess[P]>
+  }
+
+
+
+
+  export type CollectionUserAccessGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CollectionUserAccessWhereInput
+    orderBy?: CollectionUserAccessOrderByWithAggregationInput | CollectionUserAccessOrderByWithAggregationInput[]
+    by: CollectionUserAccessScalarFieldEnum[] | CollectionUserAccessScalarFieldEnum
+    having?: CollectionUserAccessScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CollectionUserAccessCountAggregateInputType | true
+    _avg?: CollectionUserAccessAvgAggregateInputType
+    _sum?: CollectionUserAccessSumAggregateInputType
+    _min?: CollectionUserAccessMinAggregateInputType
+    _max?: CollectionUserAccessMaxAggregateInputType
+  }
+
+  export type CollectionUserAccessGroupByOutputType = {
+    id: string
+    user_id: string
+    collection_id: string
+    permission_type_id: number
+    created_at: Date
+    updated_at: Date
+    _count: CollectionUserAccessCountAggregateOutputType | null
+    _avg: CollectionUserAccessAvgAggregateOutputType | null
+    _sum: CollectionUserAccessSumAggregateOutputType | null
+    _min: CollectionUserAccessMinAggregateOutputType | null
+    _max: CollectionUserAccessMaxAggregateOutputType | null
+  }
+
+  type GetCollectionUserAccessGroupByPayload<T extends CollectionUserAccessGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CollectionUserAccessGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CollectionUserAccessGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CollectionUserAccessGroupByOutputType[P]>
+            : GetScalarType<T[P], CollectionUserAccessGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CollectionUserAccessSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    collection_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    collection?: boolean | CollectionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["collectionUserAccess"]>
+
+  export type CollectionUserAccessSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    collection_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    collection?: boolean | CollectionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["collectionUserAccess"]>
+
+  export type CollectionUserAccessSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    collection_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    collection?: boolean | CollectionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["collectionUserAccess"]>
+
+  export type CollectionUserAccessSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    collection_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type CollectionUserAccessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "collection_id" | "permission_type_id" | "created_at" | "updated_at", ExtArgs["result"]["collectionUserAccess"]>
+  export type CollectionUserAccessInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    collection?: boolean | CollectionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }
+  export type CollectionUserAccessIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    collection?: boolean | CollectionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }
+  export type CollectionUserAccessIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    collection?: boolean | CollectionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $CollectionUserAccessPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CollectionUserAccess"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      collection: Prisma.$CollectionPayload<ExtArgs>
+      permission_type: Prisma.$CollectionPermissionTypePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      collection_id: string
+      permission_type_id: number
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["collectionUserAccess"]>
+    composites: {}
+  }
+
+  type CollectionUserAccessGetPayload<S extends boolean | null | undefined | CollectionUserAccessDefaultArgs> = $Result.GetResult<Prisma.$CollectionUserAccessPayload, S>
+
+  type CollectionUserAccessCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CollectionUserAccessFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CollectionUserAccessCountAggregateInputType | true
+    }
+
+  export interface CollectionUserAccessDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CollectionUserAccess'], meta: { name: 'CollectionUserAccess' } }
+    /**
+     * Find zero or one CollectionUserAccess that matches the filter.
+     * @param {CollectionUserAccessFindUniqueArgs} args - Arguments to find a CollectionUserAccess
+     * @example
+     * // Get one CollectionUserAccess
+     * const collectionUserAccess = await prisma.collectionUserAccess.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CollectionUserAccessFindUniqueArgs>(args: SelectSubset<T, CollectionUserAccessFindUniqueArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CollectionUserAccess that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CollectionUserAccessFindUniqueOrThrowArgs} args - Arguments to find a CollectionUserAccess
+     * @example
+     * // Get one CollectionUserAccess
+     * const collectionUserAccess = await prisma.collectionUserAccess.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CollectionUserAccessFindUniqueOrThrowArgs>(args: SelectSubset<T, CollectionUserAccessFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CollectionUserAccess that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessFindFirstArgs} args - Arguments to find a CollectionUserAccess
+     * @example
+     * // Get one CollectionUserAccess
+     * const collectionUserAccess = await prisma.collectionUserAccess.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CollectionUserAccessFindFirstArgs>(args?: SelectSubset<T, CollectionUserAccessFindFirstArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CollectionUserAccess that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessFindFirstOrThrowArgs} args - Arguments to find a CollectionUserAccess
+     * @example
+     * // Get one CollectionUserAccess
+     * const collectionUserAccess = await prisma.collectionUserAccess.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CollectionUserAccessFindFirstOrThrowArgs>(args?: SelectSubset<T, CollectionUserAccessFindFirstOrThrowArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CollectionUserAccesses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CollectionUserAccesses
+     * const collectionUserAccesses = await prisma.collectionUserAccess.findMany()
+     * 
+     * // Get first 10 CollectionUserAccesses
+     * const collectionUserAccesses = await prisma.collectionUserAccess.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const collectionUserAccessWithIdOnly = await prisma.collectionUserAccess.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CollectionUserAccessFindManyArgs>(args?: SelectSubset<T, CollectionUserAccessFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CollectionUserAccess.
+     * @param {CollectionUserAccessCreateArgs} args - Arguments to create a CollectionUserAccess.
+     * @example
+     * // Create one CollectionUserAccess
+     * const CollectionUserAccess = await prisma.collectionUserAccess.create({
+     *   data: {
+     *     // ... data to create a CollectionUserAccess
+     *   }
+     * })
+     * 
+     */
+    create<T extends CollectionUserAccessCreateArgs>(args: SelectSubset<T, CollectionUserAccessCreateArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CollectionUserAccesses.
+     * @param {CollectionUserAccessCreateManyArgs} args - Arguments to create many CollectionUserAccesses.
+     * @example
+     * // Create many CollectionUserAccesses
+     * const collectionUserAccess = await prisma.collectionUserAccess.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CollectionUserAccessCreateManyArgs>(args?: SelectSubset<T, CollectionUserAccessCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CollectionUserAccesses and returns the data saved in the database.
+     * @param {CollectionUserAccessCreateManyAndReturnArgs} args - Arguments to create many CollectionUserAccesses.
+     * @example
+     * // Create many CollectionUserAccesses
+     * const collectionUserAccess = await prisma.collectionUserAccess.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CollectionUserAccesses and only return the `id`
+     * const collectionUserAccessWithIdOnly = await prisma.collectionUserAccess.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CollectionUserAccessCreateManyAndReturnArgs>(args?: SelectSubset<T, CollectionUserAccessCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CollectionUserAccess.
+     * @param {CollectionUserAccessDeleteArgs} args - Arguments to delete one CollectionUserAccess.
+     * @example
+     * // Delete one CollectionUserAccess
+     * const CollectionUserAccess = await prisma.collectionUserAccess.delete({
+     *   where: {
+     *     // ... filter to delete one CollectionUserAccess
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CollectionUserAccessDeleteArgs>(args: SelectSubset<T, CollectionUserAccessDeleteArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CollectionUserAccess.
+     * @param {CollectionUserAccessUpdateArgs} args - Arguments to update one CollectionUserAccess.
+     * @example
+     * // Update one CollectionUserAccess
+     * const collectionUserAccess = await prisma.collectionUserAccess.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CollectionUserAccessUpdateArgs>(args: SelectSubset<T, CollectionUserAccessUpdateArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CollectionUserAccesses.
+     * @param {CollectionUserAccessDeleteManyArgs} args - Arguments to filter CollectionUserAccesses to delete.
+     * @example
+     * // Delete a few CollectionUserAccesses
+     * const { count } = await prisma.collectionUserAccess.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CollectionUserAccessDeleteManyArgs>(args?: SelectSubset<T, CollectionUserAccessDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CollectionUserAccesses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CollectionUserAccesses
+     * const collectionUserAccess = await prisma.collectionUserAccess.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CollectionUserAccessUpdateManyArgs>(args: SelectSubset<T, CollectionUserAccessUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CollectionUserAccesses and returns the data updated in the database.
+     * @param {CollectionUserAccessUpdateManyAndReturnArgs} args - Arguments to update many CollectionUserAccesses.
+     * @example
+     * // Update many CollectionUserAccesses
+     * const collectionUserAccess = await prisma.collectionUserAccess.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CollectionUserAccesses and only return the `id`
+     * const collectionUserAccessWithIdOnly = await prisma.collectionUserAccess.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CollectionUserAccessUpdateManyAndReturnArgs>(args: SelectSubset<T, CollectionUserAccessUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CollectionUserAccess.
+     * @param {CollectionUserAccessUpsertArgs} args - Arguments to update or create a CollectionUserAccess.
+     * @example
+     * // Update or create a CollectionUserAccess
+     * const collectionUserAccess = await prisma.collectionUserAccess.upsert({
+     *   create: {
+     *     // ... data to create a CollectionUserAccess
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CollectionUserAccess we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CollectionUserAccessUpsertArgs>(args: SelectSubset<T, CollectionUserAccessUpsertArgs<ExtArgs>>): Prisma__CollectionUserAccessClient<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CollectionUserAccesses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessCountArgs} args - Arguments to filter CollectionUserAccesses to count.
+     * @example
+     * // Count the number of CollectionUserAccesses
+     * const count = await prisma.collectionUserAccess.count({
+     *   where: {
+     *     // ... the filter for the CollectionUserAccesses we want to count
+     *   }
+     * })
+    **/
+    count<T extends CollectionUserAccessCountArgs>(
+      args?: Subset<T, CollectionUserAccessCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CollectionUserAccessCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CollectionUserAccess.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CollectionUserAccessAggregateArgs>(args: Subset<T, CollectionUserAccessAggregateArgs>): Prisma.PrismaPromise<GetCollectionUserAccessAggregateType<T>>
+
+    /**
+     * Group by CollectionUserAccess.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CollectionUserAccessGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CollectionUserAccessGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CollectionUserAccessGroupByArgs['orderBy'] }
+        : { orderBy?: CollectionUserAccessGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CollectionUserAccessGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCollectionUserAccessGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CollectionUserAccess model
+   */
+  readonly fields: CollectionUserAccessFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CollectionUserAccess.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CollectionUserAccessClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    collection<T extends CollectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CollectionDefaultArgs<ExtArgs>>): Prisma__CollectionClient<$Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    permission_type<T extends CollectionPermissionTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CollectionPermissionTypeDefaultArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CollectionUserAccess model
+   */
+  interface CollectionUserAccessFieldRefs {
+    readonly id: FieldRef<"CollectionUserAccess", 'String'>
+    readonly user_id: FieldRef<"CollectionUserAccess", 'String'>
+    readonly collection_id: FieldRef<"CollectionUserAccess", 'String'>
+    readonly permission_type_id: FieldRef<"CollectionUserAccess", 'Int'>
+    readonly created_at: FieldRef<"CollectionUserAccess", 'DateTime'>
+    readonly updated_at: FieldRef<"CollectionUserAccess", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CollectionUserAccess findUnique
+   */
+  export type CollectionUserAccessFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionUserAccess to fetch.
+     */
+    where: CollectionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * CollectionUserAccess findUniqueOrThrow
+   */
+  export type CollectionUserAccessFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionUserAccess to fetch.
+     */
+    where: CollectionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * CollectionUserAccess findFirst
+   */
+  export type CollectionUserAccessFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionUserAccess to fetch.
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionUserAccesses to fetch.
+     */
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CollectionUserAccesses.
+     */
+    cursor?: CollectionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionUserAccesses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CollectionUserAccesses.
+     */
+    distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionUserAccess findFirstOrThrow
+   */
+  export type CollectionUserAccessFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionUserAccess to fetch.
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionUserAccesses to fetch.
+     */
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CollectionUserAccesses.
+     */
+    cursor?: CollectionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionUserAccesses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CollectionUserAccesses.
+     */
+    distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionUserAccess findMany
+   */
+  export type CollectionUserAccessFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which CollectionUserAccesses to fetch.
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CollectionUserAccesses to fetch.
+     */
+    orderBy?: CollectionUserAccessOrderByWithRelationInput | CollectionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CollectionUserAccesses.
+     */
+    cursor?: CollectionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CollectionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CollectionUserAccesses.
+     */
+    skip?: number
+    distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionUserAccess create
+   */
+  export type CollectionUserAccessCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CollectionUserAccess.
+     */
+    data: XOR<CollectionUserAccessCreateInput, CollectionUserAccessUncheckedCreateInput>
+  }
+
+  /**
+   * CollectionUserAccess createMany
+   */
+  export type CollectionUserAccessCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CollectionUserAccesses.
+     */
+    data: CollectionUserAccessCreateManyInput | CollectionUserAccessCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CollectionUserAccess createManyAndReturn
+   */
+  export type CollectionUserAccessCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * The data used to create many CollectionUserAccesses.
+     */
+    data: CollectionUserAccessCreateManyInput | CollectionUserAccessCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CollectionUserAccess update
+   */
+  export type CollectionUserAccessUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CollectionUserAccess.
+     */
+    data: XOR<CollectionUserAccessUpdateInput, CollectionUserAccessUncheckedUpdateInput>
+    /**
+     * Choose, which CollectionUserAccess to update.
+     */
+    where: CollectionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * CollectionUserAccess updateMany
+   */
+  export type CollectionUserAccessUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CollectionUserAccesses.
+     */
+    data: XOR<CollectionUserAccessUpdateManyMutationInput, CollectionUserAccessUncheckedUpdateManyInput>
+    /**
+     * Filter which CollectionUserAccesses to update
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * Limit how many CollectionUserAccesses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CollectionUserAccess updateManyAndReturn
+   */
+  export type CollectionUserAccessUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * The data used to update CollectionUserAccesses.
+     */
+    data: XOR<CollectionUserAccessUpdateManyMutationInput, CollectionUserAccessUncheckedUpdateManyInput>
+    /**
+     * Filter which CollectionUserAccesses to update
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * Limit how many CollectionUserAccesses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CollectionUserAccess upsert
+   */
+  export type CollectionUserAccessUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CollectionUserAccess to update in case it exists.
+     */
+    where: CollectionUserAccessWhereUniqueInput
+    /**
+     * In case the CollectionUserAccess found by the `where` argument doesn't exist, create a new CollectionUserAccess with this data.
+     */
+    create: XOR<CollectionUserAccessCreateInput, CollectionUserAccessUncheckedCreateInput>
+    /**
+     * In case the CollectionUserAccess was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CollectionUserAccessUpdateInput, CollectionUserAccessUncheckedUpdateInput>
+  }
+
+  /**
+   * CollectionUserAccess delete
+   */
+  export type CollectionUserAccessDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter which CollectionUserAccess to delete.
+     */
+    where: CollectionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * CollectionUserAccess deleteMany
+   */
+  export type CollectionUserAccessDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CollectionUserAccesses to delete
+     */
+    where?: CollectionUserAccessWhereInput
+    /**
+     * Limit how many CollectionUserAccesses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CollectionUserAccess without action
+   */
+  export type CollectionUserAccessDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CollectionUserAccess
+     */
+    select?: CollectionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CollectionUserAccess
+     */
+    omit?: CollectionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollectionUserAccessInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8101,6 +10587,27 @@ export namespace Prisma {
   };
 
   export type QuestionCollectionScalarFieldEnum = (typeof QuestionCollectionScalarFieldEnum)[keyof typeof QuestionCollectionScalarFieldEnum]
+
+
+  export const CollectionPermissionTypeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description'
+  };
+
+  export type CollectionPermissionTypeScalarFieldEnum = (typeof CollectionPermissionTypeScalarFieldEnum)[keyof typeof CollectionPermissionTypeScalarFieldEnum]
+
+
+  export const CollectionUserAccessScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    collection_id: 'collection_id',
+    permission_type_id: 'permission_type_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type CollectionUserAccessScalarFieldEnum = (typeof CollectionUserAccessScalarFieldEnum)[keyof typeof CollectionUserAccessScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8209,6 +10716,7 @@ export namespace Prisma {
     profile_picture?: StringNullableFilter<"User"> | string | null
     collections_created?: CollectionListRelationFilter
     questions_created?: QuestionListRelationFilter
+    collections_access?: CollectionUserAccessListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8219,6 +10727,7 @@ export namespace Prisma {
     profile_picture?: SortOrderInput | SortOrder
     collections_created?: CollectionOrderByRelationAggregateInput
     questions_created?: QuestionOrderByRelationAggregateInput
+    collections_access?: CollectionUserAccessOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8232,6 +10741,7 @@ export namespace Prisma {
     profile_picture?: StringNullableFilter<"User"> | string | null
     collections_created?: CollectionListRelationFilter
     questions_created?: QuestionListRelationFilter
+    collections_access?: CollectionUserAccessListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -8268,6 +10778,7 @@ export namespace Prisma {
     author_id?: StringFilter<"Collection"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     questions?: QuestionCollectionListRelationFilter
+    permissions?: CollectionUserAccessListRelationFilter
   }
 
   export type CollectionOrderByWithRelationInput = {
@@ -8279,6 +10790,7 @@ export namespace Prisma {
     author_id?: SortOrder
     author?: UserOrderByWithRelationInput
     questions?: QuestionCollectionOrderByRelationAggregateInput
+    permissions?: CollectionUserAccessOrderByRelationAggregateInput
   }
 
   export type CollectionWhereUniqueInput = Prisma.AtLeast<{
@@ -8293,6 +10805,7 @@ export namespace Prisma {
     author_id?: StringFilter<"Collection"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     questions?: QuestionCollectionListRelationFilter
+    permissions?: CollectionUserAccessListRelationFilter
   }, "id">
 
   export type CollectionOrderByWithAggregationInput = {
@@ -8546,6 +11059,122 @@ export namespace Prisma {
     assigned_at?: DateTimeWithAggregatesFilter<"QuestionCollection"> | Date | string
   }
 
+  export type CollectionPermissionTypeWhereInput = {
+    AND?: CollectionPermissionTypeWhereInput | CollectionPermissionTypeWhereInput[]
+    OR?: CollectionPermissionTypeWhereInput[]
+    NOT?: CollectionPermissionTypeWhereInput | CollectionPermissionTypeWhereInput[]
+    id?: IntFilter<"CollectionPermissionType"> | number
+    name?: StringFilter<"CollectionPermissionType"> | string
+    description?: StringNullableFilter<"CollectionPermissionType"> | string | null
+    collections?: CollectionUserAccessListRelationFilter
+  }
+
+  export type CollectionPermissionTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    collections?: CollectionUserAccessOrderByRelationAggregateInput
+  }
+
+  export type CollectionPermissionTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: CollectionPermissionTypeWhereInput | CollectionPermissionTypeWhereInput[]
+    OR?: CollectionPermissionTypeWhereInput[]
+    NOT?: CollectionPermissionTypeWhereInput | CollectionPermissionTypeWhereInput[]
+    description?: StringNullableFilter<"CollectionPermissionType"> | string | null
+    collections?: CollectionUserAccessListRelationFilter
+  }, "id" | "name">
+
+  export type CollectionPermissionTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    _count?: CollectionPermissionTypeCountOrderByAggregateInput
+    _avg?: CollectionPermissionTypeAvgOrderByAggregateInput
+    _max?: CollectionPermissionTypeMaxOrderByAggregateInput
+    _min?: CollectionPermissionTypeMinOrderByAggregateInput
+    _sum?: CollectionPermissionTypeSumOrderByAggregateInput
+  }
+
+  export type CollectionPermissionTypeScalarWhereWithAggregatesInput = {
+    AND?: CollectionPermissionTypeScalarWhereWithAggregatesInput | CollectionPermissionTypeScalarWhereWithAggregatesInput[]
+    OR?: CollectionPermissionTypeScalarWhereWithAggregatesInput[]
+    NOT?: CollectionPermissionTypeScalarWhereWithAggregatesInput | CollectionPermissionTypeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"CollectionPermissionType"> | number
+    name?: StringWithAggregatesFilter<"CollectionPermissionType"> | string
+    description?: StringNullableWithAggregatesFilter<"CollectionPermissionType"> | string | null
+  }
+
+  export type CollectionUserAccessWhereInput = {
+    AND?: CollectionUserAccessWhereInput | CollectionUserAccessWhereInput[]
+    OR?: CollectionUserAccessWhereInput[]
+    NOT?: CollectionUserAccessWhereInput | CollectionUserAccessWhereInput[]
+    id?: StringFilter<"CollectionUserAccess"> | string
+    user_id?: StringFilter<"CollectionUserAccess"> | string
+    collection_id?: StringFilter<"CollectionUserAccess"> | string
+    permission_type_id?: IntFilter<"CollectionUserAccess"> | number
+    created_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
+    updated_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    collection?: XOR<CollectionScalarRelationFilter, CollectionWhereInput>
+    permission_type?: XOR<CollectionPermissionTypeScalarRelationFilter, CollectionPermissionTypeWhereInput>
+  }
+
+  export type CollectionUserAccessOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    collection_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    collection?: CollectionOrderByWithRelationInput
+    permission_type?: CollectionPermissionTypeOrderByWithRelationInput
+  }
+
+  export type CollectionUserAccessWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_collection_id?: CollectionUserAccessUser_idCollection_idCompoundUniqueInput
+    AND?: CollectionUserAccessWhereInput | CollectionUserAccessWhereInput[]
+    OR?: CollectionUserAccessWhereInput[]
+    NOT?: CollectionUserAccessWhereInput | CollectionUserAccessWhereInput[]
+    user_id?: StringFilter<"CollectionUserAccess"> | string
+    collection_id?: StringFilter<"CollectionUserAccess"> | string
+    permission_type_id?: IntFilter<"CollectionUserAccess"> | number
+    created_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
+    updated_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    collection?: XOR<CollectionScalarRelationFilter, CollectionWhereInput>
+    permission_type?: XOR<CollectionPermissionTypeScalarRelationFilter, CollectionPermissionTypeWhereInput>
+  }, "id" | "user_id_collection_id">
+
+  export type CollectionUserAccessOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    collection_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: CollectionUserAccessCountOrderByAggregateInput
+    _avg?: CollectionUserAccessAvgOrderByAggregateInput
+    _max?: CollectionUserAccessMaxOrderByAggregateInput
+    _min?: CollectionUserAccessMinOrderByAggregateInput
+    _sum?: CollectionUserAccessSumOrderByAggregateInput
+  }
+
+  export type CollectionUserAccessScalarWhereWithAggregatesInput = {
+    AND?: CollectionUserAccessScalarWhereWithAggregatesInput | CollectionUserAccessScalarWhereWithAggregatesInput[]
+    OR?: CollectionUserAccessScalarWhereWithAggregatesInput[]
+    NOT?: CollectionUserAccessScalarWhereWithAggregatesInput | CollectionUserAccessScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CollectionUserAccess"> | string
+    user_id?: StringWithAggregatesFilter<"CollectionUserAccess"> | string
+    collection_id?: StringWithAggregatesFilter<"CollectionUserAccess"> | string
+    permission_type_id?: IntWithAggregatesFilter<"CollectionUserAccess"> | number
+    created_at?: DateTimeWithAggregatesFilter<"CollectionUserAccess"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"CollectionUserAccess"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -8554,6 +11183,7 @@ export namespace Prisma {
     profile_picture?: string | null
     collections_created?: CollectionCreateNestedManyWithoutAuthorInput
     questions_created?: QuestionCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -8564,6 +11194,7 @@ export namespace Prisma {
     profile_picture?: string | null
     collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
     questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -8574,6 +11205,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
     questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -8584,6 +11216,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
     questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -8618,6 +11251,7 @@ export namespace Prisma {
     updated_at?: Date | string
     author: UserCreateNestedOneWithoutCollections_createdInput
     questions?: QuestionCollectionCreateNestedManyWithoutCollectionInput
+    permissions?: CollectionUserAccessCreateNestedManyWithoutCollectionInput
   }
 
   export type CollectionUncheckedCreateInput = {
@@ -8628,6 +11262,7 @@ export namespace Prisma {
     updated_at?: Date | string
     author_id: string
     questions?: QuestionCollectionUncheckedCreateNestedManyWithoutCollectionInput
+    permissions?: CollectionUserAccessUncheckedCreateNestedManyWithoutCollectionInput
   }
 
   export type CollectionUpdateInput = {
@@ -8638,6 +11273,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCollections_createdNestedInput
     questions?: QuestionCollectionUpdateManyWithoutCollectionNestedInput
+    permissions?: CollectionUserAccessUpdateManyWithoutCollectionNestedInput
   }
 
   export type CollectionUncheckedUpdateInput = {
@@ -8648,6 +11284,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
     questions?: QuestionCollectionUncheckedUpdateManyWithoutCollectionNestedInput
+    permissions?: CollectionUserAccessUncheckedUpdateManyWithoutCollectionNestedInput
   }
 
   export type CollectionCreateManyInput = {
@@ -8890,6 +11527,109 @@ export namespace Prisma {
     assigned_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CollectionPermissionTypeCreateInput = {
+    name: string
+    description?: string | null
+    collections?: CollectionUserAccessCreateNestedManyWithoutPermission_typeInput
+  }
+
+  export type CollectionPermissionTypeUncheckedCreateInput = {
+    id?: number
+    name: string
+    description?: string | null
+    collections?: CollectionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput
+  }
+
+  export type CollectionPermissionTypeUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    collections?: CollectionUserAccessUpdateManyWithoutPermission_typeNestedInput
+  }
+
+  export type CollectionPermissionTypeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    collections?: CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput
+  }
+
+  export type CollectionPermissionTypeCreateManyInput = {
+    id?: number
+    name: string
+    description?: string | null
+  }
+
+  export type CollectionPermissionTypeUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CollectionPermissionTypeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CollectionUserAccessCreateInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutCollections_accessInput
+    collection: CollectionCreateNestedOneWithoutPermissionsInput
+    permission_type: CollectionPermissionTypeCreateNestedOneWithoutCollectionsInput
+  }
+
+  export type CollectionUserAccessUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    collection_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type CollectionUserAccessUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollections_accessNestedInput
+    collection?: CollectionUpdateOneRequiredWithoutPermissionsNestedInput
+    permission_type?: CollectionPermissionTypeUpdateOneRequiredWithoutCollectionsNestedInput
+  }
+
+  export type CollectionUserAccessUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CollectionUserAccessCreateManyInput = {
+    id?: string
+    user_id: string
+    collection_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type CollectionUserAccessUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CollectionUserAccessUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8932,6 +11672,12 @@ export namespace Prisma {
     none?: QuestionWhereInput
   }
 
+  export type CollectionUserAccessListRelationFilter = {
+    every?: CollectionUserAccessWhereInput
+    some?: CollectionUserAccessWhereInput
+    none?: CollectionUserAccessWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -8942,6 +11688,10 @@ export namespace Prisma {
   }
 
   export type QuestionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CollectionUserAccessOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9248,6 +11998,77 @@ export namespace Prisma {
     assigned_at?: SortOrder
   }
 
+  export type CollectionPermissionTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+  }
+
+  export type CollectionPermissionTypeAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CollectionPermissionTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+  }
+
+  export type CollectionPermissionTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+  }
+
+  export type CollectionPermissionTypeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CollectionPermissionTypeScalarRelationFilter = {
+    is?: CollectionPermissionTypeWhereInput
+    isNot?: CollectionPermissionTypeWhereInput
+  }
+
+  export type CollectionUserAccessUser_idCollection_idCompoundUniqueInput = {
+    user_id: string
+    collection_id: string
+  }
+
+  export type CollectionUserAccessCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    collection_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type CollectionUserAccessAvgOrderByAggregateInput = {
+    permission_type_id?: SortOrder
+  }
+
+  export type CollectionUserAccessMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    collection_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type CollectionUserAccessMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    collection_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type CollectionUserAccessSumOrderByAggregateInput = {
+    permission_type_id?: SortOrder
+  }
+
   export type CollectionCreateNestedManyWithoutAuthorInput = {
     create?: XOR<CollectionCreateWithoutAuthorInput, CollectionUncheckedCreateWithoutAuthorInput> | CollectionCreateWithoutAuthorInput[] | CollectionUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CollectionCreateOrConnectWithoutAuthorInput | CollectionCreateOrConnectWithoutAuthorInput[]
@@ -9262,6 +12083,13 @@ export namespace Prisma {
     connect?: QuestionWhereUniqueInput | QuestionWhereUniqueInput[]
   }
 
+  export type CollectionUserAccessCreateNestedManyWithoutUserInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutUserInput, CollectionUserAccessUncheckedCreateWithoutUserInput> | CollectionUserAccessCreateWithoutUserInput[] | CollectionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutUserInput | CollectionUserAccessCreateOrConnectWithoutUserInput[]
+    createMany?: CollectionUserAccessCreateManyUserInputEnvelope
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+  }
+
   export type CollectionUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<CollectionCreateWithoutAuthorInput, CollectionUncheckedCreateWithoutAuthorInput> | CollectionCreateWithoutAuthorInput[] | CollectionUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CollectionCreateOrConnectWithoutAuthorInput | CollectionCreateOrConnectWithoutAuthorInput[]
@@ -9274,6 +12102,13 @@ export namespace Prisma {
     connectOrCreate?: QuestionCreateOrConnectWithoutAuthorInput | QuestionCreateOrConnectWithoutAuthorInput[]
     createMany?: QuestionCreateManyAuthorInputEnvelope
     connect?: QuestionWhereUniqueInput | QuestionWhereUniqueInput[]
+  }
+
+  export type CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutUserInput, CollectionUserAccessUncheckedCreateWithoutUserInput> | CollectionUserAccessCreateWithoutUserInput[] | CollectionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutUserInput | CollectionUserAccessCreateOrConnectWithoutUserInput[]
+    createMany?: CollectionUserAccessCreateManyUserInputEnvelope
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9312,6 +12147,20 @@ export namespace Prisma {
     deleteMany?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
   }
 
+  export type CollectionUserAccessUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutUserInput, CollectionUserAccessUncheckedCreateWithoutUserInput> | CollectionUserAccessCreateWithoutUserInput[] | CollectionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutUserInput | CollectionUserAccessCreateOrConnectWithoutUserInput[]
+    upsert?: CollectionUserAccessUpsertWithWhereUniqueWithoutUserInput | CollectionUserAccessUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CollectionUserAccessCreateManyUserInputEnvelope
+    set?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    disconnect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    delete?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    update?: CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput | CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutUserInput | CollectionUserAccessUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
   export type CollectionUncheckedUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<CollectionCreateWithoutAuthorInput, CollectionUncheckedCreateWithoutAuthorInput> | CollectionCreateWithoutAuthorInput[] | CollectionUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CollectionCreateOrConnectWithoutAuthorInput | CollectionCreateOrConnectWithoutAuthorInput[]
@@ -9340,6 +12189,20 @@ export namespace Prisma {
     deleteMany?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
   }
 
+  export type CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutUserInput, CollectionUserAccessUncheckedCreateWithoutUserInput> | CollectionUserAccessCreateWithoutUserInput[] | CollectionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutUserInput | CollectionUserAccessCreateOrConnectWithoutUserInput[]
+    upsert?: CollectionUserAccessUpsertWithWhereUniqueWithoutUserInput | CollectionUserAccessUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CollectionUserAccessCreateManyUserInputEnvelope
+    set?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    disconnect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    delete?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    update?: CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput | CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutUserInput | CollectionUserAccessUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutCollections_createdInput = {
     create?: XOR<UserCreateWithoutCollections_createdInput, UserUncheckedCreateWithoutCollections_createdInput>
     connectOrCreate?: UserCreateOrConnectWithoutCollections_createdInput
@@ -9353,11 +12216,25 @@ export namespace Prisma {
     connect?: QuestionCollectionWhereUniqueInput | QuestionCollectionWhereUniqueInput[]
   }
 
+  export type CollectionUserAccessCreateNestedManyWithoutCollectionInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutCollectionInput, CollectionUserAccessUncheckedCreateWithoutCollectionInput> | CollectionUserAccessCreateWithoutCollectionInput[] | CollectionUserAccessUncheckedCreateWithoutCollectionInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutCollectionInput | CollectionUserAccessCreateOrConnectWithoutCollectionInput[]
+    createMany?: CollectionUserAccessCreateManyCollectionInputEnvelope
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+  }
+
   export type QuestionCollectionUncheckedCreateNestedManyWithoutCollectionInput = {
     create?: XOR<QuestionCollectionCreateWithoutCollectionInput, QuestionCollectionUncheckedCreateWithoutCollectionInput> | QuestionCollectionCreateWithoutCollectionInput[] | QuestionCollectionUncheckedCreateWithoutCollectionInput[]
     connectOrCreate?: QuestionCollectionCreateOrConnectWithoutCollectionInput | QuestionCollectionCreateOrConnectWithoutCollectionInput[]
     createMany?: QuestionCollectionCreateManyCollectionInputEnvelope
     connect?: QuestionCollectionWhereUniqueInput | QuestionCollectionWhereUniqueInput[]
+  }
+
+  export type CollectionUserAccessUncheckedCreateNestedManyWithoutCollectionInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutCollectionInput, CollectionUserAccessUncheckedCreateWithoutCollectionInput> | CollectionUserAccessCreateWithoutCollectionInput[] | CollectionUserAccessUncheckedCreateWithoutCollectionInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutCollectionInput | CollectionUserAccessCreateOrConnectWithoutCollectionInput[]
+    createMany?: CollectionUserAccessCreateManyCollectionInputEnvelope
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -9386,6 +12263,20 @@ export namespace Prisma {
     deleteMany?: QuestionCollectionScalarWhereInput | QuestionCollectionScalarWhereInput[]
   }
 
+  export type CollectionUserAccessUpdateManyWithoutCollectionNestedInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutCollectionInput, CollectionUserAccessUncheckedCreateWithoutCollectionInput> | CollectionUserAccessCreateWithoutCollectionInput[] | CollectionUserAccessUncheckedCreateWithoutCollectionInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutCollectionInput | CollectionUserAccessCreateOrConnectWithoutCollectionInput[]
+    upsert?: CollectionUserAccessUpsertWithWhereUniqueWithoutCollectionInput | CollectionUserAccessUpsertWithWhereUniqueWithoutCollectionInput[]
+    createMany?: CollectionUserAccessCreateManyCollectionInputEnvelope
+    set?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    disconnect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    delete?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    update?: CollectionUserAccessUpdateWithWhereUniqueWithoutCollectionInput | CollectionUserAccessUpdateWithWhereUniqueWithoutCollectionInput[]
+    updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutCollectionInput | CollectionUserAccessUpdateManyWithWhereWithoutCollectionInput[]
+    deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
   export type QuestionCollectionUncheckedUpdateManyWithoutCollectionNestedInput = {
     create?: XOR<QuestionCollectionCreateWithoutCollectionInput, QuestionCollectionUncheckedCreateWithoutCollectionInput> | QuestionCollectionCreateWithoutCollectionInput[] | QuestionCollectionUncheckedCreateWithoutCollectionInput[]
     connectOrCreate?: QuestionCollectionCreateOrConnectWithoutCollectionInput | QuestionCollectionCreateOrConnectWithoutCollectionInput[]
@@ -9398,6 +12289,20 @@ export namespace Prisma {
     update?: QuestionCollectionUpdateWithWhereUniqueWithoutCollectionInput | QuestionCollectionUpdateWithWhereUniqueWithoutCollectionInput[]
     updateMany?: QuestionCollectionUpdateManyWithWhereWithoutCollectionInput | QuestionCollectionUpdateManyWithWhereWithoutCollectionInput[]
     deleteMany?: QuestionCollectionScalarWhereInput | QuestionCollectionScalarWhereInput[]
+  }
+
+  export type CollectionUserAccessUncheckedUpdateManyWithoutCollectionNestedInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutCollectionInput, CollectionUserAccessUncheckedCreateWithoutCollectionInput> | CollectionUserAccessCreateWithoutCollectionInput[] | CollectionUserAccessUncheckedCreateWithoutCollectionInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutCollectionInput | CollectionUserAccessCreateOrConnectWithoutCollectionInput[]
+    upsert?: CollectionUserAccessUpsertWithWhereUniqueWithoutCollectionInput | CollectionUserAccessUpsertWithWhereUniqueWithoutCollectionInput[]
+    createMany?: CollectionUserAccessCreateManyCollectionInputEnvelope
+    set?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    disconnect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    delete?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    update?: CollectionUserAccessUpdateWithWhereUniqueWithoutCollectionInput | CollectionUserAccessUpdateWithWhereUniqueWithoutCollectionInput[]
+    updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutCollectionInput | CollectionUserAccessUpdateManyWithWhereWithoutCollectionInput[]
+    deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
   }
 
   export type QuestionTypeCreateNestedOneWithoutQuestionsInput = {
@@ -9608,6 +12513,90 @@ export namespace Prisma {
     update?: XOR<XOR<CollectionUpdateToOneWithWhereWithoutQuestionsInput, CollectionUpdateWithoutQuestionsInput>, CollectionUncheckedUpdateWithoutQuestionsInput>
   }
 
+  export type CollectionUserAccessCreateNestedManyWithoutPermission_typeInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput> | CollectionUserAccessCreateWithoutPermission_typeInput[] | CollectionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutPermission_typeInput | CollectionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    createMany?: CollectionUserAccessCreateManyPermission_typeInputEnvelope
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+  }
+
+  export type CollectionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput> | CollectionUserAccessCreateWithoutPermission_typeInput[] | CollectionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutPermission_typeInput | CollectionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    createMany?: CollectionUserAccessCreateManyPermission_typeInputEnvelope
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+  }
+
+  export type CollectionUserAccessUpdateManyWithoutPermission_typeNestedInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput> | CollectionUserAccessCreateWithoutPermission_typeInput[] | CollectionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutPermission_typeInput | CollectionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    upsert?: CollectionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput | CollectionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput[]
+    createMany?: CollectionUserAccessCreateManyPermission_typeInputEnvelope
+    set?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    disconnect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    delete?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    update?: CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput | CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput[]
+    updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput | CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput[]
+    deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
+  export type CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput = {
+    create?: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput> | CollectionUserAccessCreateWithoutPermission_typeInput[] | CollectionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutPermission_typeInput | CollectionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    upsert?: CollectionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput | CollectionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput[]
+    createMany?: CollectionUserAccessCreateManyPermission_typeInputEnvelope
+    set?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    disconnect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    delete?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+    update?: CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput | CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput[]
+    updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput | CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput[]
+    deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCollections_accessInput = {
+    create?: XOR<UserCreateWithoutCollections_accessInput, UserUncheckedCreateWithoutCollections_accessInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCollections_accessInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CollectionCreateNestedOneWithoutPermissionsInput = {
+    create?: XOR<CollectionCreateWithoutPermissionsInput, CollectionUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: CollectionCreateOrConnectWithoutPermissionsInput
+    connect?: CollectionWhereUniqueInput
+  }
+
+  export type CollectionPermissionTypeCreateNestedOneWithoutCollectionsInput = {
+    create?: XOR<CollectionPermissionTypeCreateWithoutCollectionsInput, CollectionPermissionTypeUncheckedCreateWithoutCollectionsInput>
+    connectOrCreate?: CollectionPermissionTypeCreateOrConnectWithoutCollectionsInput
+    connect?: CollectionPermissionTypeWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCollections_accessNestedInput = {
+    create?: XOR<UserCreateWithoutCollections_accessInput, UserUncheckedCreateWithoutCollections_accessInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCollections_accessInput
+    upsert?: UserUpsertWithoutCollections_accessInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCollections_accessInput, UserUpdateWithoutCollections_accessInput>, UserUncheckedUpdateWithoutCollections_accessInput>
+  }
+
+  export type CollectionUpdateOneRequiredWithoutPermissionsNestedInput = {
+    create?: XOR<CollectionCreateWithoutPermissionsInput, CollectionUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: CollectionCreateOrConnectWithoutPermissionsInput
+    upsert?: CollectionUpsertWithoutPermissionsInput
+    connect?: CollectionWhereUniqueInput
+    update?: XOR<XOR<CollectionUpdateToOneWithWhereWithoutPermissionsInput, CollectionUpdateWithoutPermissionsInput>, CollectionUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type CollectionPermissionTypeUpdateOneRequiredWithoutCollectionsNestedInput = {
+    create?: XOR<CollectionPermissionTypeCreateWithoutCollectionsInput, CollectionPermissionTypeUncheckedCreateWithoutCollectionsInput>
+    connectOrCreate?: CollectionPermissionTypeCreateOrConnectWithoutCollectionsInput
+    upsert?: CollectionPermissionTypeUpsertWithoutCollectionsInput
+    connect?: CollectionPermissionTypeWhereUniqueInput
+    update?: XOR<XOR<CollectionPermissionTypeUpdateToOneWithWhereWithoutCollectionsInput, CollectionPermissionTypeUpdateWithoutCollectionsInput>, CollectionPermissionTypeUncheckedUpdateWithoutCollectionsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -9764,6 +12753,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     questions?: QuestionCollectionCreateNestedManyWithoutCollectionInput
+    permissions?: CollectionUserAccessCreateNestedManyWithoutCollectionInput
   }
 
   export type CollectionUncheckedCreateWithoutAuthorInput = {
@@ -9773,6 +12763,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     questions?: QuestionCollectionUncheckedCreateNestedManyWithoutCollectionInput
+    permissions?: CollectionUserAccessUncheckedCreateNestedManyWithoutCollectionInput
   }
 
   export type CollectionCreateOrConnectWithoutAuthorInput = {
@@ -9812,6 +12803,32 @@ export namespace Prisma {
 
   export type QuestionCreateManyAuthorInputEnvelope = {
     data: QuestionCreateManyAuthorInput | QuestionCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CollectionUserAccessCreateWithoutUserInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    collection: CollectionCreateNestedOneWithoutPermissionsInput
+    permission_type: CollectionPermissionTypeCreateNestedOneWithoutCollectionsInput
+  }
+
+  export type CollectionUserAccessUncheckedCreateWithoutUserInput = {
+    id?: string
+    collection_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type CollectionUserAccessCreateOrConnectWithoutUserInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    create: XOR<CollectionUserAccessCreateWithoutUserInput, CollectionUserAccessUncheckedCreateWithoutUserInput>
+  }
+
+  export type CollectionUserAccessCreateManyUserInputEnvelope = {
+    data: CollectionUserAccessCreateManyUserInput | CollectionUserAccessCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -9871,6 +12888,34 @@ export namespace Prisma {
     author_id?: StringFilter<"Question"> | string
   }
 
+  export type CollectionUserAccessUpsertWithWhereUniqueWithoutUserInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    update: XOR<CollectionUserAccessUpdateWithoutUserInput, CollectionUserAccessUncheckedUpdateWithoutUserInput>
+    create: XOR<CollectionUserAccessCreateWithoutUserInput, CollectionUserAccessUncheckedCreateWithoutUserInput>
+  }
+
+  export type CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    data: XOR<CollectionUserAccessUpdateWithoutUserInput, CollectionUserAccessUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CollectionUserAccessUpdateManyWithWhereWithoutUserInput = {
+    where: CollectionUserAccessScalarWhereInput
+    data: XOR<CollectionUserAccessUpdateManyMutationInput, CollectionUserAccessUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CollectionUserAccessScalarWhereInput = {
+    AND?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+    OR?: CollectionUserAccessScalarWhereInput[]
+    NOT?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+    id?: StringFilter<"CollectionUserAccess"> | string
+    user_id?: StringFilter<"CollectionUserAccess"> | string
+    collection_id?: StringFilter<"CollectionUserAccess"> | string
+    permission_type_id?: IntFilter<"CollectionUserAccess"> | number
+    created_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
+    updated_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
+  }
+
   export type UserCreateWithoutCollections_createdInput = {
     id?: string
     email: string
@@ -9878,6 +12923,7 @@ export namespace Prisma {
     name?: string | null
     profile_picture?: string | null
     questions_created?: QuestionCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCollections_createdInput = {
@@ -9887,6 +12933,7 @@ export namespace Prisma {
     name?: string | null
     profile_picture?: string | null
     questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCollections_createdInput = {
@@ -9914,6 +12961,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CollectionUserAccessCreateWithoutCollectionInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutCollections_accessInput
+    permission_type: CollectionPermissionTypeCreateNestedOneWithoutCollectionsInput
+  }
+
+  export type CollectionUserAccessUncheckedCreateWithoutCollectionInput = {
+    id?: string
+    user_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type CollectionUserAccessCreateOrConnectWithoutCollectionInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    create: XOR<CollectionUserAccessCreateWithoutCollectionInput, CollectionUserAccessUncheckedCreateWithoutCollectionInput>
+  }
+
+  export type CollectionUserAccessCreateManyCollectionInputEnvelope = {
+    data: CollectionUserAccessCreateManyCollectionInput | CollectionUserAccessCreateManyCollectionInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutCollections_createdInput = {
     update: XOR<UserUpdateWithoutCollections_createdInput, UserUncheckedUpdateWithoutCollections_createdInput>
     create: XOR<UserCreateWithoutCollections_createdInput, UserUncheckedCreateWithoutCollections_createdInput>
@@ -9932,6 +13005,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollections_createdInput = {
@@ -9941,6 +13015,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuestionCollectionUpsertWithWhereUniqueWithoutCollectionInput = {
@@ -9966,6 +13041,22 @@ export namespace Prisma {
     question_id?: StringFilter<"QuestionCollection"> | string
     collection_id?: StringFilter<"QuestionCollection"> | string
     assigned_at?: DateTimeFilter<"QuestionCollection"> | Date | string
+  }
+
+  export type CollectionUserAccessUpsertWithWhereUniqueWithoutCollectionInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    update: XOR<CollectionUserAccessUpdateWithoutCollectionInput, CollectionUserAccessUncheckedUpdateWithoutCollectionInput>
+    create: XOR<CollectionUserAccessCreateWithoutCollectionInput, CollectionUserAccessUncheckedCreateWithoutCollectionInput>
+  }
+
+  export type CollectionUserAccessUpdateWithWhereUniqueWithoutCollectionInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    data: XOR<CollectionUserAccessUpdateWithoutCollectionInput, CollectionUserAccessUncheckedUpdateWithoutCollectionInput>
+  }
+
+  export type CollectionUserAccessUpdateManyWithWhereWithoutCollectionInput = {
+    where: CollectionUserAccessScalarWhereInput
+    data: XOR<CollectionUserAccessUpdateManyMutationInput, CollectionUserAccessUncheckedUpdateManyWithoutCollectionInput>
   }
 
   export type QuestionTypeCreateWithoutQuestionsInput = {
@@ -10037,6 +13128,7 @@ export namespace Prisma {
     name?: string | null
     profile_picture?: string | null
     collections_created?: CollectionCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQuestions_createdInput = {
@@ -10046,6 +13138,7 @@ export namespace Prisma {
     name?: string | null
     profile_picture?: string | null
     collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQuestions_createdInput = {
@@ -10137,6 +13230,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuestions_createdInput = {
@@ -10146,6 +13240,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuestionCreateWithoutTypeInput = {
@@ -10282,6 +13377,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     author: UserCreateNestedOneWithoutCollections_createdInput
+    permissions?: CollectionUserAccessCreateNestedManyWithoutCollectionInput
   }
 
   export type CollectionUncheckedCreateWithoutQuestionsInput = {
@@ -10291,6 +13387,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
+    permissions?: CollectionUserAccessUncheckedCreateNestedManyWithoutCollectionInput
   }
 
   export type CollectionCreateOrConnectWithoutQuestionsInput = {
@@ -10347,6 +13444,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCollections_createdNestedInput
+    permissions?: CollectionUserAccessUpdateManyWithoutCollectionNestedInput
   }
 
   export type CollectionUncheckedUpdateWithoutQuestionsInput = {
@@ -10356,6 +13454,199 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
+    permissions?: CollectionUserAccessUncheckedUpdateManyWithoutCollectionNestedInput
+  }
+
+  export type CollectionUserAccessCreateWithoutPermission_typeInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutCollections_accessInput
+    collection: CollectionCreateNestedOneWithoutPermissionsInput
+  }
+
+  export type CollectionUserAccessUncheckedCreateWithoutPermission_typeInput = {
+    id?: string
+    user_id: string
+    collection_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type CollectionUserAccessCreateOrConnectWithoutPermission_typeInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    create: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput>
+  }
+
+  export type CollectionUserAccessCreateManyPermission_typeInputEnvelope = {
+    data: CollectionUserAccessCreateManyPermission_typeInput | CollectionUserAccessCreateManyPermission_typeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CollectionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    update: XOR<CollectionUserAccessUpdateWithoutPermission_typeInput, CollectionUserAccessUncheckedUpdateWithoutPermission_typeInput>
+    create: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput>
+  }
+
+  export type CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput = {
+    where: CollectionUserAccessWhereUniqueInput
+    data: XOR<CollectionUserAccessUpdateWithoutPermission_typeInput, CollectionUserAccessUncheckedUpdateWithoutPermission_typeInput>
+  }
+
+  export type CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput = {
+    where: CollectionUserAccessScalarWhereInput
+    data: XOR<CollectionUserAccessUpdateManyMutationInput, CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeInput>
+  }
+
+  export type UserCreateWithoutCollections_accessInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    profile_picture?: string | null
+    collections_created?: CollectionCreateNestedManyWithoutAuthorInput
+    questions_created?: QuestionCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutCollections_accessInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    profile_picture?: string | null
+    collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
+    questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutCollections_accessInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCollections_accessInput, UserUncheckedCreateWithoutCollections_accessInput>
+  }
+
+  export type CollectionCreateWithoutPermissionsInput = {
+    id?: string
+    title: string
+    description: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    author: UserCreateNestedOneWithoutCollections_createdInput
+    questions?: QuestionCollectionCreateNestedManyWithoutCollectionInput
+  }
+
+  export type CollectionUncheckedCreateWithoutPermissionsInput = {
+    id?: string
+    title: string
+    description: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    author_id: string
+    questions?: QuestionCollectionUncheckedCreateNestedManyWithoutCollectionInput
+  }
+
+  export type CollectionCreateOrConnectWithoutPermissionsInput = {
+    where: CollectionWhereUniqueInput
+    create: XOR<CollectionCreateWithoutPermissionsInput, CollectionUncheckedCreateWithoutPermissionsInput>
+  }
+
+  export type CollectionPermissionTypeCreateWithoutCollectionsInput = {
+    name: string
+    description?: string | null
+  }
+
+  export type CollectionPermissionTypeUncheckedCreateWithoutCollectionsInput = {
+    id?: number
+    name: string
+    description?: string | null
+  }
+
+  export type CollectionPermissionTypeCreateOrConnectWithoutCollectionsInput = {
+    where: CollectionPermissionTypeWhereUniqueInput
+    create: XOR<CollectionPermissionTypeCreateWithoutCollectionsInput, CollectionPermissionTypeUncheckedCreateWithoutCollectionsInput>
+  }
+
+  export type UserUpsertWithoutCollections_accessInput = {
+    update: XOR<UserUpdateWithoutCollections_accessInput, UserUncheckedUpdateWithoutCollections_accessInput>
+    create: XOR<UserCreateWithoutCollections_accessInput, UserUncheckedCreateWithoutCollections_accessInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCollections_accessInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCollections_accessInput, UserUncheckedUpdateWithoutCollections_accessInput>
+  }
+
+  export type UserUpdateWithoutCollections_accessInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
+    collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
+    questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCollections_accessInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
+    collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
+    questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type CollectionUpsertWithoutPermissionsInput = {
+    update: XOR<CollectionUpdateWithoutPermissionsInput, CollectionUncheckedUpdateWithoutPermissionsInput>
+    create: XOR<CollectionCreateWithoutPermissionsInput, CollectionUncheckedCreateWithoutPermissionsInput>
+    where?: CollectionWhereInput
+  }
+
+  export type CollectionUpdateToOneWithWhereWithoutPermissionsInput = {
+    where?: CollectionWhereInput
+    data: XOR<CollectionUpdateWithoutPermissionsInput, CollectionUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type CollectionUpdateWithoutPermissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutCollections_createdNestedInput
+    questions?: QuestionCollectionUpdateManyWithoutCollectionNestedInput
+  }
+
+  export type CollectionUncheckedUpdateWithoutPermissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    author_id?: StringFieldUpdateOperationsInput | string
+    questions?: QuestionCollectionUncheckedUpdateManyWithoutCollectionNestedInput
+  }
+
+  export type CollectionPermissionTypeUpsertWithoutCollectionsInput = {
+    update: XOR<CollectionPermissionTypeUpdateWithoutCollectionsInput, CollectionPermissionTypeUncheckedUpdateWithoutCollectionsInput>
+    create: XOR<CollectionPermissionTypeCreateWithoutCollectionsInput, CollectionPermissionTypeUncheckedCreateWithoutCollectionsInput>
+    where?: CollectionPermissionTypeWhereInput
+  }
+
+  export type CollectionPermissionTypeUpdateToOneWithWhereWithoutCollectionsInput = {
+    where?: CollectionPermissionTypeWhereInput
+    data: XOR<CollectionPermissionTypeUpdateWithoutCollectionsInput, CollectionPermissionTypeUncheckedUpdateWithoutCollectionsInput>
+  }
+
+  export type CollectionPermissionTypeUpdateWithoutCollectionsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CollectionPermissionTypeUncheckedUpdateWithoutCollectionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CollectionCreateManyAuthorInput = {
@@ -10374,6 +13665,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type CollectionUserAccessCreateManyUserInput = {
+    id?: string
+    collection_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type CollectionUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -10381,6 +13680,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionCollectionUpdateManyWithoutCollectionNestedInput
+    permissions?: CollectionUserAccessUpdateManyWithoutCollectionNestedInput
   }
 
   export type CollectionUncheckedUpdateWithoutAuthorInput = {
@@ -10390,6 +13690,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionCollectionUncheckedUpdateManyWithoutCollectionNestedInput
+    permissions?: CollectionUserAccessUncheckedUpdateManyWithoutCollectionNestedInput
   }
 
   export type CollectionUncheckedUpdateManyWithoutAuthorInput = {
@@ -10428,9 +13729,41 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CollectionUserAccessUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    collection?: CollectionUpdateOneRequiredWithoutPermissionsNestedInput
+    permission_type?: CollectionPermissionTypeUpdateOneRequiredWithoutCollectionsNestedInput
+  }
+
+  export type CollectionUserAccessUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CollectionUserAccessUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type QuestionCollectionCreateManyCollectionInput = {
     question_id: string
     assigned_at?: Date | string
+  }
+
+  export type CollectionUserAccessCreateManyCollectionInput = {
+    id?: string
+    user_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
   export type QuestionCollectionUpdateWithoutCollectionInput = {
@@ -10446,6 +13779,30 @@ export namespace Prisma {
   export type QuestionCollectionUncheckedUpdateManyWithoutCollectionInput = {
     question_id?: StringFieldUpdateOperationsInput | string
     assigned_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CollectionUserAccessUpdateWithoutCollectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollections_accessNestedInput
+    permission_type?: CollectionPermissionTypeUpdateOneRequiredWithoutCollectionsNestedInput
+  }
+
+  export type CollectionUserAccessUncheckedUpdateWithoutCollectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CollectionUserAccessUncheckedUpdateManyWithoutCollectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionCollectionCreateManyQuestionInput = {
@@ -10534,6 +13891,38 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CollectionUserAccessCreateManyPermission_typeInput = {
+    id?: string
+    user_id: string
+    collection_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type CollectionUserAccessUpdateWithoutPermission_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollections_accessNestedInput
+    collection?: CollectionUpdateOneRequiredWithoutPermissionsNestedInput
+  }
+
+  export type CollectionUserAccessUncheckedUpdateWithoutPermission_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

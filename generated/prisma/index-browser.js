@@ -167,6 +167,21 @@ exports.Prisma.QuestionCollectionScalarFieldEnum = {
   assigned_at: 'assigned_at'
 };
 
+exports.Prisma.CollectionPermissionTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.CollectionUserAccessScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  collection_id: 'collection_id',
+  permission_type_id: 'permission_type_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -189,7 +204,9 @@ exports.Prisma.ModelName = {
   Question: 'Question',
   QuestionType: 'QuestionType',
   Alternative: 'Alternative',
-  QuestionCollection: 'QuestionCollection'
+  QuestionCollection: 'QuestionCollection',
+  CollectionPermissionType: 'CollectionPermissionType',
+  CollectionUserAccess: 'CollectionUserAccess'
 };
 
 /**
