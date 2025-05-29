@@ -12,4 +12,6 @@ export class CreateQuestionDto {
     statement: string;
     @ApiProperty({enum: En_QuestionType, example: En_QuestionType.MULTIPLE_CHOICE})
     type: number;
+    @ApiProperty({ example: 'a49e39b3-81aa-4beb-bed4-e7103f962e60' })
+    author_id: string;
 }

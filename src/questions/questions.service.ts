@@ -10,11 +10,12 @@ export class QuestionsService {
 
   create(createQuestionDto: CreateQuestionDto) {
     // TODO: VERIFY IF TYPE EXISTS IN THE DATABASE
-    const { type, ...rest } = createQuestionDto;
+    const { type, author_id, ...rest } = createQuestionDto;
     return this.prisma.question.create({
       data: {
         ...rest,
-        type: type ? { connect: { id: type } } : undefined
+        type: type ? { connect: { id: type } } : undefined,
+        author: author_id ? { connect: { id: author_id } } : undefined
       }
     });
   }
@@ -32,14 +33,15 @@ export class QuestionsService {
   }
 
   update(id: string, updateQuestionDto: UpdateQuestionDto) {
-    const { type, ...rest } = updateQuestionDto;
+    const { type, author_id, ...rest } = updateQuestionDto;
     return this.prisma.question.update({
       where: {
         id
       },
       data: {
         ...rest,
-        type: type ? { connect: { id: type } } : undefined
+        type: type ? { connect: { id: type } } : undefined,
+        author: author_id ? { connect: { id: author_id } } : undefined
       }
     });
   }

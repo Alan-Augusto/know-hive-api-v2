@@ -8,9 +8,10 @@ import { QuestionsModule } from './questions/questions.module';
 import { QuestionTypesModule } from './question-types/question-types.module';
 import { AlternativesModule } from './alternatives/alternatives.module';
 import { RelQuestionCollectionModule } from './rel-question-collection/rel-question-collection.module';
+import { CollectionPermissionTypeModule } from './collection-permission-type/collection-permission-type.module';
 
 @Module({
-  imports: [UsersModule, CollectionsModule, QuestionsModule, QuestionTypesModule, AlternativesModule, RelQuestionCollectionModule],
+  imports: [UsersModule, CollectionsModule, QuestionsModule, QuestionTypesModule, AlternativesModule, RelQuestionCollectionModule, CollectionPermissionTypeModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
