@@ -13,11 +13,7 @@ export class QuestionTypesService {
   }
 
   findAll() {
-    return this.prisma.questionType.findMany({
-      orderBy: {
-        name: 'asc',
-      },
-    });
+    return this.prisma.questionType.findMany();
   }
 
   findOne(id: number) {
