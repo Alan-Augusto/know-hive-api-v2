@@ -38,7 +38,12 @@ $ npm run test:cov
 ```
 
 ## Nest CLI
-Para gerar uma nova entdiade completa com controller, service e dto, utilize o comando abaixo:
+Caso não tenha o Nest CLI instalado, instale-o globalmente com o comando:
+```bash
+$ npm i -g @nestjs/cli
+```
+
+Para gerar uma nova entidade completa com controller, service e dto, utilize o comando abaixo:
 ```bash
 $ nest g resource <nome-recurso>
 ```
@@ -47,6 +52,11 @@ $ nest g resource <nome-recurso>
 Para gera uma nova migration aplicando todas as alteraçoes pendentes no s modelos de banco presente em ./psrima/schema.prisma:
 ```bash
 npx prisma migrate dev --name <nome-migration>
+```
+
+Para rodas as migrations pendentes, utilize o comando:
+```bash
+npx prisma migrate deploy
 ```
 
 Para formatar o arquivo de esquema do Prisma, utilize o comando:
