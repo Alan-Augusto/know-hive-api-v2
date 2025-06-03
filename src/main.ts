@@ -10,6 +10,16 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
 
+  // ===== CORS =====
+  app.enableCors({
+    origin: [
+      'http://localhost:4200',
+      'https://know-hive.vercel.app'
+    ],
+    credentials: true,
+  });
+
+
   // ======SWAGGER=====
     const config = new DocumentBuilder()
     .setTitle('KnowHive API')
