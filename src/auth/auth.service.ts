@@ -27,11 +27,15 @@ export class AuthService {
   }
 
   async login(loginAuthDto: LoginAuthDto): Promise<{ user: any; token: string } | null> {
+    if (!loginAuthDto.email || !loginAuthDto.password) {
+      return null;
+    }
     const user = await this.userService.findByEmail(loginAuthDto.email);
     if (!user) return null;
 
     const bcrypt = await import('bcrypt');
     const passwordMatch = await bcrypt.compare(loginAuthDto.password, user.password);
+
     if (!passwordMatch) return null;
 
     const token = this.generateToken(user, loginAuthDto.rememberMe);

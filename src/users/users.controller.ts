@@ -13,8 +13,7 @@ export class UsersController {
   @Post()
   @ApiBody({ type: CreateUserDto })
   async create(@Body() createUserDto: CreateUserDto) {
-    const encriptedPassword = await hash(createUserDto.password, 10);
-    return this.usersService.create({...createUserDto, password: encriptedPassword});
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
