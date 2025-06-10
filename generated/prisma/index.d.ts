@@ -3973,6 +3973,8 @@ export namespace Prisma {
 
   export type QuestionMinAggregateOutputType = {
     id: string | null
+    title: string | null
+    image_url: string | null
     statement: string | null
     type_id: number | null
     created_at: Date | null
@@ -3982,6 +3984,8 @@ export namespace Prisma {
 
   export type QuestionMaxAggregateOutputType = {
     id: string | null
+    title: string | null
+    image_url: string | null
     statement: string | null
     type_id: number | null
     created_at: Date | null
@@ -3991,6 +3995,8 @@ export namespace Prisma {
 
   export type QuestionCountAggregateOutputType = {
     id: number
+    title: number
+    image_url: number
     statement: number
     type_id: number
     created_at: number
@@ -4010,6 +4016,8 @@ export namespace Prisma {
 
   export type QuestionMinAggregateInputType = {
     id?: true
+    title?: true
+    image_url?: true
     statement?: true
     type_id?: true
     created_at?: true
@@ -4019,6 +4027,8 @@ export namespace Prisma {
 
   export type QuestionMaxAggregateInputType = {
     id?: true
+    title?: true
+    image_url?: true
     statement?: true
     type_id?: true
     created_at?: true
@@ -4028,6 +4038,8 @@ export namespace Prisma {
 
   export type QuestionCountAggregateInputType = {
     id?: true
+    title?: true
+    image_url?: true
     statement?: true
     type_id?: true
     created_at?: true
@@ -4124,6 +4136,8 @@ export namespace Prisma {
 
   export type QuestionGroupByOutputType = {
     id: string
+    title: string
+    image_url: string | null
     statement: string
     type_id: number
     created_at: Date
@@ -4152,6 +4166,8 @@ export namespace Prisma {
 
   export type QuestionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    title?: boolean
+    image_url?: boolean
     statement?: boolean
     type_id?: boolean
     created_at?: boolean
@@ -4166,6 +4182,8 @@ export namespace Prisma {
 
   export type QuestionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    title?: boolean
+    image_url?: boolean
     statement?: boolean
     type_id?: boolean
     created_at?: boolean
@@ -4177,6 +4195,8 @@ export namespace Prisma {
 
   export type QuestionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    title?: boolean
+    image_url?: boolean
     statement?: boolean
     type_id?: boolean
     created_at?: boolean
@@ -4188,6 +4208,8 @@ export namespace Prisma {
 
   export type QuestionSelectScalar = {
     id?: boolean
+    title?: boolean
+    image_url?: boolean
     statement?: boolean
     type_id?: boolean
     created_at?: boolean
@@ -4195,7 +4217,7 @@ export namespace Prisma {
     author_id?: boolean
   }
 
-  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statement" | "type_id" | "created_at" | "updated_at" | "author_id", ExtArgs["result"]["question"]>
+  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "image_url" | "statement" | "type_id" | "created_at" | "updated_at" | "author_id", ExtArgs["result"]["question"]>
   export type QuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | QuestionTypeDefaultArgs<ExtArgs>
     collections?: boolean | Question$collectionsArgs<ExtArgs>
@@ -4222,6 +4244,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      title: string
+      image_url: string | null
       statement: string
       type_id: number
       created_at: Date
@@ -4655,6 +4679,8 @@ export namespace Prisma {
    */
   interface QuestionFieldRefs {
     readonly id: FieldRef<"Question", 'String'>
+    readonly title: FieldRef<"Question", 'String'>
+    readonly image_url: FieldRef<"Question", 'String'>
     readonly statement: FieldRef<"Question", 'String'>
     readonly type_id: FieldRef<"Question", 'Int'>
     readonly created_at: FieldRef<"Question", 'DateTime'>
@@ -10549,6 +10575,8 @@ export namespace Prisma {
 
   export const QuestionScalarFieldEnum: {
     id: 'id',
+    title: 'title',
+    image_url: 'image_url',
     statement: 'statement',
     type_id: 'type_id',
     created_at: 'created_at',
@@ -10837,6 +10865,8 @@ export namespace Prisma {
     OR?: QuestionWhereInput[]
     NOT?: QuestionWhereInput | QuestionWhereInput[]
     id?: StringFilter<"Question"> | string
+    title?: StringFilter<"Question"> | string
+    image_url?: StringNullableFilter<"Question"> | string | null
     statement?: StringFilter<"Question"> | string
     type_id?: IntFilter<"Question"> | number
     created_at?: DateTimeFilter<"Question"> | Date | string
@@ -10850,6 +10880,8 @@ export namespace Prisma {
 
   export type QuestionOrderByWithRelationInput = {
     id?: SortOrder
+    title?: SortOrder
+    image_url?: SortOrderInput | SortOrder
     statement?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
@@ -10866,6 +10898,8 @@ export namespace Prisma {
     AND?: QuestionWhereInput | QuestionWhereInput[]
     OR?: QuestionWhereInput[]
     NOT?: QuestionWhereInput | QuestionWhereInput[]
+    title?: StringFilter<"Question"> | string
+    image_url?: StringNullableFilter<"Question"> | string | null
     statement?: StringFilter<"Question"> | string
     type_id?: IntFilter<"Question"> | number
     created_at?: DateTimeFilter<"Question"> | Date | string
@@ -10879,6 +10913,8 @@ export namespace Prisma {
 
   export type QuestionOrderByWithAggregationInput = {
     id?: SortOrder
+    title?: SortOrder
+    image_url?: SortOrderInput | SortOrder
     statement?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
@@ -10896,6 +10932,8 @@ export namespace Prisma {
     OR?: QuestionScalarWhereWithAggregatesInput[]
     NOT?: QuestionScalarWhereWithAggregatesInput | QuestionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Question"> | string
+    title?: StringWithAggregatesFilter<"Question"> | string
+    image_url?: StringNullableWithAggregatesFilter<"Question"> | string | null
     statement?: StringWithAggregatesFilter<"Question"> | string
     type_id?: IntWithAggregatesFilter<"Question"> | number
     created_at?: DateTimeWithAggregatesFilter<"Question"> | Date | string
@@ -11315,6 +11353,8 @@ export namespace Prisma {
 
   export type QuestionCreateInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -11326,6 +11366,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedCreateInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     type_id: number
     created_at?: Date | string
@@ -11337,6 +11379,8 @@ export namespace Prisma {
 
   export type QuestionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11348,6 +11392,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11359,6 +11405,8 @@ export namespace Prisma {
 
   export type QuestionCreateManyInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     type_id: number
     created_at?: Date | string
@@ -11368,6 +11416,8 @@ export namespace Prisma {
 
   export type QuestionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11375,6 +11425,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11850,6 +11902,8 @@ export namespace Prisma {
 
   export type QuestionCountOrderByAggregateInput = {
     id?: SortOrder
+    title?: SortOrder
+    image_url?: SortOrder
     statement?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
@@ -11863,6 +11917,8 @@ export namespace Prisma {
 
   export type QuestionMaxOrderByAggregateInput = {
     id?: SortOrder
+    title?: SortOrder
+    image_url?: SortOrder
     statement?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
@@ -11872,6 +11928,8 @@ export namespace Prisma {
 
   export type QuestionMinOrderByAggregateInput = {
     id?: SortOrder
+    title?: SortOrder
+    image_url?: SortOrder
     statement?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
@@ -12778,6 +12836,8 @@ export namespace Prisma {
 
   export type QuestionCreateWithoutAuthorInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -12788,6 +12848,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedCreateWithoutAuthorInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     type_id: number
     created_at?: Date | string
@@ -12881,6 +12943,8 @@ export namespace Prisma {
     OR?: QuestionScalarWhereInput[]
     NOT?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
     id?: StringFilter<"Question"> | string
+    title?: StringFilter<"Question"> | string
+    image_url?: StringNullableFilter<"Question"> | string | null
     statement?: StringFilter<"Question"> | string
     type_id?: IntFilter<"Question"> | number
     created_at?: DateTimeFilter<"Question"> | Date | string
@@ -13245,6 +13309,8 @@ export namespace Prisma {
 
   export type QuestionCreateWithoutTypeInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -13255,6 +13321,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedCreateWithoutTypeInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -13291,6 +13359,8 @@ export namespace Prisma {
 
   export type QuestionCreateWithoutAlternativesInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -13301,6 +13371,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedCreateWithoutAlternativesInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     type_id: number
     created_at?: Date | string
@@ -13327,6 +13399,8 @@ export namespace Prisma {
 
   export type QuestionUpdateWithoutAlternativesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13337,6 +13411,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateWithoutAlternativesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13347,6 +13423,8 @@ export namespace Prisma {
 
   export type QuestionCreateWithoutCollectionsInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -13357,6 +13435,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedCreateWithoutCollectionsInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     type_id: number
     created_at?: Date | string
@@ -13408,6 +13488,8 @@ export namespace Prisma {
 
   export type QuestionUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13418,6 +13500,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13659,6 +13743,8 @@ export namespace Prisma {
 
   export type QuestionCreateManyAuthorInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     type_id: number
     created_at?: Date | string
@@ -13703,6 +13789,8 @@ export namespace Prisma {
 
   export type QuestionUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13713,6 +13801,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13723,6 +13813,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13859,6 +13951,8 @@ export namespace Prisma {
 
   export type QuestionCreateManyTypeInput = {
     id?: string
+    title?: string
+    image_url?: string | null
     statement: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -13867,6 +13961,8 @@ export namespace Prisma {
 
   export type QuestionUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13877,6 +13973,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13887,6 +13985,8 @@ export namespace Prisma {
 
   export type QuestionUncheckedUpdateManyWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string

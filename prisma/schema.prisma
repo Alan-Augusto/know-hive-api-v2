@@ -39,6 +39,8 @@ model Collection {
 
 model Question {
   id           String               @id @default(uuid())
+  title        String               @default("Título")
+  image_url    String?
   statement    String
   type_id      Int
   type         QuestionType         @relation(fields: [type_id], references: [id])
