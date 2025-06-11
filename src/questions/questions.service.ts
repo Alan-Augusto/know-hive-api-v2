@@ -21,13 +21,34 @@ export class QuestionsService {
   }
 
   findAll() {
-    return this.prisma.question.findMany();
+    return this.prisma.question.findMany({
+      include: {
+        type: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profile_picture: true
+          }
+        }
+      }
+    });
   }
 
   findOne(id: string) {
     return this.prisma.question.findUnique({
       where: {
         id
+      },
+      include: {
+        type: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profile_picture: true
+          }
+        }
       }
     });
   }
@@ -50,6 +71,25 @@ export class QuestionsService {
     return this.prisma.question.delete({
       where: {
         id
+      }
+    });
+  }
+
+
+  findByUser(userId: string) {
+    return this.prisma.question.findMany({
+      where: {
+        author_id: userId
+      },
+      include: {
+        type: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profile_picture: true
+          }
+        }
       }
     });
   }
