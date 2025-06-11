@@ -53,6 +53,11 @@ export type CollectionPermissionType = $Result.DefaultSelection<Prisma.$Collecti
  * 
  */
 export type CollectionUserAccess = $Result.DefaultSelection<Prisma.$CollectionUserAccessPayload>
+/**
+ * Model QuestionUserAccess
+ * 
+ */
+export type QuestionUserAccess = $Result.DefaultSelection<Prisma.$QuestionUserAccessPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -258,6 +263,16 @@ export class PrismaClient<
     * ```
     */
   get collectionUserAccess(): Prisma.CollectionUserAccessDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.questionUserAccess`: Exposes CRUD operations for the **QuestionUserAccess** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QuestionUserAccesses
+    * const questionUserAccesses = await prisma.questionUserAccess.findMany()
+    * ```
+    */
+  get questionUserAccess(): Prisma.QuestionUserAccessDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -705,7 +720,8 @@ export namespace Prisma {
     Alternative: 'Alternative',
     QuestionCollection: 'QuestionCollection',
     CollectionPermissionType: 'CollectionPermissionType',
-    CollectionUserAccess: 'CollectionUserAccess'
+    CollectionUserAccess: 'CollectionUserAccess',
+    QuestionUserAccess: 'QuestionUserAccess'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -724,7 +740,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "collection" | "question" | "questionType" | "alternative" | "questionCollection" | "collectionPermissionType" | "collectionUserAccess"
+      modelProps: "user" | "collection" | "question" | "questionType" | "alternative" | "questionCollection" | "collectionPermissionType" | "collectionUserAccess" | "questionUserAccess"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1320,6 +1336,80 @@ export namespace Prisma {
           }
         }
       }
+      QuestionUserAccess: {
+        payload: Prisma.$QuestionUserAccessPayload<ExtArgs>
+        fields: Prisma.QuestionUserAccessFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuestionUserAccessFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuestionUserAccessFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>
+          }
+          findFirst: {
+            args: Prisma.QuestionUserAccessFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuestionUserAccessFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>
+          }
+          findMany: {
+            args: Prisma.QuestionUserAccessFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>[]
+          }
+          create: {
+            args: Prisma.QuestionUserAccessCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>
+          }
+          createMany: {
+            args: Prisma.QuestionUserAccessCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.QuestionUserAccessCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>[]
+          }
+          delete: {
+            args: Prisma.QuestionUserAccessDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>
+          }
+          update: {
+            args: Prisma.QuestionUserAccessUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuestionUserAccessDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuestionUserAccessUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.QuestionUserAccessUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>[]
+          }
+          upsert: {
+            args: Prisma.QuestionUserAccessUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestionUserAccessPayload>
+          }
+          aggregate: {
+            args: Prisma.QuestionUserAccessAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuestionUserAccess>
+          }
+          groupBy: {
+            args: Prisma.QuestionUserAccessGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuestionUserAccessGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuestionUserAccessCountArgs<ExtArgs>
+            result: $Utils.Optional<QuestionUserAccessCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1412,6 +1502,7 @@ export namespace Prisma {
     questionCollection?: QuestionCollectionOmit
     collectionPermissionType?: CollectionPermissionTypeOmit
     collectionUserAccess?: CollectionUserAccessOmit
+    questionUserAccess?: QuestionUserAccessOmit
   }
 
   /* Types for Logging */
@@ -1509,12 +1600,14 @@ export namespace Prisma {
     collections_created: number
     questions_created: number
     collections_access: number
+    questions_access: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_created?: boolean | UserCountOutputTypeCountCollections_createdArgs
     questions_created?: boolean | UserCountOutputTypeCountQuestions_createdArgs
     collections_access?: boolean | UserCountOutputTypeCountCollections_accessArgs
+    questions_access?: boolean | UserCountOutputTypeCountQuestions_accessArgs
   }
 
   // Custom InputTypes
@@ -1547,6 +1640,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCollections_accessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CollectionUserAccessWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountQuestions_accessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestionUserAccessWhereInput
   }
 
 
@@ -1597,11 +1697,13 @@ export namespace Prisma {
   export type QuestionCountOutputType = {
     collections: number
     alternatives: number
+    permissions: number
   }
 
   export type QuestionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | QuestionCountOutputTypeCountCollectionsArgs
     alternatives?: boolean | QuestionCountOutputTypeCountAlternativesArgs
+    permissions?: boolean | QuestionCountOutputTypeCountPermissionsArgs
   }
 
   // Custom InputTypes
@@ -1627,6 +1729,13 @@ export namespace Prisma {
    */
   export type QuestionCountOutputTypeCountAlternativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AlternativeWhereInput
+  }
+
+  /**
+   * QuestionCountOutputType without action
+   */
+  export type QuestionCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestionUserAccessWhereInput
   }
 
 
@@ -1667,10 +1776,12 @@ export namespace Prisma {
 
   export type CollectionPermissionTypeCountOutputType = {
     collections: number
+    questions: number
   }
 
   export type CollectionPermissionTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | CollectionPermissionTypeCountOutputTypeCountCollectionsArgs
+    questions?: boolean | CollectionPermissionTypeCountOutputTypeCountQuestionsArgs
   }
 
   // Custom InputTypes
@@ -1689,6 +1800,13 @@ export namespace Prisma {
    */
   export type CollectionPermissionTypeCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CollectionUserAccessWhereInput
+  }
+
+  /**
+   * CollectionPermissionTypeCountOutputType without action
+   */
+  export type CollectionPermissionTypeCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestionUserAccessWhereInput
   }
 
 
@@ -1863,6 +1981,7 @@ export namespace Prisma {
     collections_created?: boolean | User$collections_createdArgs<ExtArgs>
     questions_created?: boolean | User$questions_createdArgs<ExtArgs>
     collections_access?: boolean | User$collections_accessArgs<ExtArgs>
+    questions_access?: boolean | User$questions_accessArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1895,6 +2014,7 @@ export namespace Prisma {
     collections_created?: boolean | User$collections_createdArgs<ExtArgs>
     questions_created?: boolean | User$questions_createdArgs<ExtArgs>
     collections_access?: boolean | User$collections_accessArgs<ExtArgs>
+    questions_access?: boolean | User$questions_accessArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1906,6 +2026,7 @@ export namespace Prisma {
       collections_created: Prisma.$CollectionPayload<ExtArgs>[]
       questions_created: Prisma.$QuestionPayload<ExtArgs>[]
       collections_access: Prisma.$CollectionUserAccessPayload<ExtArgs>[]
+      questions_access: Prisma.$QuestionUserAccessPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2310,6 +2431,7 @@ export namespace Prisma {
     collections_created<T extends User$collections_createdArgs<ExtArgs> = {}>(args?: Subset<T, User$collections_createdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     questions_created<T extends User$questions_createdArgs<ExtArgs> = {}>(args?: Subset<T, User$questions_createdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     collections_access<T extends User$collections_accessArgs<ExtArgs> = {}>(args?: Subset<T, User$collections_accessArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    questions_access<T extends User$questions_accessArgs<ExtArgs> = {}>(args?: Subset<T, User$questions_accessArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2801,6 +2923,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * User.questions_access
+   */
+  export type User$questions_accessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    where?: QuestionUserAccessWhereInput
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    cursor?: QuestionUserAccessWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestionUserAccessScalarFieldEnum | QuestionUserAccessScalarFieldEnum[]
   }
 
   /**
@@ -4177,6 +4323,7 @@ export namespace Prisma {
     collections?: boolean | Question$collectionsArgs<ExtArgs>
     alternatives?: boolean | Question$alternativesArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
+    permissions?: boolean | Question$permissionsArgs<ExtArgs>
     _count?: boolean | QuestionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
@@ -4223,6 +4370,7 @@ export namespace Prisma {
     collections?: boolean | Question$collectionsArgs<ExtArgs>
     alternatives?: boolean | Question$alternativesArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
+    permissions?: boolean | Question$permissionsArgs<ExtArgs>
     _count?: boolean | QuestionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type QuestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4241,6 +4389,7 @@ export namespace Prisma {
       collections: Prisma.$QuestionCollectionPayload<ExtArgs>[]
       alternatives: Prisma.$AlternativePayload<ExtArgs>[]
       author: Prisma.$UserPayload<ExtArgs>
+      permissions: Prisma.$QuestionUserAccessPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4649,6 +4798,7 @@ export namespace Prisma {
     collections<T extends Question$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, Question$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionCollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     alternatives<T extends Question$alternativesArgs<ExtArgs> = {}>(args?: Subset<T, Question$alternativesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlternativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    permissions<T extends Question$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, Question$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5127,6 +5277,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AlternativeScalarFieldEnum | AlternativeScalarFieldEnum[]
+  }
+
+  /**
+   * Question.permissions
+   */
+  export type Question$permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    where?: QuestionUserAccessWhereInput
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    cursor?: QuestionUserAccessWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestionUserAccessScalarFieldEnum | QuestionUserAccessScalarFieldEnum[]
   }
 
   /**
@@ -8520,6 +8694,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     collections?: boolean | CollectionPermissionType$collectionsArgs<ExtArgs>
+    questions?: boolean | CollectionPermissionType$questionsArgs<ExtArgs>
     _count?: boolean | CollectionPermissionTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["collectionPermissionType"]>
 
@@ -8544,6 +8719,7 @@ export namespace Prisma {
   export type CollectionPermissionTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["collectionPermissionType"]>
   export type CollectionPermissionTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | CollectionPermissionType$collectionsArgs<ExtArgs>
+    questions?: boolean | CollectionPermissionType$questionsArgs<ExtArgs>
     _count?: boolean | CollectionPermissionTypeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CollectionPermissionTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8553,6 +8729,7 @@ export namespace Prisma {
     name: "CollectionPermissionType"
     objects: {
       collections: Prisma.$CollectionUserAccessPayload<ExtArgs>[]
+      questions: Prisma.$QuestionUserAccessPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8953,6 +9130,7 @@ export namespace Prisma {
   export interface Prisma__CollectionPermissionTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     collections<T extends CollectionPermissionType$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, CollectionPermissionType$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    questions<T extends CollectionPermissionType$questionsArgs<ExtArgs> = {}>(args?: Subset<T, CollectionPermissionType$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9394,6 +9572,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CollectionUserAccessScalarFieldEnum | CollectionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * CollectionPermissionType.questions
+   */
+  export type CollectionPermissionType$questionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    where?: QuestionUserAccessWhereInput
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    cursor?: QuestionUserAccessWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestionUserAccessScalarFieldEnum | QuestionUserAccessScalarFieldEnum[]
   }
 
   /**
@@ -10537,6 +10739,1127 @@ export namespace Prisma {
 
 
   /**
+   * Model QuestionUserAccess
+   */
+
+  export type AggregateQuestionUserAccess = {
+    _count: QuestionUserAccessCountAggregateOutputType | null
+    _avg: QuestionUserAccessAvgAggregateOutputType | null
+    _sum: QuestionUserAccessSumAggregateOutputType | null
+    _min: QuestionUserAccessMinAggregateOutputType | null
+    _max: QuestionUserAccessMaxAggregateOutputType | null
+  }
+
+  export type QuestionUserAccessAvgAggregateOutputType = {
+    permission_type_id: number | null
+  }
+
+  export type QuestionUserAccessSumAggregateOutputType = {
+    permission_type_id: number | null
+  }
+
+  export type QuestionUserAccessMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    question_id: string | null
+    permission_type_id: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type QuestionUserAccessMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    question_id: string | null
+    permission_type_id: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type QuestionUserAccessCountAggregateOutputType = {
+    id: number
+    user_id: number
+    question_id: number
+    permission_type_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type QuestionUserAccessAvgAggregateInputType = {
+    permission_type_id?: true
+  }
+
+  export type QuestionUserAccessSumAggregateInputType = {
+    permission_type_id?: true
+  }
+
+  export type QuestionUserAccessMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    question_id?: true
+    permission_type_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type QuestionUserAccessMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    question_id?: true
+    permission_type_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type QuestionUserAccessCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    question_id?: true
+    permission_type_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type QuestionUserAccessAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestionUserAccess to aggregate.
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestionUserAccesses to fetch.
+     */
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuestionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestionUserAccesses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QuestionUserAccesses
+    **/
+    _count?: true | QuestionUserAccessCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuestionUserAccessAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuestionUserAccessSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuestionUserAccessMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuestionUserAccessMaxAggregateInputType
+  }
+
+  export type GetQuestionUserAccessAggregateType<T extends QuestionUserAccessAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuestionUserAccess]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuestionUserAccess[P]>
+      : GetScalarType<T[P], AggregateQuestionUserAccess[P]>
+  }
+
+
+
+
+  export type QuestionUserAccessGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestionUserAccessWhereInput
+    orderBy?: QuestionUserAccessOrderByWithAggregationInput | QuestionUserAccessOrderByWithAggregationInput[]
+    by: QuestionUserAccessScalarFieldEnum[] | QuestionUserAccessScalarFieldEnum
+    having?: QuestionUserAccessScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuestionUserAccessCountAggregateInputType | true
+    _avg?: QuestionUserAccessAvgAggregateInputType
+    _sum?: QuestionUserAccessSumAggregateInputType
+    _min?: QuestionUserAccessMinAggregateInputType
+    _max?: QuestionUserAccessMaxAggregateInputType
+  }
+
+  export type QuestionUserAccessGroupByOutputType = {
+    id: string
+    user_id: string
+    question_id: string
+    permission_type_id: number
+    created_at: Date
+    updated_at: Date
+    _count: QuestionUserAccessCountAggregateOutputType | null
+    _avg: QuestionUserAccessAvgAggregateOutputType | null
+    _sum: QuestionUserAccessSumAggregateOutputType | null
+    _min: QuestionUserAccessMinAggregateOutputType | null
+    _max: QuestionUserAccessMaxAggregateOutputType | null
+  }
+
+  type GetQuestionUserAccessGroupByPayload<T extends QuestionUserAccessGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuestionUserAccessGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuestionUserAccessGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuestionUserAccessGroupByOutputType[P]>
+            : GetScalarType<T[P], QuestionUserAccessGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuestionUserAccessSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    question_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    question?: boolean | QuestionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questionUserAccess"]>
+
+  export type QuestionUserAccessSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    question_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    question?: boolean | QuestionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questionUserAccess"]>
+
+  export type QuestionUserAccessSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    question_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    question?: boolean | QuestionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questionUserAccess"]>
+
+  export type QuestionUserAccessSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    question_id?: boolean
+    permission_type_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type QuestionUserAccessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "question_id" | "permission_type_id" | "created_at" | "updated_at", ExtArgs["result"]["questionUserAccess"]>
+  export type QuestionUserAccessInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    question?: boolean | QuestionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }
+  export type QuestionUserAccessIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    question?: boolean | QuestionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }
+  export type QuestionUserAccessIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    question?: boolean | QuestionDefaultArgs<ExtArgs>
+    permission_type?: boolean | CollectionPermissionTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $QuestionUserAccessPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QuestionUserAccess"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      question: Prisma.$QuestionPayload<ExtArgs>
+      permission_type: Prisma.$CollectionPermissionTypePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      question_id: string
+      permission_type_id: number
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["questionUserAccess"]>
+    composites: {}
+  }
+
+  type QuestionUserAccessGetPayload<S extends boolean | null | undefined | QuestionUserAccessDefaultArgs> = $Result.GetResult<Prisma.$QuestionUserAccessPayload, S>
+
+  type QuestionUserAccessCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuestionUserAccessFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuestionUserAccessCountAggregateInputType | true
+    }
+
+  export interface QuestionUserAccessDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QuestionUserAccess'], meta: { name: 'QuestionUserAccess' } }
+    /**
+     * Find zero or one QuestionUserAccess that matches the filter.
+     * @param {QuestionUserAccessFindUniqueArgs} args - Arguments to find a QuestionUserAccess
+     * @example
+     * // Get one QuestionUserAccess
+     * const questionUserAccess = await prisma.questionUserAccess.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuestionUserAccessFindUniqueArgs>(args: SelectSubset<T, QuestionUserAccessFindUniqueArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QuestionUserAccess that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuestionUserAccessFindUniqueOrThrowArgs} args - Arguments to find a QuestionUserAccess
+     * @example
+     * // Get one QuestionUserAccess
+     * const questionUserAccess = await prisma.questionUserAccess.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuestionUserAccessFindUniqueOrThrowArgs>(args: SelectSubset<T, QuestionUserAccessFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestionUserAccess that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessFindFirstArgs} args - Arguments to find a QuestionUserAccess
+     * @example
+     * // Get one QuestionUserAccess
+     * const questionUserAccess = await prisma.questionUserAccess.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuestionUserAccessFindFirstArgs>(args?: SelectSubset<T, QuestionUserAccessFindFirstArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestionUserAccess that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessFindFirstOrThrowArgs} args - Arguments to find a QuestionUserAccess
+     * @example
+     * // Get one QuestionUserAccess
+     * const questionUserAccess = await prisma.questionUserAccess.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuestionUserAccessFindFirstOrThrowArgs>(args?: SelectSubset<T, QuestionUserAccessFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuestionUserAccesses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QuestionUserAccesses
+     * const questionUserAccesses = await prisma.questionUserAccess.findMany()
+     * 
+     * // Get first 10 QuestionUserAccesses
+     * const questionUserAccesses = await prisma.questionUserAccess.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const questionUserAccessWithIdOnly = await prisma.questionUserAccess.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuestionUserAccessFindManyArgs>(args?: SelectSubset<T, QuestionUserAccessFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QuestionUserAccess.
+     * @param {QuestionUserAccessCreateArgs} args - Arguments to create a QuestionUserAccess.
+     * @example
+     * // Create one QuestionUserAccess
+     * const QuestionUserAccess = await prisma.questionUserAccess.create({
+     *   data: {
+     *     // ... data to create a QuestionUserAccess
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuestionUserAccessCreateArgs>(args: SelectSubset<T, QuestionUserAccessCreateArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QuestionUserAccesses.
+     * @param {QuestionUserAccessCreateManyArgs} args - Arguments to create many QuestionUserAccesses.
+     * @example
+     * // Create many QuestionUserAccesses
+     * const questionUserAccess = await prisma.questionUserAccess.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuestionUserAccessCreateManyArgs>(args?: SelectSubset<T, QuestionUserAccessCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many QuestionUserAccesses and returns the data saved in the database.
+     * @param {QuestionUserAccessCreateManyAndReturnArgs} args - Arguments to create many QuestionUserAccesses.
+     * @example
+     * // Create many QuestionUserAccesses
+     * const questionUserAccess = await prisma.questionUserAccess.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many QuestionUserAccesses and only return the `id`
+     * const questionUserAccessWithIdOnly = await prisma.questionUserAccess.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends QuestionUserAccessCreateManyAndReturnArgs>(args?: SelectSubset<T, QuestionUserAccessCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a QuestionUserAccess.
+     * @param {QuestionUserAccessDeleteArgs} args - Arguments to delete one QuestionUserAccess.
+     * @example
+     * // Delete one QuestionUserAccess
+     * const QuestionUserAccess = await prisma.questionUserAccess.delete({
+     *   where: {
+     *     // ... filter to delete one QuestionUserAccess
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuestionUserAccessDeleteArgs>(args: SelectSubset<T, QuestionUserAccessDeleteArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QuestionUserAccess.
+     * @param {QuestionUserAccessUpdateArgs} args - Arguments to update one QuestionUserAccess.
+     * @example
+     * // Update one QuestionUserAccess
+     * const questionUserAccess = await prisma.questionUserAccess.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuestionUserAccessUpdateArgs>(args: SelectSubset<T, QuestionUserAccessUpdateArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QuestionUserAccesses.
+     * @param {QuestionUserAccessDeleteManyArgs} args - Arguments to filter QuestionUserAccesses to delete.
+     * @example
+     * // Delete a few QuestionUserAccesses
+     * const { count } = await prisma.questionUserAccess.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuestionUserAccessDeleteManyArgs>(args?: SelectSubset<T, QuestionUserAccessDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestionUserAccesses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QuestionUserAccesses
+     * const questionUserAccess = await prisma.questionUserAccess.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuestionUserAccessUpdateManyArgs>(args: SelectSubset<T, QuestionUserAccessUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestionUserAccesses and returns the data updated in the database.
+     * @param {QuestionUserAccessUpdateManyAndReturnArgs} args - Arguments to update many QuestionUserAccesses.
+     * @example
+     * // Update many QuestionUserAccesses
+     * const questionUserAccess = await prisma.questionUserAccess.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more QuestionUserAccesses and only return the `id`
+     * const questionUserAccessWithIdOnly = await prisma.questionUserAccess.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends QuestionUserAccessUpdateManyAndReturnArgs>(args: SelectSubset<T, QuestionUserAccessUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one QuestionUserAccess.
+     * @param {QuestionUserAccessUpsertArgs} args - Arguments to update or create a QuestionUserAccess.
+     * @example
+     * // Update or create a QuestionUserAccess
+     * const questionUserAccess = await prisma.questionUserAccess.upsert({
+     *   create: {
+     *     // ... data to create a QuestionUserAccess
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QuestionUserAccess we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuestionUserAccessUpsertArgs>(args: SelectSubset<T, QuestionUserAccessUpsertArgs<ExtArgs>>): Prisma__QuestionUserAccessClient<$Result.GetResult<Prisma.$QuestionUserAccessPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QuestionUserAccesses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessCountArgs} args - Arguments to filter QuestionUserAccesses to count.
+     * @example
+     * // Count the number of QuestionUserAccesses
+     * const count = await prisma.questionUserAccess.count({
+     *   where: {
+     *     // ... the filter for the QuestionUserAccesses we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuestionUserAccessCountArgs>(
+      args?: Subset<T, QuestionUserAccessCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuestionUserAccessCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QuestionUserAccess.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuestionUserAccessAggregateArgs>(args: Subset<T, QuestionUserAccessAggregateArgs>): Prisma.PrismaPromise<GetQuestionUserAccessAggregateType<T>>
+
+    /**
+     * Group by QuestionUserAccess.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestionUserAccessGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuestionUserAccessGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuestionUserAccessGroupByArgs['orderBy'] }
+        : { orderBy?: QuestionUserAccessGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuestionUserAccessGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuestionUserAccessGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QuestionUserAccess model
+   */
+  readonly fields: QuestionUserAccessFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QuestionUserAccess.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuestionUserAccessClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    question<T extends QuestionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestionDefaultArgs<ExtArgs>>): Prisma__QuestionClient<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    permission_type<T extends CollectionPermissionTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CollectionPermissionTypeDefaultArgs<ExtArgs>>): Prisma__CollectionPermissionTypeClient<$Result.GetResult<Prisma.$CollectionPermissionTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QuestionUserAccess model
+   */
+  interface QuestionUserAccessFieldRefs {
+    readonly id: FieldRef<"QuestionUserAccess", 'String'>
+    readonly user_id: FieldRef<"QuestionUserAccess", 'String'>
+    readonly question_id: FieldRef<"QuestionUserAccess", 'String'>
+    readonly permission_type_id: FieldRef<"QuestionUserAccess", 'Int'>
+    readonly created_at: FieldRef<"QuestionUserAccess", 'DateTime'>
+    readonly updated_at: FieldRef<"QuestionUserAccess", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QuestionUserAccess findUnique
+   */
+  export type QuestionUserAccessFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestionUserAccess to fetch.
+     */
+    where: QuestionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * QuestionUserAccess findUniqueOrThrow
+   */
+  export type QuestionUserAccessFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestionUserAccess to fetch.
+     */
+    where: QuestionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * QuestionUserAccess findFirst
+   */
+  export type QuestionUserAccessFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestionUserAccess to fetch.
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestionUserAccesses to fetch.
+     */
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestionUserAccesses.
+     */
+    cursor?: QuestionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestionUserAccesses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestionUserAccesses.
+     */
+    distinct?: QuestionUserAccessScalarFieldEnum | QuestionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * QuestionUserAccess findFirstOrThrow
+   */
+  export type QuestionUserAccessFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestionUserAccess to fetch.
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestionUserAccesses to fetch.
+     */
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestionUserAccesses.
+     */
+    cursor?: QuestionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestionUserAccesses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestionUserAccesses.
+     */
+    distinct?: QuestionUserAccessScalarFieldEnum | QuestionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * QuestionUserAccess findMany
+   */
+  export type QuestionUserAccessFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestionUserAccesses to fetch.
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestionUserAccesses to fetch.
+     */
+    orderBy?: QuestionUserAccessOrderByWithRelationInput | QuestionUserAccessOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QuestionUserAccesses.
+     */
+    cursor?: QuestionUserAccessWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestionUserAccesses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestionUserAccesses.
+     */
+    skip?: number
+    distinct?: QuestionUserAccessScalarFieldEnum | QuestionUserAccessScalarFieldEnum[]
+  }
+
+  /**
+   * QuestionUserAccess create
+   */
+  export type QuestionUserAccessCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * The data needed to create a QuestionUserAccess.
+     */
+    data: XOR<QuestionUserAccessCreateInput, QuestionUserAccessUncheckedCreateInput>
+  }
+
+  /**
+   * QuestionUserAccess createMany
+   */
+  export type QuestionUserAccessCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QuestionUserAccesses.
+     */
+    data: QuestionUserAccessCreateManyInput | QuestionUserAccessCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QuestionUserAccess createManyAndReturn
+   */
+  export type QuestionUserAccessCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * The data used to create many QuestionUserAccesses.
+     */
+    data: QuestionUserAccessCreateManyInput | QuestionUserAccessCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestionUserAccess update
+   */
+  export type QuestionUserAccessUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * The data needed to update a QuestionUserAccess.
+     */
+    data: XOR<QuestionUserAccessUpdateInput, QuestionUserAccessUncheckedUpdateInput>
+    /**
+     * Choose, which QuestionUserAccess to update.
+     */
+    where: QuestionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * QuestionUserAccess updateMany
+   */
+  export type QuestionUserAccessUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QuestionUserAccesses.
+     */
+    data: XOR<QuestionUserAccessUpdateManyMutationInput, QuestionUserAccessUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestionUserAccesses to update
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * Limit how many QuestionUserAccesses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestionUserAccess updateManyAndReturn
+   */
+  export type QuestionUserAccessUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * The data used to update QuestionUserAccesses.
+     */
+    data: XOR<QuestionUserAccessUpdateManyMutationInput, QuestionUserAccessUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestionUserAccesses to update
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * Limit how many QuestionUserAccesses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestionUserAccess upsert
+   */
+  export type QuestionUserAccessUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * The filter to search for the QuestionUserAccess to update in case it exists.
+     */
+    where: QuestionUserAccessWhereUniqueInput
+    /**
+     * In case the QuestionUserAccess found by the `where` argument doesn't exist, create a new QuestionUserAccess with this data.
+     */
+    create: XOR<QuestionUserAccessCreateInput, QuestionUserAccessUncheckedCreateInput>
+    /**
+     * In case the QuestionUserAccess was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuestionUserAccessUpdateInput, QuestionUserAccessUncheckedUpdateInput>
+  }
+
+  /**
+   * QuestionUserAccess delete
+   */
+  export type QuestionUserAccessDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+    /**
+     * Filter which QuestionUserAccess to delete.
+     */
+    where: QuestionUserAccessWhereUniqueInput
+  }
+
+  /**
+   * QuestionUserAccess deleteMany
+   */
+  export type QuestionUserAccessDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestionUserAccesses to delete
+     */
+    where?: QuestionUserAccessWhereInput
+    /**
+     * Limit how many QuestionUserAccesses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestionUserAccess without action
+   */
+  export type QuestionUserAccessDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionUserAccess
+     */
+    select?: QuestionUserAccessSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestionUserAccess
+     */
+    omit?: QuestionUserAccessOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionUserAccessInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10636,6 +11959,18 @@ export namespace Prisma {
   };
 
   export type CollectionUserAccessScalarFieldEnum = (typeof CollectionUserAccessScalarFieldEnum)[keyof typeof CollectionUserAccessScalarFieldEnum]
+
+
+  export const QuestionUserAccessScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    question_id: 'question_id',
+    permission_type_id: 'permission_type_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type QuestionUserAccessScalarFieldEnum = (typeof QuestionUserAccessScalarFieldEnum)[keyof typeof QuestionUserAccessScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10745,6 +12080,7 @@ export namespace Prisma {
     collections_created?: CollectionListRelationFilter
     questions_created?: QuestionListRelationFilter
     collections_access?: CollectionUserAccessListRelationFilter
+    questions_access?: QuestionUserAccessListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10756,6 +12092,7 @@ export namespace Prisma {
     collections_created?: CollectionOrderByRelationAggregateInput
     questions_created?: QuestionOrderByRelationAggregateInput
     collections_access?: CollectionUserAccessOrderByRelationAggregateInput
+    questions_access?: QuestionUserAccessOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10770,6 +12107,7 @@ export namespace Prisma {
     collections_created?: CollectionListRelationFilter
     questions_created?: QuestionListRelationFilter
     collections_access?: CollectionUserAccessListRelationFilter
+    questions_access?: QuestionUserAccessListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10876,6 +12214,7 @@ export namespace Prisma {
     collections?: QuestionCollectionListRelationFilter
     alternatives?: AlternativeListRelationFilter
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    permissions?: QuestionUserAccessListRelationFilter
   }
 
   export type QuestionOrderByWithRelationInput = {
@@ -10891,6 +12230,7 @@ export namespace Prisma {
     collections?: QuestionCollectionOrderByRelationAggregateInput
     alternatives?: AlternativeOrderByRelationAggregateInput
     author?: UserOrderByWithRelationInput
+    permissions?: QuestionUserAccessOrderByRelationAggregateInput
   }
 
   export type QuestionWhereUniqueInput = Prisma.AtLeast<{
@@ -10909,6 +12249,7 @@ export namespace Prisma {
     collections?: QuestionCollectionListRelationFilter
     alternatives?: AlternativeListRelationFilter
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    permissions?: QuestionUserAccessListRelationFilter
   }, "id">
 
   export type QuestionOrderByWithAggregationInput = {
@@ -11105,6 +12446,7 @@ export namespace Prisma {
     name?: StringFilter<"CollectionPermissionType"> | string
     description?: StringNullableFilter<"CollectionPermissionType"> | string | null
     collections?: CollectionUserAccessListRelationFilter
+    questions?: QuestionUserAccessListRelationFilter
   }
 
   export type CollectionPermissionTypeOrderByWithRelationInput = {
@@ -11112,6 +12454,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     collections?: CollectionUserAccessOrderByRelationAggregateInput
+    questions?: QuestionUserAccessOrderByRelationAggregateInput
   }
 
   export type CollectionPermissionTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -11122,6 +12465,7 @@ export namespace Prisma {
     NOT?: CollectionPermissionTypeWhereInput | CollectionPermissionTypeWhereInput[]
     description?: StringNullableFilter<"CollectionPermissionType"> | string | null
     collections?: CollectionUserAccessListRelationFilter
+    questions?: QuestionUserAccessListRelationFilter
   }, "id" | "name">
 
   export type CollectionPermissionTypeOrderByWithAggregationInput = {
@@ -11213,6 +12557,75 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"CollectionUserAccess"> | Date | string
   }
 
+  export type QuestionUserAccessWhereInput = {
+    AND?: QuestionUserAccessWhereInput | QuestionUserAccessWhereInput[]
+    OR?: QuestionUserAccessWhereInput[]
+    NOT?: QuestionUserAccessWhereInput | QuestionUserAccessWhereInput[]
+    id?: StringFilter<"QuestionUserAccess"> | string
+    user_id?: StringFilter<"QuestionUserAccess"> | string
+    question_id?: StringFilter<"QuestionUserAccess"> | string
+    permission_type_id?: IntFilter<"QuestionUserAccess"> | number
+    created_at?: DateTimeFilter<"QuestionUserAccess"> | Date | string
+    updated_at?: DateTimeFilter<"QuestionUserAccess"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
+    permission_type?: XOR<CollectionPermissionTypeScalarRelationFilter, CollectionPermissionTypeWhereInput>
+  }
+
+  export type QuestionUserAccessOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    question_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    question?: QuestionOrderByWithRelationInput
+    permission_type?: CollectionPermissionTypeOrderByWithRelationInput
+  }
+
+  export type QuestionUserAccessWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_question_id?: QuestionUserAccessUser_idQuestion_idCompoundUniqueInput
+    AND?: QuestionUserAccessWhereInput | QuestionUserAccessWhereInput[]
+    OR?: QuestionUserAccessWhereInput[]
+    NOT?: QuestionUserAccessWhereInput | QuestionUserAccessWhereInput[]
+    user_id?: StringFilter<"QuestionUserAccess"> | string
+    question_id?: StringFilter<"QuestionUserAccess"> | string
+    permission_type_id?: IntFilter<"QuestionUserAccess"> | number
+    created_at?: DateTimeFilter<"QuestionUserAccess"> | Date | string
+    updated_at?: DateTimeFilter<"QuestionUserAccess"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
+    permission_type?: XOR<CollectionPermissionTypeScalarRelationFilter, CollectionPermissionTypeWhereInput>
+  }, "id" | "user_id_question_id">
+
+  export type QuestionUserAccessOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    question_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: QuestionUserAccessCountOrderByAggregateInput
+    _avg?: QuestionUserAccessAvgOrderByAggregateInput
+    _max?: QuestionUserAccessMaxOrderByAggregateInput
+    _min?: QuestionUserAccessMinOrderByAggregateInput
+    _sum?: QuestionUserAccessSumOrderByAggregateInput
+  }
+
+  export type QuestionUserAccessScalarWhereWithAggregatesInput = {
+    AND?: QuestionUserAccessScalarWhereWithAggregatesInput | QuestionUserAccessScalarWhereWithAggregatesInput[]
+    OR?: QuestionUserAccessScalarWhereWithAggregatesInput[]
+    NOT?: QuestionUserAccessScalarWhereWithAggregatesInput | QuestionUserAccessScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"QuestionUserAccess"> | string
+    user_id?: StringWithAggregatesFilter<"QuestionUserAccess"> | string
+    question_id?: StringWithAggregatesFilter<"QuestionUserAccess"> | string
+    permission_type_id?: IntWithAggregatesFilter<"QuestionUserAccess"> | number
+    created_at?: DateTimeWithAggregatesFilter<"QuestionUserAccess"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"QuestionUserAccess"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -11222,6 +12635,7 @@ export namespace Prisma {
     collections_created?: CollectionCreateNestedManyWithoutAuthorInput
     questions_created?: QuestionCreateNestedManyWithoutAuthorInput
     collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
+    questions_access?: QuestionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11233,6 +12647,7 @@ export namespace Prisma {
     collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
     questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
     collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
+    questions_access?: QuestionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11244,6 +12659,7 @@ export namespace Prisma {
     collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
     questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
     collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
+    questions_access?: QuestionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11255,6 +12671,7 @@ export namespace Prisma {
     collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
     questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
     collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
+    questions_access?: QuestionUserAccessUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11362,6 +12779,7 @@ export namespace Prisma {
     collections?: QuestionCollectionCreateNestedManyWithoutQuestionInput
     alternatives?: AlternativeCreateNestedManyWithoutQuestionInput
     author: UserCreateNestedOneWithoutQuestions_createdInput
+    permissions?: QuestionUserAccessCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionUncheckedCreateInput = {
@@ -11375,6 +12793,7 @@ export namespace Prisma {
     author_id: string
     collections?: QuestionCollectionUncheckedCreateNestedManyWithoutQuestionInput
     alternatives?: AlternativeUncheckedCreateNestedManyWithoutQuestionInput
+    permissions?: QuestionUserAccessUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionUpdateInput = {
@@ -11388,6 +12807,7 @@ export namespace Prisma {
     collections?: QuestionCollectionUpdateManyWithoutQuestionNestedInput
     alternatives?: AlternativeUpdateManyWithoutQuestionNestedInput
     author?: UserUpdateOneRequiredWithoutQuestions_createdNestedInput
+    permissions?: QuestionUserAccessUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateInput = {
@@ -11401,6 +12821,7 @@ export namespace Prisma {
     author_id?: StringFieldUpdateOperationsInput | string
     collections?: QuestionCollectionUncheckedUpdateManyWithoutQuestionNestedInput
     alternatives?: AlternativeUncheckedUpdateManyWithoutQuestionNestedInput
+    permissions?: QuestionUserAccessUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionCreateManyInput = {
@@ -11583,6 +13004,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     collections?: CollectionUserAccessCreateNestedManyWithoutPermission_typeInput
+    questions?: QuestionUserAccessCreateNestedManyWithoutPermission_typeInput
   }
 
   export type CollectionPermissionTypeUncheckedCreateInput = {
@@ -11590,12 +13012,14 @@ export namespace Prisma {
     name: string
     description?: string | null
     collections?: CollectionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput
+    questions?: QuestionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput
   }
 
   export type CollectionPermissionTypeUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     collections?: CollectionUserAccessUpdateManyWithoutPermission_typeNestedInput
+    questions?: QuestionUserAccessUpdateManyWithoutPermission_typeNestedInput
   }
 
   export type CollectionPermissionTypeUncheckedUpdateInput = {
@@ -11603,6 +13027,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     collections?: CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput
+    questions?: QuestionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput
   }
 
   export type CollectionPermissionTypeCreateManyInput = {
@@ -11682,6 +13107,66 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type QuestionUserAccessCreateInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutQuestions_accessInput
+    question: QuestionCreateNestedOneWithoutPermissionsInput
+    permission_type: CollectionPermissionTypeCreateNestedOneWithoutQuestionsInput
+  }
+
+  export type QuestionUserAccessUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    question_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutQuestions_accessNestedInput
+    question?: QuestionUpdateOneRequiredWithoutPermissionsNestedInput
+    permission_type?: CollectionPermissionTypeUpdateOneRequiredWithoutQuestionsNestedInput
+  }
+
+  export type QuestionUserAccessUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessCreateManyInput = {
+    id?: string
+    user_id: string
+    question_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11730,6 +13215,12 @@ export namespace Prisma {
     none?: CollectionUserAccessWhereInput
   }
 
+  export type QuestionUserAccessListRelationFilter = {
+    every?: QuestionUserAccessWhereInput
+    some?: QuestionUserAccessWhereInput
+    none?: QuestionUserAccessWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11744,6 +13235,10 @@ export namespace Prisma {
   }
 
   export type CollectionUserAccessOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QuestionUserAccessOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12127,6 +13622,46 @@ export namespace Prisma {
     permission_type_id?: SortOrder
   }
 
+  export type QuestionUserAccessUser_idQuestion_idCompoundUniqueInput = {
+    user_id: string
+    question_id: string
+  }
+
+  export type QuestionUserAccessCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    question_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type QuestionUserAccessAvgOrderByAggregateInput = {
+    permission_type_id?: SortOrder
+  }
+
+  export type QuestionUserAccessMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    question_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type QuestionUserAccessMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    question_id?: SortOrder
+    permission_type_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type QuestionUserAccessSumOrderByAggregateInput = {
+    permission_type_id?: SortOrder
+  }
+
   export type CollectionCreateNestedManyWithoutAuthorInput = {
     create?: XOR<CollectionCreateWithoutAuthorInput, CollectionUncheckedCreateWithoutAuthorInput> | CollectionCreateWithoutAuthorInput[] | CollectionUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CollectionCreateOrConnectWithoutAuthorInput | CollectionCreateOrConnectWithoutAuthorInput[]
@@ -12148,6 +13683,13 @@ export namespace Prisma {
     connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
   }
 
+  export type QuestionUserAccessCreateNestedManyWithoutUserInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutUserInput, QuestionUserAccessUncheckedCreateWithoutUserInput> | QuestionUserAccessCreateWithoutUserInput[] | QuestionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutUserInput | QuestionUserAccessCreateOrConnectWithoutUserInput[]
+    createMany?: QuestionUserAccessCreateManyUserInputEnvelope
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+  }
+
   export type CollectionUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<CollectionCreateWithoutAuthorInput, CollectionUncheckedCreateWithoutAuthorInput> | CollectionCreateWithoutAuthorInput[] | CollectionUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CollectionCreateOrConnectWithoutAuthorInput | CollectionCreateOrConnectWithoutAuthorInput[]
@@ -12167,6 +13709,13 @@ export namespace Prisma {
     connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutUserInput | CollectionUserAccessCreateOrConnectWithoutUserInput[]
     createMany?: CollectionUserAccessCreateManyUserInputEnvelope
     connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+  }
+
+  export type QuestionUserAccessUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutUserInput, QuestionUserAccessUncheckedCreateWithoutUserInput> | QuestionUserAccessCreateWithoutUserInput[] | QuestionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutUserInput | QuestionUserAccessCreateOrConnectWithoutUserInput[]
+    createMany?: QuestionUserAccessCreateManyUserInputEnvelope
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12219,6 +13768,20 @@ export namespace Prisma {
     deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
   }
 
+  export type QuestionUserAccessUpdateManyWithoutUserNestedInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutUserInput, QuestionUserAccessUncheckedCreateWithoutUserInput> | QuestionUserAccessCreateWithoutUserInput[] | QuestionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutUserInput | QuestionUserAccessCreateOrConnectWithoutUserInput[]
+    upsert?: QuestionUserAccessUpsertWithWhereUniqueWithoutUserInput | QuestionUserAccessUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: QuestionUserAccessCreateManyUserInputEnvelope
+    set?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    disconnect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    delete?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    update?: QuestionUserAccessUpdateWithWhereUniqueWithoutUserInput | QuestionUserAccessUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: QuestionUserAccessUpdateManyWithWhereWithoutUserInput | QuestionUserAccessUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
+  }
+
   export type CollectionUncheckedUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<CollectionCreateWithoutAuthorInput, CollectionUncheckedCreateWithoutAuthorInput> | CollectionCreateWithoutAuthorInput[] | CollectionUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CollectionCreateOrConnectWithoutAuthorInput | CollectionCreateOrConnectWithoutAuthorInput[]
@@ -12259,6 +13822,20 @@ export namespace Prisma {
     update?: CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput | CollectionUserAccessUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutUserInput | CollectionUserAccessUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutUserInput, QuestionUserAccessUncheckedCreateWithoutUserInput> | QuestionUserAccessCreateWithoutUserInput[] | QuestionUserAccessUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutUserInput | QuestionUserAccessCreateOrConnectWithoutUserInput[]
+    upsert?: QuestionUserAccessUpsertWithWhereUniqueWithoutUserInput | QuestionUserAccessUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: QuestionUserAccessCreateManyUserInputEnvelope
+    set?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    disconnect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    delete?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    update?: QuestionUserAccessUpdateWithWhereUniqueWithoutUserInput | QuestionUserAccessUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: QuestionUserAccessUpdateManyWithWhereWithoutUserInput | QuestionUserAccessUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCollections_createdInput = {
@@ -12389,6 +13966,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type QuestionUserAccessCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutQuestionInput, QuestionUserAccessUncheckedCreateWithoutQuestionInput> | QuestionUserAccessCreateWithoutQuestionInput[] | QuestionUserAccessUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutQuestionInput | QuestionUserAccessCreateOrConnectWithoutQuestionInput[]
+    createMany?: QuestionUserAccessCreateManyQuestionInputEnvelope
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+  }
+
   export type QuestionCollectionUncheckedCreateNestedManyWithoutQuestionInput = {
     create?: XOR<QuestionCollectionCreateWithoutQuestionInput, QuestionCollectionUncheckedCreateWithoutQuestionInput> | QuestionCollectionCreateWithoutQuestionInput[] | QuestionCollectionUncheckedCreateWithoutQuestionInput[]
     connectOrCreate?: QuestionCollectionCreateOrConnectWithoutQuestionInput | QuestionCollectionCreateOrConnectWithoutQuestionInput[]
@@ -12401,6 +13985,13 @@ export namespace Prisma {
     connectOrCreate?: AlternativeCreateOrConnectWithoutQuestionInput | AlternativeCreateOrConnectWithoutQuestionInput[]
     createMany?: AlternativeCreateManyQuestionInputEnvelope
     connect?: AlternativeWhereUniqueInput | AlternativeWhereUniqueInput[]
+  }
+
+  export type QuestionUserAccessUncheckedCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutQuestionInput, QuestionUserAccessUncheckedCreateWithoutQuestionInput> | QuestionUserAccessCreateWithoutQuestionInput[] | QuestionUserAccessUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutQuestionInput | QuestionUserAccessCreateOrConnectWithoutQuestionInput[]
+    createMany?: QuestionUserAccessCreateManyQuestionInputEnvelope
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
   }
 
   export type QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput = {
@@ -12447,6 +14038,20 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutQuestions_createdInput, UserUpdateWithoutQuestions_createdInput>, UserUncheckedUpdateWithoutQuestions_createdInput>
   }
 
+  export type QuestionUserAccessUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutQuestionInput, QuestionUserAccessUncheckedCreateWithoutQuestionInput> | QuestionUserAccessCreateWithoutQuestionInput[] | QuestionUserAccessUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutQuestionInput | QuestionUserAccessCreateOrConnectWithoutQuestionInput[]
+    upsert?: QuestionUserAccessUpsertWithWhereUniqueWithoutQuestionInput | QuestionUserAccessUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: QuestionUserAccessCreateManyQuestionInputEnvelope
+    set?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    disconnect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    delete?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    update?: QuestionUserAccessUpdateWithWhereUniqueWithoutQuestionInput | QuestionUserAccessUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: QuestionUserAccessUpdateManyWithWhereWithoutQuestionInput | QuestionUserAccessUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12481,6 +14086,20 @@ export namespace Prisma {
     update?: AlternativeUpdateWithWhereUniqueWithoutQuestionInput | AlternativeUpdateWithWhereUniqueWithoutQuestionInput[]
     updateMany?: AlternativeUpdateManyWithWhereWithoutQuestionInput | AlternativeUpdateManyWithWhereWithoutQuestionInput[]
     deleteMany?: AlternativeScalarWhereInput | AlternativeScalarWhereInput[]
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutQuestionInput, QuestionUserAccessUncheckedCreateWithoutQuestionInput> | QuestionUserAccessCreateWithoutQuestionInput[] | QuestionUserAccessUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutQuestionInput | QuestionUserAccessCreateOrConnectWithoutQuestionInput[]
+    upsert?: QuestionUserAccessUpsertWithWhereUniqueWithoutQuestionInput | QuestionUserAccessUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: QuestionUserAccessCreateManyQuestionInputEnvelope
+    set?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    disconnect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    delete?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    update?: QuestionUserAccessUpdateWithWhereUniqueWithoutQuestionInput | QuestionUserAccessUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: QuestionUserAccessUpdateManyWithWhereWithoutQuestionInput | QuestionUserAccessUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
   }
 
   export type QuestionCreateNestedManyWithoutTypeInput = {
@@ -12578,11 +14197,25 @@ export namespace Prisma {
     connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
   }
 
+  export type QuestionUserAccessCreateNestedManyWithoutPermission_typeInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutPermission_typeInput, QuestionUserAccessUncheckedCreateWithoutPermission_typeInput> | QuestionUserAccessCreateWithoutPermission_typeInput[] | QuestionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutPermission_typeInput | QuestionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    createMany?: QuestionUserAccessCreateManyPermission_typeInputEnvelope
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+  }
+
   export type CollectionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput = {
     create?: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput> | CollectionUserAccessCreateWithoutPermission_typeInput[] | CollectionUserAccessUncheckedCreateWithoutPermission_typeInput[]
     connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutPermission_typeInput | CollectionUserAccessCreateOrConnectWithoutPermission_typeInput[]
     createMany?: CollectionUserAccessCreateManyPermission_typeInputEnvelope
     connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
+  }
+
+  export type QuestionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutPermission_typeInput, QuestionUserAccessUncheckedCreateWithoutPermission_typeInput> | QuestionUserAccessCreateWithoutPermission_typeInput[] | QuestionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutPermission_typeInput | QuestionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    createMany?: QuestionUserAccessCreateManyPermission_typeInputEnvelope
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
   }
 
   export type CollectionUserAccessUpdateManyWithoutPermission_typeNestedInput = {
@@ -12599,6 +14232,20 @@ export namespace Prisma {
     deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
   }
 
+  export type QuestionUserAccessUpdateManyWithoutPermission_typeNestedInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutPermission_typeInput, QuestionUserAccessUncheckedCreateWithoutPermission_typeInput> | QuestionUserAccessCreateWithoutPermission_typeInput[] | QuestionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutPermission_typeInput | QuestionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    upsert?: QuestionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput | QuestionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput[]
+    createMany?: QuestionUserAccessCreateManyPermission_typeInputEnvelope
+    set?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    disconnect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    delete?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    update?: QuestionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput | QuestionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput[]
+    updateMany?: QuestionUserAccessUpdateManyWithWhereWithoutPermission_typeInput | QuestionUserAccessUpdateManyWithWhereWithoutPermission_typeInput[]
+    deleteMany?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
+  }
+
   export type CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput = {
     create?: XOR<CollectionUserAccessCreateWithoutPermission_typeInput, CollectionUserAccessUncheckedCreateWithoutPermission_typeInput> | CollectionUserAccessCreateWithoutPermission_typeInput[] | CollectionUserAccessUncheckedCreateWithoutPermission_typeInput[]
     connectOrCreate?: CollectionUserAccessCreateOrConnectWithoutPermission_typeInput | CollectionUserAccessCreateOrConnectWithoutPermission_typeInput[]
@@ -12611,6 +14258,20 @@ export namespace Prisma {
     update?: CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput | CollectionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput[]
     updateMany?: CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput | CollectionUserAccessUpdateManyWithWhereWithoutPermission_typeInput[]
     deleteMany?: CollectionUserAccessScalarWhereInput | CollectionUserAccessScalarWhereInput[]
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput = {
+    create?: XOR<QuestionUserAccessCreateWithoutPermission_typeInput, QuestionUserAccessUncheckedCreateWithoutPermission_typeInput> | QuestionUserAccessCreateWithoutPermission_typeInput[] | QuestionUserAccessUncheckedCreateWithoutPermission_typeInput[]
+    connectOrCreate?: QuestionUserAccessCreateOrConnectWithoutPermission_typeInput | QuestionUserAccessCreateOrConnectWithoutPermission_typeInput[]
+    upsert?: QuestionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput | QuestionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput[]
+    createMany?: QuestionUserAccessCreateManyPermission_typeInputEnvelope
+    set?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    disconnect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    delete?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    connect?: QuestionUserAccessWhereUniqueInput | QuestionUserAccessWhereUniqueInput[]
+    update?: QuestionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput | QuestionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput[]
+    updateMany?: QuestionUserAccessUpdateManyWithWhereWithoutPermission_typeInput | QuestionUserAccessUpdateManyWithWhereWithoutPermission_typeInput[]
+    deleteMany?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCollections_accessInput = {
@@ -12653,6 +14314,48 @@ export namespace Prisma {
     upsert?: CollectionPermissionTypeUpsertWithoutCollectionsInput
     connect?: CollectionPermissionTypeWhereUniqueInput
     update?: XOR<XOR<CollectionPermissionTypeUpdateToOneWithWhereWithoutCollectionsInput, CollectionPermissionTypeUpdateWithoutCollectionsInput>, CollectionPermissionTypeUncheckedUpdateWithoutCollectionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutQuestions_accessInput = {
+    create?: XOR<UserCreateWithoutQuestions_accessInput, UserUncheckedCreateWithoutQuestions_accessInput>
+    connectOrCreate?: UserCreateOrConnectWithoutQuestions_accessInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type QuestionCreateNestedOneWithoutPermissionsInput = {
+    create?: XOR<QuestionCreateWithoutPermissionsInput, QuestionUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: QuestionCreateOrConnectWithoutPermissionsInput
+    connect?: QuestionWhereUniqueInput
+  }
+
+  export type CollectionPermissionTypeCreateNestedOneWithoutQuestionsInput = {
+    create?: XOR<CollectionPermissionTypeCreateWithoutQuestionsInput, CollectionPermissionTypeUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: CollectionPermissionTypeCreateOrConnectWithoutQuestionsInput
+    connect?: CollectionPermissionTypeWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutQuestions_accessNestedInput = {
+    create?: XOR<UserCreateWithoutQuestions_accessInput, UserUncheckedCreateWithoutQuestions_accessInput>
+    connectOrCreate?: UserCreateOrConnectWithoutQuestions_accessInput
+    upsert?: UserUpsertWithoutQuestions_accessInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutQuestions_accessInput, UserUpdateWithoutQuestions_accessInput>, UserUncheckedUpdateWithoutQuestions_accessInput>
+  }
+
+  export type QuestionUpdateOneRequiredWithoutPermissionsNestedInput = {
+    create?: XOR<QuestionCreateWithoutPermissionsInput, QuestionUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: QuestionCreateOrConnectWithoutPermissionsInput
+    upsert?: QuestionUpsertWithoutPermissionsInput
+    connect?: QuestionWhereUniqueInput
+    update?: XOR<XOR<QuestionUpdateToOneWithWhereWithoutPermissionsInput, QuestionUpdateWithoutPermissionsInput>, QuestionUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type CollectionPermissionTypeUpdateOneRequiredWithoutQuestionsNestedInput = {
+    create?: XOR<CollectionPermissionTypeCreateWithoutQuestionsInput, CollectionPermissionTypeUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: CollectionPermissionTypeCreateOrConnectWithoutQuestionsInput
+    upsert?: CollectionPermissionTypeUpsertWithoutQuestionsInput
+    connect?: CollectionPermissionTypeWhereUniqueInput
+    update?: XOR<XOR<CollectionPermissionTypeUpdateToOneWithWhereWithoutQuestionsInput, CollectionPermissionTypeUpdateWithoutQuestionsInput>, CollectionPermissionTypeUncheckedUpdateWithoutQuestionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12844,6 +14547,7 @@ export namespace Prisma {
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
     collections?: QuestionCollectionCreateNestedManyWithoutQuestionInput
     alternatives?: AlternativeCreateNestedManyWithoutQuestionInput
+    permissions?: QuestionUserAccessCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionUncheckedCreateWithoutAuthorInput = {
@@ -12856,6 +14560,7 @@ export namespace Prisma {
     updated_at?: Date | string
     collections?: QuestionCollectionUncheckedCreateNestedManyWithoutQuestionInput
     alternatives?: AlternativeUncheckedCreateNestedManyWithoutQuestionInput
+    permissions?: QuestionUserAccessUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionCreateOrConnectWithoutAuthorInput = {
@@ -12891,6 +14596,32 @@ export namespace Prisma {
 
   export type CollectionUserAccessCreateManyUserInputEnvelope = {
     data: CollectionUserAccessCreateManyUserInput | CollectionUserAccessCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuestionUserAccessCreateWithoutUserInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    question: QuestionCreateNestedOneWithoutPermissionsInput
+    permission_type: CollectionPermissionTypeCreateNestedOneWithoutQuestionsInput
+  }
+
+  export type QuestionUserAccessUncheckedCreateWithoutUserInput = {
+    id?: string
+    question_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessCreateOrConnectWithoutUserInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    create: XOR<QuestionUserAccessCreateWithoutUserInput, QuestionUserAccessUncheckedCreateWithoutUserInput>
+  }
+
+  export type QuestionUserAccessCreateManyUserInputEnvelope = {
+    data: QuestionUserAccessCreateManyUserInput | QuestionUserAccessCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -12980,6 +14711,34 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"CollectionUserAccess"> | Date | string
   }
 
+  export type QuestionUserAccessUpsertWithWhereUniqueWithoutUserInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    update: XOR<QuestionUserAccessUpdateWithoutUserInput, QuestionUserAccessUncheckedUpdateWithoutUserInput>
+    create: XOR<QuestionUserAccessCreateWithoutUserInput, QuestionUserAccessUncheckedCreateWithoutUserInput>
+  }
+
+  export type QuestionUserAccessUpdateWithWhereUniqueWithoutUserInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    data: XOR<QuestionUserAccessUpdateWithoutUserInput, QuestionUserAccessUncheckedUpdateWithoutUserInput>
+  }
+
+  export type QuestionUserAccessUpdateManyWithWhereWithoutUserInput = {
+    where: QuestionUserAccessScalarWhereInput
+    data: XOR<QuestionUserAccessUpdateManyMutationInput, QuestionUserAccessUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type QuestionUserAccessScalarWhereInput = {
+    AND?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
+    OR?: QuestionUserAccessScalarWhereInput[]
+    NOT?: QuestionUserAccessScalarWhereInput | QuestionUserAccessScalarWhereInput[]
+    id?: StringFilter<"QuestionUserAccess"> | string
+    user_id?: StringFilter<"QuestionUserAccess"> | string
+    question_id?: StringFilter<"QuestionUserAccess"> | string
+    permission_type_id?: IntFilter<"QuestionUserAccess"> | number
+    created_at?: DateTimeFilter<"QuestionUserAccess"> | Date | string
+    updated_at?: DateTimeFilter<"QuestionUserAccess"> | Date | string
+  }
+
   export type UserCreateWithoutCollections_createdInput = {
     id?: string
     email: string
@@ -12988,6 +14747,7 @@ export namespace Prisma {
     profile_picture?: string | null
     questions_created?: QuestionCreateNestedManyWithoutAuthorInput
     collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
+    questions_access?: QuestionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCollections_createdInput = {
@@ -12998,6 +14758,7 @@ export namespace Prisma {
     profile_picture?: string | null
     questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
     collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
+    questions_access?: QuestionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCollections_createdInput = {
@@ -13070,6 +14831,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
     collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
+    questions_access?: QuestionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollections_createdInput = {
@@ -13080,6 +14842,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
     collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
+    questions_access?: QuestionUserAccessUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuestionCollectionUpsertWithWhereUniqueWithoutCollectionInput = {
@@ -13193,6 +14956,7 @@ export namespace Prisma {
     profile_picture?: string | null
     collections_created?: CollectionCreateNestedManyWithoutAuthorInput
     collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
+    questions_access?: QuestionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQuestions_createdInput = {
@@ -13203,11 +14967,38 @@ export namespace Prisma {
     profile_picture?: string | null
     collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
     collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
+    questions_access?: QuestionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQuestions_createdInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutQuestions_createdInput, UserUncheckedCreateWithoutQuestions_createdInput>
+  }
+
+  export type QuestionUserAccessCreateWithoutQuestionInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutQuestions_accessInput
+    permission_type: CollectionPermissionTypeCreateNestedOneWithoutQuestionsInput
+  }
+
+  export type QuestionUserAccessUncheckedCreateWithoutQuestionInput = {
+    id?: string
+    user_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessCreateOrConnectWithoutQuestionInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    create: XOR<QuestionUserAccessCreateWithoutQuestionInput, QuestionUserAccessUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type QuestionUserAccessCreateManyQuestionInputEnvelope = {
+    data: QuestionUserAccessCreateManyQuestionInput | QuestionUserAccessCreateManyQuestionInput[]
+    skipDuplicates?: boolean
   }
 
   export type QuestionTypeUpsertWithoutQuestionsInput = {
@@ -13295,6 +15086,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
     collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
+    questions_access?: QuestionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuestions_createdInput = {
@@ -13305,6 +15097,23 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
     collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
+    questions_access?: QuestionUserAccessUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type QuestionUserAccessUpsertWithWhereUniqueWithoutQuestionInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    update: XOR<QuestionUserAccessUpdateWithoutQuestionInput, QuestionUserAccessUncheckedUpdateWithoutQuestionInput>
+    create: XOR<QuestionUserAccessCreateWithoutQuestionInput, QuestionUserAccessUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type QuestionUserAccessUpdateWithWhereUniqueWithoutQuestionInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    data: XOR<QuestionUserAccessUpdateWithoutQuestionInput, QuestionUserAccessUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type QuestionUserAccessUpdateManyWithWhereWithoutQuestionInput = {
+    where: QuestionUserAccessScalarWhereInput
+    data: XOR<QuestionUserAccessUpdateManyMutationInput, QuestionUserAccessUncheckedUpdateManyWithoutQuestionInput>
   }
 
   export type QuestionCreateWithoutTypeInput = {
@@ -13317,6 +15126,7 @@ export namespace Prisma {
     collections?: QuestionCollectionCreateNestedManyWithoutQuestionInput
     alternatives?: AlternativeCreateNestedManyWithoutQuestionInput
     author: UserCreateNestedOneWithoutQuestions_createdInput
+    permissions?: QuestionUserAccessCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionUncheckedCreateWithoutTypeInput = {
@@ -13329,6 +15139,7 @@ export namespace Prisma {
     author_id: string
     collections?: QuestionCollectionUncheckedCreateNestedManyWithoutQuestionInput
     alternatives?: AlternativeUncheckedCreateNestedManyWithoutQuestionInput
+    permissions?: QuestionUserAccessUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionCreateOrConnectWithoutTypeInput = {
@@ -13367,6 +15178,7 @@ export namespace Prisma {
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
     collections?: QuestionCollectionCreateNestedManyWithoutQuestionInput
     author: UserCreateNestedOneWithoutQuestions_createdInput
+    permissions?: QuestionUserAccessCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionUncheckedCreateWithoutAlternativesInput = {
@@ -13379,6 +15191,7 @@ export namespace Prisma {
     updated_at?: Date | string
     author_id: string
     collections?: QuestionCollectionUncheckedCreateNestedManyWithoutQuestionInput
+    permissions?: QuestionUserAccessUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionCreateOrConnectWithoutAlternativesInput = {
@@ -13407,6 +15220,7 @@ export namespace Prisma {
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
     collections?: QuestionCollectionUpdateManyWithoutQuestionNestedInput
     author?: UserUpdateOneRequiredWithoutQuestions_createdNestedInput
+    permissions?: QuestionUserAccessUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateWithoutAlternativesInput = {
@@ -13419,6 +15233,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
     collections?: QuestionCollectionUncheckedUpdateManyWithoutQuestionNestedInput
+    permissions?: QuestionUserAccessUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionCreateWithoutCollectionsInput = {
@@ -13431,6 +15246,7 @@ export namespace Prisma {
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
     alternatives?: AlternativeCreateNestedManyWithoutQuestionInput
     author: UserCreateNestedOneWithoutQuestions_createdInput
+    permissions?: QuestionUserAccessCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionUncheckedCreateWithoutCollectionsInput = {
@@ -13443,6 +15259,7 @@ export namespace Prisma {
     updated_at?: Date | string
     author_id: string
     alternatives?: AlternativeUncheckedCreateNestedManyWithoutQuestionInput
+    permissions?: QuestionUserAccessUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionCreateOrConnectWithoutCollectionsInput = {
@@ -13496,6 +15313,7 @@ export namespace Prisma {
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
     alternatives?: AlternativeUpdateManyWithoutQuestionNestedInput
     author?: UserUpdateOneRequiredWithoutQuestions_createdNestedInput
+    permissions?: QuestionUserAccessUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateWithoutCollectionsInput = {
@@ -13508,6 +15326,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
     alternatives?: AlternativeUncheckedUpdateManyWithoutQuestionNestedInput
+    permissions?: QuestionUserAccessUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type CollectionUpsertWithoutQuestionsInput = {
@@ -13567,6 +15386,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type QuestionUserAccessCreateWithoutPermission_typeInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutQuestions_accessInput
+    question: QuestionCreateNestedOneWithoutPermissionsInput
+  }
+
+  export type QuestionUserAccessUncheckedCreateWithoutPermission_typeInput = {
+    id?: string
+    user_id: string
+    question_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessCreateOrConnectWithoutPermission_typeInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    create: XOR<QuestionUserAccessCreateWithoutPermission_typeInput, QuestionUserAccessUncheckedCreateWithoutPermission_typeInput>
+  }
+
+  export type QuestionUserAccessCreateManyPermission_typeInputEnvelope = {
+    data: QuestionUserAccessCreateManyPermission_typeInput | QuestionUserAccessCreateManyPermission_typeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CollectionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput = {
     where: CollectionUserAccessWhereUniqueInput
     update: XOR<CollectionUserAccessUpdateWithoutPermission_typeInput, CollectionUserAccessUncheckedUpdateWithoutPermission_typeInput>
@@ -13583,6 +15428,22 @@ export namespace Prisma {
     data: XOR<CollectionUserAccessUpdateManyMutationInput, CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeInput>
   }
 
+  export type QuestionUserAccessUpsertWithWhereUniqueWithoutPermission_typeInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    update: XOR<QuestionUserAccessUpdateWithoutPermission_typeInput, QuestionUserAccessUncheckedUpdateWithoutPermission_typeInput>
+    create: XOR<QuestionUserAccessCreateWithoutPermission_typeInput, QuestionUserAccessUncheckedCreateWithoutPermission_typeInput>
+  }
+
+  export type QuestionUserAccessUpdateWithWhereUniqueWithoutPermission_typeInput = {
+    where: QuestionUserAccessWhereUniqueInput
+    data: XOR<QuestionUserAccessUpdateWithoutPermission_typeInput, QuestionUserAccessUncheckedUpdateWithoutPermission_typeInput>
+  }
+
+  export type QuestionUserAccessUpdateManyWithWhereWithoutPermission_typeInput = {
+    where: QuestionUserAccessScalarWhereInput
+    data: XOR<QuestionUserAccessUpdateManyMutationInput, QuestionUserAccessUncheckedUpdateManyWithoutPermission_typeInput>
+  }
+
   export type UserCreateWithoutCollections_accessInput = {
     id?: string
     email: string
@@ -13591,6 +15452,7 @@ export namespace Prisma {
     profile_picture?: string | null
     collections_created?: CollectionCreateNestedManyWithoutAuthorInput
     questions_created?: QuestionCreateNestedManyWithoutAuthorInput
+    questions_access?: QuestionUserAccessCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCollections_accessInput = {
@@ -13601,6 +15463,7 @@ export namespace Prisma {
     profile_picture?: string | null
     collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
     questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
+    questions_access?: QuestionUserAccessUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCollections_accessInput = {
@@ -13636,12 +15499,14 @@ export namespace Prisma {
   export type CollectionPermissionTypeCreateWithoutCollectionsInput = {
     name: string
     description?: string | null
+    questions?: QuestionUserAccessCreateNestedManyWithoutPermission_typeInput
   }
 
   export type CollectionPermissionTypeUncheckedCreateWithoutCollectionsInput = {
     id?: number
     name: string
     description?: string | null
+    questions?: QuestionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput
   }
 
   export type CollectionPermissionTypeCreateOrConnectWithoutCollectionsInput = {
@@ -13668,6 +15533,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
     questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
+    questions_access?: QuestionUserAccessUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollections_accessInput = {
@@ -13678,6 +15544,7 @@ export namespace Prisma {
     profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
     collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
     questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
+    questions_access?: QuestionUserAccessUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CollectionUpsertWithoutPermissionsInput = {
@@ -13725,12 +15592,184 @@ export namespace Prisma {
   export type CollectionPermissionTypeUpdateWithoutCollectionsInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: QuestionUserAccessUpdateManyWithoutPermission_typeNestedInput
   }
 
   export type CollectionPermissionTypeUncheckedUpdateWithoutCollectionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: QuestionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput
+  }
+
+  export type UserCreateWithoutQuestions_accessInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    profile_picture?: string | null
+    collections_created?: CollectionCreateNestedManyWithoutAuthorInput
+    questions_created?: QuestionCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutQuestions_accessInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    profile_picture?: string | null
+    collections_created?: CollectionUncheckedCreateNestedManyWithoutAuthorInput
+    questions_created?: QuestionUncheckedCreateNestedManyWithoutAuthorInput
+    collections_access?: CollectionUserAccessUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutQuestions_accessInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutQuestions_accessInput, UserUncheckedCreateWithoutQuestions_accessInput>
+  }
+
+  export type QuestionCreateWithoutPermissionsInput = {
+    id?: string
+    title?: string
+    image_url?: string | null
+    statement: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    type: QuestionTypeCreateNestedOneWithoutQuestionsInput
+    collections?: QuestionCollectionCreateNestedManyWithoutQuestionInput
+    alternatives?: AlternativeCreateNestedManyWithoutQuestionInput
+    author: UserCreateNestedOneWithoutQuestions_createdInput
+  }
+
+  export type QuestionUncheckedCreateWithoutPermissionsInput = {
+    id?: string
+    title?: string
+    image_url?: string | null
+    statement: string
+    type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    author_id: string
+    collections?: QuestionCollectionUncheckedCreateNestedManyWithoutQuestionInput
+    alternatives?: AlternativeUncheckedCreateNestedManyWithoutQuestionInput
+  }
+
+  export type QuestionCreateOrConnectWithoutPermissionsInput = {
+    where: QuestionWhereUniqueInput
+    create: XOR<QuestionCreateWithoutPermissionsInput, QuestionUncheckedCreateWithoutPermissionsInput>
+  }
+
+  export type CollectionPermissionTypeCreateWithoutQuestionsInput = {
+    name: string
+    description?: string | null
+    collections?: CollectionUserAccessCreateNestedManyWithoutPermission_typeInput
+  }
+
+  export type CollectionPermissionTypeUncheckedCreateWithoutQuestionsInput = {
+    id?: number
+    name: string
+    description?: string | null
+    collections?: CollectionUserAccessUncheckedCreateNestedManyWithoutPermission_typeInput
+  }
+
+  export type CollectionPermissionTypeCreateOrConnectWithoutQuestionsInput = {
+    where: CollectionPermissionTypeWhereUniqueInput
+    create: XOR<CollectionPermissionTypeCreateWithoutQuestionsInput, CollectionPermissionTypeUncheckedCreateWithoutQuestionsInput>
+  }
+
+  export type UserUpsertWithoutQuestions_accessInput = {
+    update: XOR<UserUpdateWithoutQuestions_accessInput, UserUncheckedUpdateWithoutQuestions_accessInput>
+    create: XOR<UserCreateWithoutQuestions_accessInput, UserUncheckedCreateWithoutQuestions_accessInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutQuestions_accessInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutQuestions_accessInput, UserUncheckedUpdateWithoutQuestions_accessInput>
+  }
+
+  export type UserUpdateWithoutQuestions_accessInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
+    collections_created?: CollectionUpdateManyWithoutAuthorNestedInput
+    questions_created?: QuestionUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutQuestions_accessInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture?: NullableStringFieldUpdateOperationsInput | string | null
+    collections_created?: CollectionUncheckedUpdateManyWithoutAuthorNestedInput
+    questions_created?: QuestionUncheckedUpdateManyWithoutAuthorNestedInput
+    collections_access?: CollectionUserAccessUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type QuestionUpsertWithoutPermissionsInput = {
+    update: XOR<QuestionUpdateWithoutPermissionsInput, QuestionUncheckedUpdateWithoutPermissionsInput>
+    create: XOR<QuestionCreateWithoutPermissionsInput, QuestionUncheckedCreateWithoutPermissionsInput>
+    where?: QuestionWhereInput
+  }
+
+  export type QuestionUpdateToOneWithWhereWithoutPermissionsInput = {
+    where?: QuestionWhereInput
+    data: XOR<QuestionUpdateWithoutPermissionsInput, QuestionUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type QuestionUpdateWithoutPermissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
+    collections?: QuestionCollectionUpdateManyWithoutQuestionNestedInput
+    alternatives?: AlternativeUpdateManyWithoutQuestionNestedInput
+    author?: UserUpdateOneRequiredWithoutQuestions_createdNestedInput
+  }
+
+  export type QuestionUncheckedUpdateWithoutPermissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: StringFieldUpdateOperationsInput | string
+    type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    author_id?: StringFieldUpdateOperationsInput | string
+    collections?: QuestionCollectionUncheckedUpdateManyWithoutQuestionNestedInput
+    alternatives?: AlternativeUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type CollectionPermissionTypeUpsertWithoutQuestionsInput = {
+    update: XOR<CollectionPermissionTypeUpdateWithoutQuestionsInput, CollectionPermissionTypeUncheckedUpdateWithoutQuestionsInput>
+    create: XOR<CollectionPermissionTypeCreateWithoutQuestionsInput, CollectionPermissionTypeUncheckedCreateWithoutQuestionsInput>
+    where?: CollectionPermissionTypeWhereInput
+  }
+
+  export type CollectionPermissionTypeUpdateToOneWithWhereWithoutQuestionsInput = {
+    where?: CollectionPermissionTypeWhereInput
+    data: XOR<CollectionPermissionTypeUpdateWithoutQuestionsInput, CollectionPermissionTypeUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type CollectionPermissionTypeUpdateWithoutQuestionsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    collections?: CollectionUserAccessUpdateManyWithoutPermission_typeNestedInput
+  }
+
+  export type CollectionPermissionTypeUncheckedUpdateWithoutQuestionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    collections?: CollectionUserAccessUncheckedUpdateManyWithoutPermission_typeNestedInput
   }
 
   export type CollectionCreateManyAuthorInput = {
@@ -13754,6 +15793,14 @@ export namespace Prisma {
   export type CollectionUserAccessCreateManyUserInput = {
     id?: string
     collection_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessCreateManyUserInput = {
+    id?: string
+    question_id: string
     permission_type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -13797,6 +15844,7 @@ export namespace Prisma {
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
     collections?: QuestionCollectionUpdateManyWithoutQuestionNestedInput
     alternatives?: AlternativeUpdateManyWithoutQuestionNestedInput
+    permissions?: QuestionUserAccessUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateWithoutAuthorInput = {
@@ -13809,6 +15857,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: QuestionCollectionUncheckedUpdateManyWithoutQuestionNestedInput
     alternatives?: AlternativeUncheckedUpdateManyWithoutQuestionNestedInput
+    permissions?: QuestionUserAccessUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateManyWithoutAuthorInput = {
@@ -13840,6 +15889,30 @@ export namespace Prisma {
   export type CollectionUserAccessUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     collection_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    question?: QuestionUpdateOneRequiredWithoutPermissionsNestedInput
+    permission_type?: CollectionPermissionTypeUpdateOneRequiredWithoutQuestionsNestedInput
+  }
+
+  export type QuestionUserAccessUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
     permission_type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13910,6 +15983,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type QuestionUserAccessCreateManyQuestionInput = {
+    id?: string
+    user_id: string
+    permission_type_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type QuestionCollectionUpdateWithoutQuestionInput = {
     assigned_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collection?: CollectionUpdateOneRequiredWithoutQuestionsNestedInput
@@ -13949,6 +16030,30 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type QuestionUserAccessUpdateWithoutQuestionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutQuestions_accessNestedInput
+    permission_type?: CollectionPermissionTypeUpdateOneRequiredWithoutQuestionsNestedInput
+  }
+
+  export type QuestionUserAccessUncheckedUpdateWithoutQuestionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyWithoutQuestionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    permission_type_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type QuestionCreateManyTypeInput = {
     id?: string
     title?: string
@@ -13969,6 +16074,7 @@ export namespace Prisma {
     collections?: QuestionCollectionUpdateManyWithoutQuestionNestedInput
     alternatives?: AlternativeUpdateManyWithoutQuestionNestedInput
     author?: UserUpdateOneRequiredWithoutQuestions_createdNestedInput
+    permissions?: QuestionUserAccessUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateWithoutTypeInput = {
@@ -13981,6 +16087,7 @@ export namespace Prisma {
     author_id?: StringFieldUpdateOperationsInput | string
     collections?: QuestionCollectionUncheckedUpdateManyWithoutQuestionNestedInput
     alternatives?: AlternativeUncheckedUpdateManyWithoutQuestionNestedInput
+    permissions?: QuestionUserAccessUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionUncheckedUpdateManyWithoutTypeInput = {
@@ -13997,6 +16104,14 @@ export namespace Prisma {
     id?: string
     user_id: string
     collection_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type QuestionUserAccessCreateManyPermission_typeInput = {
+    id?: string
+    user_id: string
+    question_id: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -14021,6 +16136,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     collection_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessUpdateWithoutPermission_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutQuestions_accessNestedInput
+    question?: QuestionUpdateOneRequiredWithoutPermissionsNestedInput
+  }
+
+  export type QuestionUserAccessUncheckedUpdateWithoutPermission_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionUserAccessUncheckedUpdateManyWithoutPermission_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
