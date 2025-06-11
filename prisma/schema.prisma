@@ -108,7 +108,6 @@ model CollectionUserAccess {
   @@index([collection_id]) // Index para otimizar a busca de permissões por coleção
 }
 
-// Nova tabela para relacionamento usuário-questão
 model QuestionUserAccess {
   id                 String                   @id @default(uuid())
   user_id            String
