@@ -166,11 +166,23 @@ export class QuestionsService {
     });
   }
 
-
   findByUser(userId: string) {
     return this.prisma.question.findMany({
       where: {
-        author_id: userId
+        OR: [
+          // Questões criadas pelo usuário
+          {
+            author_id: userId
+          },
+          // Questões compartilhadas com o usuário
+          {
+            permissions: {
+              some: {
+                user_id: userId
+              }
+            }
+          }
+        ]
       },
       include: {
         type: true,
@@ -179,6 +191,14 @@ export class QuestionsService {
             id: true,
             name: true,
             profile_picture: true
+          }
+        },
+        permissions: {
+          where: {
+            user_id: userId
+          },
+          include: {
+            permission_type: true
           }
         }
       }
