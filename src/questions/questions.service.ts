@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
+import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
 import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
 export class QuestionsService {
 
   constructor( private prisma: PrismaService){}
-
   create(createQuestionDto: CreateQuestionDto) {
     // TODO: VERIFY IF TYPE EXISTS IN THE DATABASE
     const { type, author_id, ...rest } = createQuestionDto;
@@ -18,6 +18,51 @@ export class QuestionsService {
         author: author_id ? { connect: { id: author_id } } : undefined
       }
     });
+  }
+
+  async createWithAlternatives(createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
+    const { alternatives, type, author_id, ...questionData } = createQuestionWithAlternativesDto;
+
+    console.log('Creating question with alternatives:', {
+      questionData,
+      alternatives,
+      type,
+      author_id
+    });
+    
+    // Create question and alternatives in a transaction
+    const result = await this.prisma.$transaction(async (prisma) => {
+      // Create the question first
+      const question = await prisma.question.create({
+        data: {
+          ...questionData,
+          type: type ? { connect: { id: type } } : undefined,
+          author: author_id ? { connect: { id: author_id } } : undefined
+        }
+      });
+
+      // Create the alternatives
+      const createdAlternatives = await Promise.all(
+        alternatives.map(alternative =>
+          prisma.alternative.create({
+            data: {
+              text: alternative.text,
+              is_correct: alternative.is_correct,
+              question: {
+                connect: { id: question.id }
+              }
+            }
+          })
+        )
+      );
+
+      return {
+        ...question,
+        alternatives: createdAlternatives
+      };
+    });
+
+    return result;
   }
 
   findAll() {

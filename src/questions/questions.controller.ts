@@ -2,17 +2,23 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { QuestionsService } from './questions.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
+import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('questions')
 @Controller('questions')
 export class QuestionsController {
   constructor(private readonly questionsService: QuestionsService) {}
-
   @Post()
   @ApiBody({ type: CreateQuestionDto })
   create(@Body() createQuestionDto: CreateQuestionDto) {
     return this.questionsService.create(createQuestionDto);
+  }
+
+  @Post('with-alternatives')
+  @ApiBody({ type: CreateQuestionWithAlternativesDto })
+  createWithAlternatives(@Body() createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
+    return this.questionsService.createWithAlternatives(createQuestionWithAlternativesDto);
   }
 
   @Get()
