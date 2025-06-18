@@ -10,6 +10,8 @@ import { En_QuestionType } from "./create-question.dto";
 // }
 
 export class CreateQuestionWithAlternativesDto {
+    @ApiProperty({ example: 'a49e39b3-81aa-4beb-bed4-e7103f962e60', required: false })
+    id?: string;
     @ApiProperty({ example: 'Qual a cor do cavalo branco de Napoleão?' })
     statement: string;
     @ApiProperty({enum: En_QuestionType, example: En_QuestionType.MULTIPLE_CHOICE})

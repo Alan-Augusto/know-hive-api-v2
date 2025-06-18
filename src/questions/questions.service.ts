@@ -7,7 +7,7 @@ import { PrismaService } from 'src/database/prisma.service';
 @Injectable()
 export class QuestionsService {
 
-  constructor( private prisma: PrismaService){}
+  constructor(private prisma: PrismaService) { }
   create(createQuestionDto: CreateQuestionDto) {
     // TODO: VERIFY IF TYPE EXISTS IN THE DATABASE
     const { type, author_id, ...rest } = createQuestionDto;
@@ -21,25 +21,38 @@ export class QuestionsService {
   }
 
   async createWithAlternatives(createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
-    const { alternatives, type, author_id, ...questionData } = createQuestionWithAlternativesDto;
+    const { id, alternatives, type, author_id, ...questionData } = createQuestionWithAlternativesDto;
 
-    console.log('Creating question with alternatives:', {
-      questionData,
-      alternatives,
-      type,
-      author_id
-    });
-    
-    // Create question and alternatives in a transaction
+    // Create or update question and alternatives in a transaction
     const result = await this.prisma.$transaction(async (prisma) => {
-      // Create the question first
-      const question = await prisma.question.create({
-        data: {
-          ...questionData,
-          type: type ? { connect: { id: type } } : undefined,
-          author: author_id ? { connect: { id: author_id } } : undefined
-        }
-      });
+      let question;
+
+      if (id) {
+        // Delete existing alternatives if updating
+        await prisma.alternative.deleteMany({
+          where: { question_id: id }
+        });
+
+        // Update existing question (without alternatives)
+        question = await prisma.question.update({
+          where: { id },
+          data: {
+            ...questionData,
+            type: type ? { connect: { id: type } } : undefined,
+            author: author_id ? { connect: { id: author_id } } : undefined
+          }
+        });
+      } 
+      else {
+        // Create new question
+        question = await prisma.question.create({
+          data: {
+            ...questionData,
+            type: type ? { connect: { id: type } } : undefined,
+            author: author_id ? { connect: { id: author_id } } : undefined
+          }
+        });
+      }
 
       // Create the alternatives
       const createdAlternatives = await Promise.all(
@@ -93,22 +106,55 @@ export class QuestionsService {
             name: true,
             profile_picture: true
           }
-        }
+        },
+        alternatives: true
       }
     });
   }
 
   update(id: string, updateQuestionDto: UpdateQuestionDto) {
-    const { type, author_id, ...rest } = updateQuestionDto;
-    return this.prisma.question.update({
-      where: {
-        id
-      },
-      data: {
-        ...rest,
-        type: type ? { connect: { id: type } } : undefined,
-        author: author_id ? { connect: { id: author_id } } : undefined
+    const { type, author_id, alternatives, ...rest } = updateQuestionDto;
+    
+    return this.prisma.$transaction(async (prisma) => {
+      // Update the question (without alternatives)
+      const question = await prisma.question.update({
+        where: { id },
+        data: {
+          ...rest,
+          type: type ? { connect: { id: type } } : undefined,
+          author: author_id ? { connect: { id: author_id } } : undefined
+        }
+      });
+
+      // If alternatives are provided, update them
+      if (alternatives && alternatives.length > 0) {
+        // Delete existing alternatives
+        await prisma.alternative.deleteMany({
+          where: { question_id: id }
+        });
+
+        // Create new alternatives
+        const createdAlternatives = await Promise.all(
+          alternatives.map(alternative =>
+            prisma.alternative.create({
+              data: {
+                text: alternative.text,
+                is_correct: alternative.is_correct,
+                question: {
+                  connect: { id: question.id }
+                }
+              }
+            })
+          )
+        );
+
+        return {
+          ...question,
+          alternatives: createdAlternatives
+        };
       }
+
+      return question;
     });
   }
 
