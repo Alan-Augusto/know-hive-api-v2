@@ -16,6 +16,60 @@ export class CollectionsService {
     return this.prisma.collection.findMany();
   }
 
+  findByUser(userId: string) {
+    return this.prisma.collection.findMany({
+      where: {
+        OR: [
+          // Coleções criadas pelo usuário
+          {
+            author_id: userId
+          },
+          // Coleções compartilhadas com o usuário
+          {
+            permissions: {
+              some: {
+                user_id: userId
+              }
+            }
+          }
+        ]
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profile_picture: true
+          }
+        },
+        permissions: {
+          where: {
+            user_id: userId
+          },
+          include: {
+            permission_type: true
+          }
+        },
+        questions: {
+          include: {
+            question: {
+              include: {
+                type: true,
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    profile_picture: true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
   findOne(id: string) {
     return this.prisma.collection.findUnique({
       where: {

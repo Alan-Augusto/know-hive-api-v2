@@ -20,6 +20,11 @@ export class CollectionsController {
     return this.collectionsService.findAll();
   }
 
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.collectionsService.findByUser(userId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.collectionsService.findOne(id);

@@ -16,6 +16,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:4200',
+      'http://localhost:64437',
       'https://know-hive.vercel.app'
     ],
     credentials: true,
