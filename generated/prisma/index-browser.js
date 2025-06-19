@@ -132,6 +132,7 @@ exports.Prisma.CollectionScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  is_public: 'is_public',
   created_at: 'created_at',
   updated_at: 'updated_at',
   author_id: 'author_id'
@@ -142,6 +143,7 @@ exports.Prisma.QuestionScalarFieldEnum = {
   title: 'title',
   image_url: 'image_url',
   statement: 'statement',
+  is_public: 'is_public',
   type_id: 'type_id',
   created_at: 'created_at',
   updated_at: 'updated_at',

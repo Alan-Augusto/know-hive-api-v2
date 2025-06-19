@@ -2982,6 +2982,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    is_public: boolean | null
     created_at: Date | null
     updated_at: Date | null
     author_id: string | null
@@ -2991,6 +2992,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    is_public: boolean | null
     created_at: Date | null
     updated_at: Date | null
     author_id: string | null
@@ -3000,6 +3002,7 @@ export namespace Prisma {
     id: number
     title: number
     description: number
+    is_public: number
     created_at: number
     updated_at: number
     author_id: number
@@ -3011,6 +3014,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    is_public?: true
     created_at?: true
     updated_at?: true
     author_id?: true
@@ -3020,6 +3024,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    is_public?: true
     created_at?: true
     updated_at?: true
     author_id?: true
@@ -3029,6 +3034,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    is_public?: true
     created_at?: true
     updated_at?: true
     author_id?: true
@@ -3111,6 +3117,7 @@ export namespace Prisma {
     id: string
     title: string
     description: string
+    is_public: boolean
     created_at: Date
     updated_at: Date
     author_id: string
@@ -3137,6 +3144,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    is_public?: boolean
     created_at?: boolean
     updated_at?: boolean
     author_id?: boolean
@@ -3150,6 +3158,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    is_public?: boolean
     created_at?: boolean
     updated_at?: boolean
     author_id?: boolean
@@ -3160,6 +3169,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    is_public?: boolean
     created_at?: boolean
     updated_at?: boolean
     author_id?: boolean
@@ -3170,12 +3180,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    is_public?: boolean
     created_at?: boolean
     updated_at?: boolean
     author_id?: boolean
   }
 
-  export type CollectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "created_at" | "updated_at" | "author_id", ExtArgs["result"]["collection"]>
+  export type CollectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "is_public" | "created_at" | "updated_at" | "author_id", ExtArgs["result"]["collection"]>
   export type CollectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Collection$questionsArgs<ExtArgs>
@@ -3200,6 +3211,7 @@ export namespace Prisma {
       id: string
       title: string
       description: string
+      is_public: boolean
       created_at: Date
       updated_at: Date
       author_id: string
@@ -3632,6 +3644,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Collection", 'String'>
     readonly title: FieldRef<"Collection", 'String'>
     readonly description: FieldRef<"Collection", 'String'>
+    readonly is_public: FieldRef<"Collection", 'Boolean'>
     readonly created_at: FieldRef<"Collection", 'DateTime'>
     readonly updated_at: FieldRef<"Collection", 'DateTime'>
     readonly author_id: FieldRef<"Collection", 'String'>
@@ -4122,6 +4135,7 @@ export namespace Prisma {
     title: string | null
     image_url: string | null
     statement: string | null
+    is_public: boolean | null
     type_id: number | null
     created_at: Date | null
     updated_at: Date | null
@@ -4133,6 +4147,7 @@ export namespace Prisma {
     title: string | null
     image_url: string | null
     statement: string | null
+    is_public: boolean | null
     type_id: number | null
     created_at: Date | null
     updated_at: Date | null
@@ -4144,6 +4159,7 @@ export namespace Prisma {
     title: number
     image_url: number
     statement: number
+    is_public: number
     type_id: number
     created_at: number
     updated_at: number
@@ -4165,6 +4181,7 @@ export namespace Prisma {
     title?: true
     image_url?: true
     statement?: true
+    is_public?: true
     type_id?: true
     created_at?: true
     updated_at?: true
@@ -4176,6 +4193,7 @@ export namespace Prisma {
     title?: true
     image_url?: true
     statement?: true
+    is_public?: true
     type_id?: true
     created_at?: true
     updated_at?: true
@@ -4187,6 +4205,7 @@ export namespace Prisma {
     title?: true
     image_url?: true
     statement?: true
+    is_public?: true
     type_id?: true
     created_at?: true
     updated_at?: true
@@ -4285,6 +4304,7 @@ export namespace Prisma {
     title: string
     image_url: string | null
     statement: string
+    is_public: boolean
     type_id: number
     created_at: Date
     updated_at: Date
@@ -4315,6 +4335,7 @@ export namespace Prisma {
     title?: boolean
     image_url?: boolean
     statement?: boolean
+    is_public?: boolean
     type_id?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4332,6 +4353,7 @@ export namespace Prisma {
     title?: boolean
     image_url?: boolean
     statement?: boolean
+    is_public?: boolean
     type_id?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4345,6 +4367,7 @@ export namespace Prisma {
     title?: boolean
     image_url?: boolean
     statement?: boolean
+    is_public?: boolean
     type_id?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4358,13 +4381,14 @@ export namespace Prisma {
     title?: boolean
     image_url?: boolean
     statement?: boolean
+    is_public?: boolean
     type_id?: boolean
     created_at?: boolean
     updated_at?: boolean
     author_id?: boolean
   }
 
-  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "image_url" | "statement" | "type_id" | "created_at" | "updated_at" | "author_id", ExtArgs["result"]["question"]>
+  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "image_url" | "statement" | "is_public" | "type_id" | "created_at" | "updated_at" | "author_id", ExtArgs["result"]["question"]>
   export type QuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | QuestionTypeDefaultArgs<ExtArgs>
     collections?: boolean | Question$collectionsArgs<ExtArgs>
@@ -4396,6 +4420,7 @@ export namespace Prisma {
       title: string
       image_url: string | null
       statement: string
+      is_public: boolean
       type_id: number
       created_at: Date
       updated_at: Date
@@ -4832,6 +4857,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Question", 'String'>
     readonly image_url: FieldRef<"Question", 'String'>
     readonly statement: FieldRef<"Question", 'String'>
+    readonly is_public: FieldRef<"Question", 'Boolean'>
     readonly type_id: FieldRef<"Question", 'Int'>
     readonly created_at: FieldRef<"Question", 'DateTime'>
     readonly updated_at: FieldRef<"Question", 'DateTime'>
@@ -11888,6 +11914,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    is_public: 'is_public',
     created_at: 'created_at',
     updated_at: 'updated_at',
     author_id: 'author_id'
@@ -11901,6 +11928,7 @@ export namespace Prisma {
     title: 'title',
     image_url: 'image_url',
     statement: 'statement',
+    is_public: 'is_public',
     type_id: 'type_id',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -12017,6 +12045,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -12041,13 +12076,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -12139,6 +12167,7 @@ export namespace Prisma {
     id?: StringFilter<"Collection"> | string
     title?: StringFilter<"Collection"> | string
     description?: StringFilter<"Collection"> | string
+    is_public?: BoolFilter<"Collection"> | boolean
     created_at?: DateTimeFilter<"Collection"> | Date | string
     updated_at?: DateTimeFilter<"Collection"> | Date | string
     author_id?: StringFilter<"Collection"> | string
@@ -12151,6 +12180,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    is_public?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     author_id?: SortOrder
@@ -12166,6 +12196,7 @@ export namespace Prisma {
     NOT?: CollectionWhereInput | CollectionWhereInput[]
     title?: StringFilter<"Collection"> | string
     description?: StringFilter<"Collection"> | string
+    is_public?: BoolFilter<"Collection"> | boolean
     created_at?: DateTimeFilter<"Collection"> | Date | string
     updated_at?: DateTimeFilter<"Collection"> | Date | string
     author_id?: StringFilter<"Collection"> | string
@@ -12178,6 +12209,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    is_public?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     author_id?: SortOrder
@@ -12193,6 +12225,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Collection"> | string
     title?: StringWithAggregatesFilter<"Collection"> | string
     description?: StringWithAggregatesFilter<"Collection"> | string
+    is_public?: BoolWithAggregatesFilter<"Collection"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"Collection"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Collection"> | Date | string
     author_id?: StringWithAggregatesFilter<"Collection"> | string
@@ -12206,6 +12239,7 @@ export namespace Prisma {
     title?: StringFilter<"Question"> | string
     image_url?: StringNullableFilter<"Question"> | string | null
     statement?: StringFilter<"Question"> | string
+    is_public?: BoolFilter<"Question"> | boolean
     type_id?: IntFilter<"Question"> | number
     created_at?: DateTimeFilter<"Question"> | Date | string
     updated_at?: DateTimeFilter<"Question"> | Date | string
@@ -12222,6 +12256,7 @@ export namespace Prisma {
     title?: SortOrder
     image_url?: SortOrderInput | SortOrder
     statement?: SortOrder
+    is_public?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -12241,6 +12276,7 @@ export namespace Prisma {
     title?: StringFilter<"Question"> | string
     image_url?: StringNullableFilter<"Question"> | string | null
     statement?: StringFilter<"Question"> | string
+    is_public?: BoolFilter<"Question"> | boolean
     type_id?: IntFilter<"Question"> | number
     created_at?: DateTimeFilter<"Question"> | Date | string
     updated_at?: DateTimeFilter<"Question"> | Date | string
@@ -12257,6 +12293,7 @@ export namespace Prisma {
     title?: SortOrder
     image_url?: SortOrderInput | SortOrder
     statement?: SortOrder
+    is_public?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -12276,6 +12313,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Question"> | string
     image_url?: StringNullableWithAggregatesFilter<"Question"> | string | null
     statement?: StringWithAggregatesFilter<"Question"> | string
+    is_public?: BoolWithAggregatesFilter<"Question"> | boolean
     type_id?: IntWithAggregatesFilter<"Question"> | number
     created_at?: DateTimeWithAggregatesFilter<"Question"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Question"> | Date | string
@@ -12702,6 +12740,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author: UserCreateNestedOneWithoutCollections_createdInput
@@ -12713,6 +12752,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
@@ -12724,6 +12764,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCollections_createdNestedInput
@@ -12735,6 +12776,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
@@ -12746,6 +12788,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
@@ -12755,6 +12798,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12763,6 +12807,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
@@ -12773,6 +12818,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
@@ -12787,6 +12833,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -12801,6 +12848,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
@@ -12815,6 +12863,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12829,6 +12878,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -12840,6 +12890,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12849,6 +12900,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13302,6 +13354,11 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13332,6 +13389,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    is_public?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     author_id?: SortOrder
@@ -13341,6 +13399,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    is_public?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     author_id?: SortOrder
@@ -13350,9 +13409,18 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    is_public?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     author_id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13400,6 +13468,7 @@ export namespace Prisma {
     title?: SortOrder
     image_url?: SortOrder
     statement?: SortOrder
+    is_public?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -13415,6 +13484,7 @@ export namespace Prisma {
     title?: SortOrder
     image_url?: SortOrder
     statement?: SortOrder
+    is_public?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -13426,6 +13496,7 @@ export namespace Prisma {
     title?: SortOrder
     image_url?: SortOrder
     statement?: SortOrder
+    is_public?: SortOrder
     type_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -13478,11 +13549,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type QuestionScalarRelationFilter = {
     is?: QuestionWhereInput
     isNot?: QuestionWhereInput
@@ -13513,14 +13579,6 @@ export namespace Prisma {
     question_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CollectionScalarRelationFilter = {
@@ -13872,6 +13930,10 @@ export namespace Prisma {
     connect?: CollectionUserAccessWhereUniqueInput | CollectionUserAccessWhereUniqueInput[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -14148,10 +14210,6 @@ export namespace Prisma {
     create?: XOR<QuestionCreateWithoutAlternativesInput, QuestionUncheckedCreateWithoutAlternativesInput>
     connectOrCreate?: QuestionCreateOrConnectWithoutAlternativesInput
     connect?: QuestionWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type QuestionUpdateOneRequiredWithoutAlternativesNestedInput = {
@@ -14442,6 +14500,11 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -14451,6 +14514,14 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -14494,23 +14565,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type CollectionCreateWithoutAuthorInput = {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     questions?: QuestionCollectionCreateNestedManyWithoutCollectionInput
@@ -14521,6 +14580,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     questions?: QuestionCollectionUncheckedCreateNestedManyWithoutCollectionInput
@@ -14542,6 +14602,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
@@ -14555,6 +14616,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -14648,6 +14710,7 @@ export namespace Prisma {
     id?: StringFilter<"Collection"> | string
     title?: StringFilter<"Collection"> | string
     description?: StringFilter<"Collection"> | string
+    is_public?: BoolFilter<"Collection"> | boolean
     created_at?: DateTimeFilter<"Collection"> | Date | string
     updated_at?: DateTimeFilter<"Collection"> | Date | string
     author_id?: StringFilter<"Collection"> | string
@@ -14677,6 +14740,7 @@ export namespace Prisma {
     title?: StringFilter<"Question"> | string
     image_url?: StringNullableFilter<"Question"> | string | null
     statement?: StringFilter<"Question"> | string
+    is_public?: BoolFilter<"Question"> | boolean
     type_id?: IntFilter<"Question"> | number
     created_at?: DateTimeFilter<"Question"> | Date | string
     updated_at?: DateTimeFilter<"Question"> | Date | string
@@ -15121,6 +15185,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     collections?: QuestionCollectionCreateNestedManyWithoutQuestionInput
@@ -15134,6 +15199,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
@@ -15173,6 +15239,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
@@ -15186,6 +15253,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -15215,6 +15283,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
@@ -15228,6 +15297,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15241,6 +15311,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
@@ -15254,6 +15325,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -15271,6 +15343,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author: UserCreateNestedOneWithoutCollections_createdInput
@@ -15281,6 +15354,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
@@ -15308,6 +15382,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
@@ -15321,6 +15396,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15344,6 +15420,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCollections_createdNestedInput
@@ -15354,6 +15431,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
@@ -15475,6 +15553,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author: UserCreateNestedOneWithoutCollections_createdInput
@@ -15485,6 +15564,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
@@ -15562,6 +15642,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCollections_createdNestedInput
@@ -15572,6 +15653,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
@@ -15634,6 +15716,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     type: QuestionTypeCreateNestedOneWithoutQuestionsInput
@@ -15647,6 +15730,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -15727,6 +15811,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
@@ -15740,6 +15825,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15776,6 +15862,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -15785,6 +15872,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     type_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -15810,6 +15898,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionCollectionUpdateManyWithoutCollectionNestedInput
@@ -15820,6 +15909,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionCollectionUncheckedUpdateManyWithoutCollectionNestedInput
@@ -15830,6 +15920,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15839,6 +15930,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: QuestionTypeUpdateOneRequiredWithoutQuestionsNestedInput
@@ -15852,6 +15944,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15865,6 +15958,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     type_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16059,6 +16153,7 @@ export namespace Prisma {
     title?: string
     image_url?: string | null
     statement: string
+    is_public?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     author_id: string
@@ -16069,6 +16164,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: QuestionCollectionUpdateManyWithoutQuestionNestedInput
@@ -16082,6 +16178,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string
@@ -16095,6 +16192,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: StringFieldUpdateOperationsInput | string
+    is_public?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     author_id?: StringFieldUpdateOperationsInput | string

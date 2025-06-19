@@ -14,4 +14,6 @@ export class CreateQuestionDto {
     type: number;
     @ApiProperty({ example: 'a49e39b3-81aa-4beb-bed4-e7103f962e60' })
     author_id: string;
+    @ApiProperty({ example: true })
+    is_public: boolean;
 }

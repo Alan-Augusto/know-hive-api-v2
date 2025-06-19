@@ -40,4 +40,26 @@ export class RelCollectionUserAccessController {
   findAllByCollection(@Param('collectionId') collectionId: string) {
     return this.relCollectionUserAccessService.findAllByCollection(collectionId);
   }
+
+  @Post('grant-access')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        giverUserId: { type: 'string' },
+        collectionId: { type: 'string' },
+        receiverEmail: { type: 'string', format: 'email' },
+        accessTypeId: { type: 'number' },
+      },
+      required: ['giverUserId', 'collectionId', 'receiverEmail', 'accessTypeId'],
+    },
+  })
+  grantAccess(
+    @Body('giverUserId') giverUserId: string,
+    @Body('collectionId') collectionId: string,
+    @Body('receiverEmail') receiverEmail: string,
+    @Body('accessTypeId') accessTypeId: number,
+  ) {
+    return this.relCollectionUserAccessService.grantAccess(giverUserId, collectionId, receiverEmail, accessTypeId);
+  }
 }

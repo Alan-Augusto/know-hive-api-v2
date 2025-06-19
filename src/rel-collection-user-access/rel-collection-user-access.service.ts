@@ -51,4 +51,27 @@ export class RelCollectionUserAccessService {
       },
     });
   }
+
+  async grantAccess(giverUserId: string, collectionId: string, receiverEmail: string, accessTypeId: number) {
+    console.log('Granting access:', {
+      collectionId,
+      receiverEmail,
+      accessTypeId,
+    });
+    const receiver = await this.prisma.user.findUnique({
+      where: { email: receiverEmail },
+    });
+
+    if (!receiver) {
+      throw new Error('Receiver user not found');
+    }
+
+    return this.prisma.collectionUserAccess.create({
+      data: {
+        user_id: receiver.id,
+        collection_id: collectionId,
+        permission_type_id: accessTypeId,
+      },
+    });
+  }
 }
