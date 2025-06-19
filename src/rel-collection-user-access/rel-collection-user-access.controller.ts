@@ -35,4 +35,9 @@ export class RelCollectionUserAccessController {
   remove(@Param('id') id: string) {
     return this.relCollectionUserAccessService.remove(id);
   }
+
+  @Get('collection/:collectionId')
+  findAllByCollection(@Param('collectionId') collectionId: string) {
+    return this.relCollectionUserAccessService.findAllByCollection(collectionId);
+  }
 }

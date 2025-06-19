@@ -40,4 +40,15 @@ export class RelCollectionUserAccessService {
       }
     });
   }
+
+  findAllByCollection(collectionId: string) {
+    return this.prisma.collectionUserAccess.findMany({
+      where: { collection_id: collectionId.toString() },
+      include: {
+        user: true,
+        collection: true,
+        permission_type: true,
+      },
+    });
+  }
 }
