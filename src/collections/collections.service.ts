@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { CreateCollectionWithQuestionsDto } from './dto/create-collection-with-questions.dto';
+import { LikeCollectionDto } from './dto/like-collection.dto';
 import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
@@ -88,9 +89,8 @@ export class CollectionsService {
   findAll() {
     return this.prisma.collection.findMany();
   }
-
-  findByUser(userId: string) {
-    return this.prisma.collection.findMany({
+  async findByUser(userId: string) {
+    const collections = await this.prisma.collection.findMany({
       where: {
         OR: [
           // Coleções criadas pelo usuário
@@ -138,9 +138,21 @@ export class CollectionsService {
               }
             }
           }
+        },
+        likes: {
+          where: {
+            user_id: userId
+          }
         }
       }
     });
+
+    // Add is_liked field to each collection
+    return collections.map(collection => ({
+      ...collection,
+      is_liked: collection.likes.length > 0,
+      likes: undefined // Remove likes array from response
+    }));
   }
 
   async findOne(id: string) {
@@ -176,5 +188,41 @@ export class CollectionsService {
         id
       }
     });
+  }
+
+  async like(likeCollectionDto: LikeCollectionDto) {
+    const { user_id, collection_id } = likeCollectionDto;
+
+    // Check if like already exists
+    const existingLike = await this.prisma.collectionLike.findUnique({
+      where: {
+        user_id_collection_id: {
+          user_id,
+          collection_id
+        }
+      }
+    });
+
+    if (existingLike) {
+      // Unlike - remove the like
+      await this.prisma.collectionLike.delete({
+        where: {
+          user_id_collection_id: {
+            user_id,
+            collection_id
+          }
+        }
+      });
+      return { liked: false, message: 'Like removido com sucesso' };
+    } else {
+      // Like - add the like
+      await this.prisma.collectionLike.create({
+        data: {
+          user_id,
+          collection_id
+        }
+      });
+      return { liked: true, message: 'Like adicionado com sucesso' };
+    }
   }
 }

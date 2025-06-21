@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
+import { LikeQuestionDto } from './dto/like-question.dto';
 import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
@@ -200,8 +201,61 @@ export class QuestionsService {
           include: {
             permission_type: true
           }
+        },
+        likes: {
+          where: {
+            user_id: userId
+          }
+        },
+        _count: {
+          select: {
+            likes: true
+          }
+        }
+      }
+    }).then(questions => 
+      questions.map(question => ({
+        ...question,
+        is_liked: question.likes.length > 0,
+        likes_count: question._count.likes,
+        likes: undefined, // Remove likes array from response
+        _count: undefined // Remove _count from response
+      }))
+    );
+  }
+  async like(likeQuestionDto: LikeQuestionDto) {
+    const { user_id, question_id } = likeQuestionDto;
+
+    // Check if like already exists
+    const existingLike = await this.prisma.questionLike.findUnique({
+      where: {
+        user_id_question_id: {
+          user_id,
+          question_id
         }
       }
     });
+
+    if (existingLike) {
+      // Unlike - remove the like
+      await this.prisma.questionLike.delete({
+        where: {
+          user_id_question_id: {
+            user_id,
+            question_id
+          }
+        }
+      });
+      return { liked: false, message: 'Like removido com sucesso' };
+    } else {
+      // Like - add the like
+      await this.prisma.questionLike.create({
+        data: {
+          user_id,
+          question_id
+        }
+      });
+      return { liked: true, message: 'Like adicionado com sucesso' };
+    }
   }
 }

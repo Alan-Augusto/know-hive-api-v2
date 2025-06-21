@@ -3,6 +3,7 @@ import { QuestionsService } from './questions.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
+import { LikeQuestionDto } from './dto/like-question.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('questions')
@@ -41,9 +42,13 @@ export class QuestionsController {
   update(@Param('id') id: string, @Body() updateQuestionDto: UpdateQuestionDto) {
     return this.questionsService.update(id, updateQuestionDto);
   }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.questionsService.remove(id);
+  }
+  @Post('like')
+  @ApiBody({ type: LikeQuestionDto })
+  like(@Body() likeQuestionDto: LikeQuestionDto) {
+    return this.questionsService.like(likeQuestionDto);
   }
 }

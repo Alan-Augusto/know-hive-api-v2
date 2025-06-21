@@ -3,6 +3,7 @@ import { CollectionsService } from './collections.service';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { CreateCollectionWithQuestionsDto } from './dto/create-collection-with-questions.dto';
+import { LikeCollectionDto } from './dto/like-collection.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('collections')
@@ -46,5 +47,11 @@ export class CollectionsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.collectionsService.remove(id);
+  }
+
+  @Post('like')
+  @ApiBody({ type: LikeCollectionDto })
+  like(@Body() likeCollectionDto: LikeCollectionDto) {
+    return this.collectionsService.like(likeCollectionDto);
   }
 }

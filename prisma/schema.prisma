@@ -24,6 +24,8 @@ model User {
   questions_created   Question[]
   collections_access  CollectionUserAccess[]
   questions_access    QuestionUserAccess[] // Nova relação
+  collection_likes    CollectionLike[]     // Nova relação para likes de coleções
+  question_likes      QuestionLike[]       // Nova relação para likes de questões
 }
 
 model Collection {
@@ -37,6 +39,7 @@ model Collection {
   author      User                   @relation(fields: [author_id], references: [id])
   questions   QuestionCollection[]
   permissions CollectionUserAccess[]
+  likes       CollectionLike[]       // Nova relação para likes
 }
 
 model Question {
@@ -54,6 +57,7 @@ model Question {
   author_id    String
   author       User                 @relation(fields: [author_id], references: [id])
   permissions  QuestionUserAccess[] // Nova relação
+  likes        QuestionLike[]       // Nova relação para likes
 }
 
 model QuestionType {
@@ -124,4 +128,28 @@ model QuestionUserAccess {
 
   @@unique([user_id, question_id]) // Garante que um usuário só pode ter uma permissão por questão
   @@index([question_id]) // Index para otimizar a busca de permissões por questão
+}
+
+model CollectionLike {
+  id            String     @id @default(uuid())
+  user_id       String
+  collection_id String
+  user          User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  collection    Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+  created_at    DateTime   @default(now())
+
+  @@unique([user_id, collection_id]) // Garante que um usuário só pode dar um like por coleção
+  @@index([collection_id]) // Index para otimizar a busca de likes por coleção
+}
+
+model QuestionLike {
+  id          String   @id @default(uuid())
+  user_id     String
+  question_id String
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  question    Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
+  created_at  DateTime @default(now())
+
+  @@unique([user_id, question_id]) // Garante que um usuário só pode dar um like por questão
+  @@index([question_id]) // Index para otimizar a busca de likes por questão
 }
