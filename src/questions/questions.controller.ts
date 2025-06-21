@@ -26,6 +26,11 @@ export class QuestionsController {
   findAll() {
     return this.questionsService.findAll();
   }
+  
+  @Get('all-for-user/:userId')
+  findAllForUser(@Param('userId') userId: string) {
+    return this.questionsService.findAllForUser(userId);
+  }
 
   @Get('user/:userId')
   findByUser(@Param('userId') userId: string) {

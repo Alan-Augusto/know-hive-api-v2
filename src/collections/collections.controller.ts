@@ -28,6 +28,11 @@ export class CollectionsController {
     return this.collectionsService.findAll();
   }
 
+  @Get('all-for-user/:userId')
+  findAllForUser(@Param('userId') userId: string) {
+    return this.collectionsService.findAllForUser(userId);
+  }
+
   @Get('user/:userId')
   findByUser(@Param('userId') userId: string) {
     return this.collectionsService.findByUser(userId);

@@ -80,18 +80,38 @@ export class QuestionsService {
   }
 
   findAll() {
-    return this.prisma.question.findMany({
+    return this.prisma.question.findMany();
+  }
+
+  async findAllForUser(userId: string) {
+    const questions = await this.prisma.question.findMany({
+      where: {
+        is_public: true
+      },
       include: {
         type: true,
         author: {
           select: {
-            id: true,
             name: true,
             profile_picture: true
+          }
+        },
+        likes: {
+          where: {
+            user_id: userId
+          },
+          select: {
+            id: true
           }
         }
       }
     });
+
+    return questions.map(q => ({
+      ...q,
+      is_liked: q.likes.length > 0,
+      likes: undefined // remove likes array from response
+    }));
   }
 
   findOne(id: string) {
