@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CollectionsService } from './collections.service';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
+import { CreateCollectionWithQuestionsDto } from './dto/create-collection-with-questions.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('collections')
@@ -13,6 +14,12 @@ export class CollectionsController {
   @ApiBody({ type: CreateCollectionDto })
   create(@Body() createCollectionDto: CreateCollectionDto) {
     return this.collectionsService.create(createCollectionDto);
+  }
+
+  @Post('with-questions')
+  @ApiBody({ type: CreateCollectionWithQuestionsDto })
+  createOrUpdateWithQuestions(@Body() createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
+    return this.collectionsService.createOrUpdateWithQuestions(createCollectionWithQuestionsDto);
   }
 
   @Get()
