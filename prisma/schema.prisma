@@ -159,7 +159,6 @@ model QuestionLike {
 model Tag {
   id           String          @id @default(uuid())
   name         String          @unique
-  description  String?
   created_at   DateTime        @default(now())
   updated_at   DateTime        @updatedAt
   collections  CollectionTag[]

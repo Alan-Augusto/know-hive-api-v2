@@ -52,7 +52,7 @@ describe('TagsService', () => {
 
   describe('create', () => {
     it('should create a new tag', async () => {
-      const createTagDto = { name: 'Test Tag', description: 'Test Description' };
+      const createTagDto = { name: 'Test Tag' };
       const expectedTag = { id: '1', ...createTagDto, created_at: new Date(), updated_at: new Date() };
 
       mockPrismaService.tag.create.mockResolvedValue(expectedTag);
@@ -77,11 +77,9 @@ describe('TagsService', () => {
 
   describe('findAll', () => {
     it('should return all tags with counts', async () => {
-      const expectedTags = [
-        {
+      const expectedTags = [        {
           id: '1',
           name: 'Tag 1',
-          description: 'Description 1',
           created_at: new Date(),
           updated_at: new Date(),
           _count: { collections: 2, questions: 3 },
@@ -111,11 +109,9 @@ describe('TagsService', () => {
 
   describe('findOne', () => {
     it('should return a tag by id', async () => {
-      const tagId = '1';
-      const expectedTag = {
+      const tagId = '1';      const expectedTag = {
         id: tagId,
         name: 'Test Tag',
-        description: 'Test Description',
         created_at: new Date(),
         updated_at: new Date(),
         _count: { collections: 1, questions: 2 },

@@ -14721,7 +14721,6 @@ export namespace Prisma {
   export type TagMinAggregateOutputType = {
     id: string | null
     name: string | null
-    description: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -14729,7 +14728,6 @@ export namespace Prisma {
   export type TagMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    description: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -14737,7 +14735,6 @@ export namespace Prisma {
   export type TagCountAggregateOutputType = {
     id: number
     name: number
-    description: number
     created_at: number
     updated_at: number
     _all: number
@@ -14747,7 +14744,6 @@ export namespace Prisma {
   export type TagMinAggregateInputType = {
     id?: true
     name?: true
-    description?: true
     created_at?: true
     updated_at?: true
   }
@@ -14755,7 +14751,6 @@ export namespace Prisma {
   export type TagMaxAggregateInputType = {
     id?: true
     name?: true
-    description?: true
     created_at?: true
     updated_at?: true
   }
@@ -14763,7 +14758,6 @@ export namespace Prisma {
   export type TagCountAggregateInputType = {
     id?: true
     name?: true
-    description?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -14844,7 +14838,6 @@ export namespace Prisma {
   export type TagGroupByOutputType = {
     id: string
     name: string
-    description: string | null
     created_at: Date
     updated_at: Date
     _count: TagCountAggregateOutputType | null
@@ -14869,7 +14862,6 @@ export namespace Prisma {
   export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
     created_at?: boolean
     updated_at?: boolean
     collections?: boolean | Tag$collectionsArgs<ExtArgs>
@@ -14880,7 +14872,6 @@ export namespace Prisma {
   export type TagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
     created_at?: boolean
     updated_at?: boolean
   }, ExtArgs["result"]["tag"]>
@@ -14888,7 +14879,6 @@ export namespace Prisma {
   export type TagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
     created_at?: boolean
     updated_at?: boolean
   }, ExtArgs["result"]["tag"]>
@@ -14896,12 +14886,11 @@ export namespace Prisma {
   export type TagSelectScalar = {
     id?: boolean
     name?: boolean
-    description?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "created_at" | "updated_at", ExtArgs["result"]["tag"]>
+  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "created_at" | "updated_at", ExtArgs["result"]["tag"]>
   export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | Tag$collectionsArgs<ExtArgs>
     questions?: boolean | Tag$questionsArgs<ExtArgs>
@@ -14919,7 +14908,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      description: string | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["tag"]>
@@ -15349,7 +15337,6 @@ export namespace Prisma {
   interface TagFieldRefs {
     readonly id: FieldRef<"Tag", 'String'>
     readonly name: FieldRef<"Tag", 'String'>
-    readonly description: FieldRef<"Tag", 'String'>
     readonly created_at: FieldRef<"Tag", 'DateTime'>
     readonly updated_at: FieldRef<"Tag", 'DateTime'>
   }
@@ -18051,7 +18038,6 @@ export namespace Prisma {
   export const TagScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    description: 'description',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -18874,7 +18860,6 @@ export namespace Prisma {
     NOT?: TagWhereInput | TagWhereInput[]
     id?: StringFilter<"Tag"> | string
     name?: StringFilter<"Tag"> | string
-    description?: StringNullableFilter<"Tag"> | string | null
     created_at?: DateTimeFilter<"Tag"> | Date | string
     updated_at?: DateTimeFilter<"Tag"> | Date | string
     collections?: CollectionTagListRelationFilter
@@ -18884,7 +18869,6 @@ export namespace Prisma {
   export type TagOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     collections?: CollectionTagOrderByRelationAggregateInput
@@ -18897,7 +18881,6 @@ export namespace Prisma {
     AND?: TagWhereInput | TagWhereInput[]
     OR?: TagWhereInput[]
     NOT?: TagWhereInput | TagWhereInput[]
-    description?: StringNullableFilter<"Tag"> | string | null
     created_at?: DateTimeFilter<"Tag"> | Date | string
     updated_at?: DateTimeFilter<"Tag"> | Date | string
     collections?: CollectionTagListRelationFilter
@@ -18907,7 +18890,6 @@ export namespace Prisma {
   export type TagOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: TagCountOrderByAggregateInput
@@ -18921,7 +18903,6 @@ export namespace Prisma {
     NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Tag"> | string
     name?: StringWithAggregatesFilter<"Tag"> | string
-    description?: StringNullableWithAggregatesFilter<"Tag"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
   }
@@ -19710,7 +19691,6 @@ export namespace Prisma {
   export type TagCreateInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     collections?: CollectionTagCreateNestedManyWithoutTagInput
@@ -19720,7 +19700,6 @@ export namespace Prisma {
   export type TagUncheckedCreateInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     collections?: CollectionTagUncheckedCreateNestedManyWithoutTagInput
@@ -19730,7 +19709,6 @@ export namespace Prisma {
   export type TagUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: CollectionTagUpdateManyWithoutTagNestedInput
@@ -19740,7 +19718,6 @@ export namespace Prisma {
   export type TagUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: CollectionTagUncheckedUpdateManyWithoutTagNestedInput
@@ -19750,7 +19727,6 @@ export namespace Prisma {
   export type TagCreateManyInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -19758,7 +19734,6 @@ export namespace Prisma {
   export type TagUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19766,7 +19741,6 @@ export namespace Prisma {
   export type TagUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20461,7 +20435,6 @@ export namespace Prisma {
   export type TagCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -20469,7 +20442,6 @@ export namespace Prisma {
   export type TagMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -20477,7 +20449,6 @@ export namespace Prisma {
   export type TagMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -23871,7 +23842,6 @@ export namespace Prisma {
   export type TagCreateWithoutCollectionsInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     questions?: QuestionTagCreateNestedManyWithoutTagInput
@@ -23880,7 +23850,6 @@ export namespace Prisma {
   export type TagUncheckedCreateWithoutCollectionsInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     questions?: QuestionTagUncheckedCreateNestedManyWithoutTagInput
@@ -23942,7 +23911,6 @@ export namespace Prisma {
   export type TagUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionTagUpdateManyWithoutTagNestedInput
@@ -23951,7 +23919,6 @@ export namespace Prisma {
   export type TagUncheckedUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionTagUncheckedUpdateManyWithoutTagNestedInput
@@ -23997,7 +23964,6 @@ export namespace Prisma {
   export type TagCreateWithoutQuestionsInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     collections?: CollectionTagCreateNestedManyWithoutTagInput
@@ -24006,7 +23972,6 @@ export namespace Prisma {
   export type TagUncheckedCreateWithoutQuestionsInput = {
     id?: string
     name: string
-    description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     collections?: CollectionTagUncheckedCreateNestedManyWithoutTagInput
@@ -24074,7 +24039,6 @@ export namespace Prisma {
   export type TagUpdateWithoutQuestionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: CollectionTagUpdateManyWithoutTagNestedInput
@@ -24083,7 +24047,6 @@ export namespace Prisma {
   export type TagUncheckedUpdateWithoutQuestionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: CollectionTagUncheckedUpdateManyWithoutTagNestedInput
