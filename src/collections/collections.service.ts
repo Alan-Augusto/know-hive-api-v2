@@ -4,17 +4,20 @@ import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { CreateCollectionWithQuestionsDto } from './dto/create-collection-with-questions.dto';
 import { LikeCollectionDto } from './dto/like-collection.dto';
 import { PrismaService } from 'src/database/prisma.service';
+import { TagsService } from '../tags/tags.service';
 
 @Injectable()
 export class CollectionsService {
 
-  constructor( private prisma: PrismaService){}
+  constructor( 
+    private prisma: PrismaService,
+    private tagsService: TagsService
+  ){}
 
   create(createCollectionDto: CreateCollectionDto) {
     return this.prisma.collection.create({data:createCollectionDto});;
-  }
-  async createOrUpdateWithQuestions(createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
-    const { id, questions_ids, ...collectionData } = createCollectionWithQuestionsDto;
+  }  async createOrUpdateWithQuestions(createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
+    const { id, questions_ids, tags, ...collectionData } = createCollectionWithQuestionsDto;
 
     // Create or update collection and connect questions in a transaction
     const result = await this.prisma.$transaction(async (prisma) => {
@@ -26,10 +29,11 @@ export class CollectionsService {
           where: { collection_id: id }
         });
 
-        // Update existing collection
+        // Update existing collection (exclude author_id from update data)
+        const { author_id, ...updateData } = collectionData;
         collection = await prisma.collection.update({
           where: { id },
-          data: collectionData
+          data: updateData
         });
       } else {
         // Create new collection
@@ -52,38 +56,53 @@ export class CollectionsService {
         );
       }
 
-      // Return the created/updated collection with questions
-      return await prisma.collection.findUnique({
-        where: { id: collection.id },
-        include: {
-          questions: {
-            include: {
-              question: {
-                include: {
-                  type: true,
-                  author: {
-                    select: {
-                      id: true,
-                      name: true,
-                      profile_picture: true
-                    }
+      return collection;
+    });
+
+    // Gerenciar tags após a transação principal
+    if (tags !== undefined) {
+      await this.tagsService.assignTagsToCollectionByNames(result.id, tags);
+    }
+
+    // Return the created/updated collection with questions and tags
+    return await this.prisma.collection.findUnique({
+      where: { id: result.id },
+      include: {
+        questions: {
+          include: {
+            question: {
+              include: {
+                type: true,
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    profile_picture: true
                   }
                 }
               }
             }
+          }
+        },
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profile_picture: true
+          }
+        },
+        tags: {
+          include: {
+            tag: true
           },
-          author: {
-            select: {
-              id: true,
-              name: true,
-              profile_picture: true
+          orderBy: {
+            tag: {
+              name: 'asc'
             }
           }
         }
-      });
+      }
     });
-
-    return result;
   }
 
   findAll() {

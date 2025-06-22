@@ -252,4 +252,84 @@ export class TagsService {
 
     return questionTags.map(qt => qt.question);
   }
+
+  normalizeTagName(name: string): string {
+    return name
+    .trim()
+    .toLowerCase()
+    // Remove acentos
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    // Substitui espaços e caracteres inválidos por hífen
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+  }
+
+  async findOrCreateTags(tagNames: string[]): Promise<Tag[]> {
+    const tags: Tag[] = [];
+    
+    for (const tagName of tagNames) {
+      const normalizedTagName = this.normalizeTagName(tagName);
+      
+      if (!normalizedTagName) continue;
+      
+      // Tentar encontrar a tag existente
+      let tag = await this.prisma.tag.findFirst({
+        where: {
+          name: {
+            equals: normalizedTagName,
+            mode: 'insensitive',
+          },
+        },
+      });
+      
+      // Se não encontrar, criar uma nova
+      if (!tag) {
+        try {
+          tag = await this.prisma.tag.create({
+            data: {
+              name: normalizedTagName,
+            },
+          });
+        } catch (error) {
+          // Se houver erro de conflito (tag criada simultaneamente), tentar buscar novamente
+          if (error.code === 'P2002') {
+            tag = await this.prisma.tag.findFirst({
+              where: {
+                name: {
+                  equals: normalizedTagName,
+                  mode: 'insensitive',
+                },
+              },
+            });
+          }
+          
+          if (!tag) {
+            throw error;
+          }
+        }
+      }
+      
+      tags.push(tag);
+    }
+    
+    return tags;
+  }
+
+  async assignTagsToCollectionByNames(collectionId: string, tagNames: string[]): Promise<void> {
+    if (!tagNames || tagNames.length === 0) {
+      // Se não há tags para atribuir, remove todas as tags existentes
+      await this.prisma.collectionTag.deleteMany({
+        where: { collection_id: collectionId },
+      });
+      return;
+    }
+
+    // Encontra ou cria as tags
+    const tags = await this.findOrCreateTags(tagNames);
+    const tagIds = tags.map(tag => tag.id);
+    
+    // Atribui as tags à coleção
+    await this.assignTagsToCollection(collectionId, tagIds);
+  }
 }

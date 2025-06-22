@@ -10,8 +10,7 @@ export class CreateCollectionWithQuestionsDto {
     @ApiProperty({ example: 'a49e39b3-81aa-4beb-bed4-e7103f962e60' })
     author_id: string;
     @ApiProperty({ example: true })
-    is_public: boolean;
-    @ApiProperty({ 
+    is_public: boolean;    @ApiProperty({ 
         type: [String],
         example: [
             'a49e39b3-81aa-4beb-bed4-e7103f962e60',
@@ -20,4 +19,12 @@ export class CreateCollectionWithQuestionsDto {
         ]
     })
     questions_ids: string[];
+    
+    @ApiProperty({ 
+        type: [String],
+        example: ['matemática', 'básico', 'educação'],
+        description: 'Array de tags (nomes) para associar à coleção. Tags inexistentes serão criadas automaticamente.',
+        required: false
+    })
+    tags?: string[];
 }
