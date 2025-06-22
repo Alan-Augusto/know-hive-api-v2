@@ -40,6 +40,7 @@ model Collection {
   questions   QuestionCollection[]
   permissions CollectionUserAccess[]
   likes       CollectionLike[]       // Nova relação para likes
+  tags        CollectionTag[]        // Nova relação para tags
 }
 
 model Question {
@@ -58,6 +59,7 @@ model Question {
   author       User                 @relation(fields: [author_id], references: [id])
   permissions  QuestionUserAccess[] // Nova relação
   likes        QuestionLike[]       // Nova relação para likes
+  tags         QuestionTag[]        // Nova relação para tags
 }
 
 model QuestionType {
@@ -152,4 +154,40 @@ model QuestionLike {
 
   @@unique([user_id, question_id]) // Garante que um usuário só pode dar um like por questão
   @@index([question_id]) // Index para otimizar a busca de likes por questão
+}
+
+model Tag {
+  id           String          @id @default(uuid())
+  name         String          @unique
+  description  String?
+  created_at   DateTime        @default(now())
+  updated_at   DateTime        @updatedAt
+  collections  CollectionTag[]
+  questions    QuestionTag[]
+}
+
+model CollectionTag {
+  id            String     @id @default(uuid())
+  collection_id String
+  tag_id        String
+  collection    Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+  tag           Tag        @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  assigned_at   DateTime   @default(now())
+
+  @@unique([collection_id, tag_id]) // Garante que uma tag não pode ser atribuída duas vezes à mesma coleção
+  @@index([collection_id]) // Index para otimizar a busca de tags por coleção
+  @@index([tag_id]) // Index para otimizar a busca de coleções por tag
+}
+
+model QuestionTag {
+  id          String   @id @default(uuid())
+  question_id String
+  tag_id      String
+  question    Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
+  tag         Tag      @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  assigned_at DateTime @default(now())
+
+  @@unique([question_id, tag_id]) // Garante que uma tag não pode ser atribuída duas vezes à mesma questão
+  @@index([question_id]) // Index para otimizar a busca de tags por questão
+  @@index([tag_id]) // Index para otimizar a busca de questões por tag
 }
