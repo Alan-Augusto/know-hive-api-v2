@@ -4,11 +4,15 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
 import { LikeQuestionDto } from './dto/like-question.dto';
 import { PrismaService } from 'src/database/prisma.service';
+import { TagsService } from '../tags/tags.service';
 
 @Injectable()
 export class QuestionsService {
 
-  constructor(private prisma: PrismaService) { }
+  constructor(
+    private prisma: PrismaService,
+    private tagsService: TagsService
+  ) { }
   create(createQuestionDto: CreateQuestionDto) {
     // TODO: VERIFY IF TYPE EXISTS IN THE DATABASE
     const { type, author_id, ...rest } = createQuestionDto;
@@ -20,9 +24,8 @@ export class QuestionsService {
       }
     });
   }
-
-  async createWithAlternatives(createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
-    const { id, alternatives, type, author_id, ...questionData } = createQuestionWithAlternativesDto;
+  async createOrUpdateWithAlternatives(createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
+    const { id, alternatives, tags, type, author_id, ...questionData } = createQuestionWithAlternativesDto;
 
     // Create or update question and alternatives in a transaction
     const result = await this.prisma.$transaction(async (prisma) => {
@@ -34,7 +37,7 @@ export class QuestionsService {
           where: { question_id: id }
         });
 
-        // Update existing question (without alternatives)
+        // Update existing question (without alternatives and tags)
         question = await prisma.question.update({
           where: { id },
           data: {
@@ -76,7 +79,36 @@ export class QuestionsService {
       };
     });
 
-    return result;
+    // Gerenciar tags após a transação principal
+    if (tags !== undefined) {
+      await this.tagsService.assignTagsToQuestionByNames(result.id, tags);
+    }
+
+    // Return the created/updated question with alternatives and tags
+    return await this.prisma.question.findUnique({
+      where: { id: result.id },
+      include: {
+        alternatives: true,
+        type: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profile_picture: true
+          }
+        },
+        tags: {
+          include: {
+            tag: true
+          },
+          orderBy: {
+            tag: {
+              name: 'asc'
+            }
+          }
+        }
+      }
+    });
   }
 
   findAll() {
@@ -114,8 +146,8 @@ export class QuestionsService {
     }));
   }
 
-  findOne(id: string) {
-    return this.prisma.question.findUnique({
+  async findOne(id: string) {
+    const question = await this.prisma.question.findUnique({
       where: {
         id
       },
@@ -128,9 +160,21 @@ export class QuestionsService {
             profile_picture: true
           }
         },
-        alternatives: true
+        alternatives: true,
+        tags: {
+          include: {
+            tag: true
+          }
+        }
       }
     });
+
+    if (!question) return null;
+
+    return {
+      ...question,
+      tags: question.tags.map((t: any) => t.tag.name)
+    };
   }
 
   update(id: string, updateQuestionDto: UpdateQuestionDto) {

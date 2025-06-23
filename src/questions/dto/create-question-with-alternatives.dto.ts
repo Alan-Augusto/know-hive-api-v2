@@ -22,4 +22,12 @@ export class CreateQuestionWithAlternativesDto {
         ]
     })
     alternatives: CreateAlternativeDto[];
+    
+    @ApiProperty({ 
+        type: [String],
+        example: ['matemática', 'múltipla escolha', 'conhecimentos gerais'],
+        description: 'Array de tags (nomes) para associar à questão. Tags inexistentes serão criadas automaticamente.',
+        required: false
+    })
+    tags?: string[];
 }

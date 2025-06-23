@@ -332,4 +332,21 @@ export class TagsService {
     // Atribui as tags à coleção
     await this.assignTagsToCollection(collectionId, tagIds);
   }
+
+  async assignTagsToQuestionByNames(questionId: string, tagNames: string[]): Promise<void> {
+    if (!tagNames || tagNames.length === 0) {
+      // Se não há tags para atribuir, remove todas as tags existentes
+      await this.prisma.questionTag.deleteMany({
+        where: { question_id: questionId },
+      });
+      return;
+    }
+
+    // Encontra ou cria as tags
+    const tags = await this.findOrCreateTags(tagNames);
+    const tagIds = tags.map(tag => tag.id);
+    
+    // Atribui as tags à questão
+    await this.assignTagsToQuestion(questionId, tagIds);
+  }
 }

@@ -23,8 +23,8 @@ export class QuestionsController {
 
   @Post('with-alternatives')
   @ApiBody({ type: CreateQuestionWithAlternativesDto })
-  createWithAlternatives(@Body() createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
-    return this.questionsService.createWithAlternatives(createQuestionWithAlternativesDto);
+  createOrUpdateWithAlternatives(@Body() createQuestionWithAlternativesDto: CreateQuestionWithAlternativesDto) {
+    return this.questionsService.createOrUpdateWithAlternatives(createQuestionWithAlternativesDto);
   }
 
   @Get()

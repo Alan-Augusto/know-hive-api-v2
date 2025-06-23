@@ -16,7 +16,9 @@ export class CollectionsService {
 
   create(createCollectionDto: CreateCollectionDto) {
     return this.prisma.collection.create({ data: createCollectionDto });;
-  } async createOrUpdateWithQuestions(createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
+  } 
+  
+  async createOrUpdateWithQuestions(createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
     const { id, questions_ids, tags, ...collectionData } = createCollectionWithQuestionsDto;
 
     // Create or update collection and connect questions in a transaction
