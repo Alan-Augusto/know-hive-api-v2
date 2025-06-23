@@ -9,14 +9,14 @@ import { TagsService } from '../tags/tags.service';
 @Injectable()
 export class CollectionsService {
 
-  constructor( 
+  constructor(
     private prisma: PrismaService,
     private tagsService: TagsService
-  ){}
+  ) { }
 
   create(createCollectionDto: CreateCollectionDto) {
-    return this.prisma.collection.create({data:createCollectionDto});;
-  }  async createOrUpdateWithQuestions(createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
+    return this.prisma.collection.create({ data: createCollectionDto });;
+  } async createOrUpdateWithQuestions(createCollectionWithQuestionsDto: CreateCollectionWithQuestionsDto) {
     const { id, questions_ids, tags, ...collectionData } = createCollectionWithQuestionsDto;
 
     // Create or update collection and connect questions in a transaction
@@ -27,18 +27,17 @@ export class CollectionsService {
         // Delete existing question connections if updating
         await prisma.questionCollection.deleteMany({
           where: { collection_id: id }
-        });
-
-        // Update existing collection (exclude author_id from update data)
-        const { author_id, ...updateData } = collectionData;
+        });        // Update existing collection (exclude author_id and any extra fields from update data)
+        const { author_id, is_liked, ...updateData } = collectionData as any;
         collection = await prisma.collection.update({
           where: { id },
           data: updateData
         });
       } else {
-        // Create new collection
+        // Create new collection (exclude is_liked field that doesn't exist in the model)
+        const { is_liked, ...validCollectionData } = collectionData as any;
         collection = await prisma.collection.create({
-          data: collectionData
+          data: validCollectionData
         });
       }
 
@@ -112,20 +111,20 @@ export class CollectionsService {
   async findAllForUser(userId: string) {
     const collections = await this.prisma.collection.findMany({
       where: {
-      is_public: true
+        is_public: true
       },
       include: {
-      author: {
-        select: {
-        name: true,
-        profile_picture: true
+        author: {
+          select: {
+            name: true,
+            profile_picture: true
+          }
+        },
+        likes: {
+          where: {
+            user_id: userId
+          }
         }
-      },
-      likes: {
-        where: {
-        user_id: userId
-        }
-      }
       }
     });
 
@@ -136,7 +135,7 @@ export class CollectionsService {
       likes: undefined // Remove likes array from response
     }));
   }
-  
+
   async findByUser(userId: string) {
     const collections = await this.prisma.collection.findMany({
       where: {
@@ -210,14 +209,22 @@ export class CollectionsService {
     });
 
     const collection = await this.prisma.collection.findUnique({
-      where: { id }
+      where: { id },
+      include: {
+        tags: {
+          include: {
+            tag: true
+          }
+        }
+      }
     });
 
     if (!collection) return null;
 
     return {
       ...collection,
-      questions_ids: questions.map(q => q.question_id)
+      questions_ids: questions.map(q => q.question_id),
+      tags: collection.tags.map(t => t.tag.name)
     };
   }
 
