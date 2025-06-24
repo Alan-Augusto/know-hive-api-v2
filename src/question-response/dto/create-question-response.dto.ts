@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsOptional, IsNumber, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional, IsNumber, IsPositive, IsArray, IsBoolean } from 'class-validator';
 
 export class CreateQuestionResponseDto {
   @ApiProperty({ 
@@ -19,12 +19,14 @@ export class CreateQuestionResponseDto {
   user_id: string;
 
   @ApiProperty({ 
-    description: 'ID da alternativa selecionada',
-    example: 'c69g59d5-03cb-6dfd-dg26-g9315h184g82' 
+    description: 'Array de IDs das alternativas selecionadas (suporta múltiplas seleções)',
+    example: ['c69g59d5-03cb-6dfd-dg26-g9315h184g82'],
+    type: [String]
   })
   @IsNotEmpty()
-  @IsString()
-  alternative_id: string;
+  @IsArray()
+  @IsString({ each: true })
+  alternative_ids: string[];
 
   @ApiPropertyOptional({ 
     description: 'Tempo gasto para responder em segundos',
@@ -42,4 +44,22 @@ export class CreateQuestionResponseDto {
   @IsOptional()
   @IsString()
   collection_id?: string;
+
+  @ApiPropertyOptional({ 
+    description: 'Número da tentativa (automaticamente calculado se não fornecido)',
+    example: 1 
+  })
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  attempt_number?: number;
+
+  @ApiPropertyOptional({ 
+    description: 'Indica se esta é a resposta final do usuário para esta questão',
+    example: true,
+    default: false
+  })
+  @IsOptional()
+  @IsBoolean()
+  is_final?: boolean;
 }

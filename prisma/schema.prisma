@@ -78,7 +78,9 @@ model Alternative {
   is_correct  Boolean  @default(false) // Indica se esta é a alternativa correta
   question_id String
   question    Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
-  responses   QuestionResponse[] // Nova relação para respostas
+  
+  // Nova relação: uma alternativa pode estar em múltiplas respostas
+  selected_in ResponseAlternative[]
 
   created_at DateTime @default(now()) // Opcional: se quiser saber quando a alternativa foi criada
   updated_at DateTime @updatedAt // Opcional: se quiser saber quando foi atualizada
@@ -199,16 +201,19 @@ model QuestionResponse {
   id            String      @id @default(uuid())
   user_id       String
   question_id   String
-  alternative_id String
   collection_id String?     // Opcional: Se a resposta foi dada no contexto de uma coleção
   response_time Int?        // Tempo em segundos para responder (opcional)
   answered_at   DateTime    @default(now())
+  attempt_number Int        @default(1) // Número da tentativa (1, 2, 3...)
+  is_final      Boolean     @default(false) // Indica se esta é a resposta final do usuário
   
   // Relações
   user          User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   question      Question    @relation(fields: [question_id], references: [id], onDelete: Cascade)
-  alternative   Alternative @relation(fields: [alternative_id], references: [id], onDelete: Cascade)
   collection    Collection? @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+  
+  // Nova relação: uma resposta pode ter múltiplas alternativas selecionadas
+  selected_alternatives ResponseAlternative[]
 
   // Índices para otimização
   @@index([user_id]) // Para buscar respostas de um usuário
@@ -216,4 +221,21 @@ model QuestionResponse {
   @@index([collection_id]) // Para buscar respostas de uma coleção
   @@index([user_id, collection_id]) // Para buscar progresso do usuário em uma coleção
   @@index([answered_at]) // Para ordenação temporal
+  @@index([user_id, question_id, attempt_number]) // Para buscar tentativas específicas
+  @@index([user_id, question_id, is_final]) // Para buscar a resposta final
+}
+
+// Nova tabela intermediária para relacionar respostas com alternativas
+model ResponseAlternative {
+  id            String      @id @default(uuid())
+  response_id   String
+  alternative_id String
+  
+  // Relações
+  response      QuestionResponse @relation(fields: [response_id], references: [id], onDelete: Cascade)
+  alternative   Alternative      @relation(fields: [alternative_id], references: [id], onDelete: Cascade)
+  
+  @@unique([response_id, alternative_id]) // Evita duplicatas
+  @@index([response_id]) // Para buscar alternativas de uma resposta
+  @@index([alternative_id]) // Para buscar respostas de uma alternativa
 }

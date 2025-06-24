@@ -88,6 +88,11 @@ export type QuestionTag = $Result.DefaultSelection<Prisma.$QuestionTagPayload>
  * 
  */
 export type QuestionResponse = $Result.DefaultSelection<Prisma.$QuestionResponsePayload>
+/**
+ * Model ResponseAlternative
+ * 
+ */
+export type ResponseAlternative = $Result.DefaultSelection<Prisma.$ResponseAlternativePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -363,6 +368,16 @@ export class PrismaClient<
     * ```
     */
   get questionResponse(): Prisma.QuestionResponseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.responseAlternative`: Exposes CRUD operations for the **ResponseAlternative** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ResponseAlternatives
+    * const responseAlternatives = await prisma.responseAlternative.findMany()
+    * ```
+    */
+  get responseAlternative(): Prisma.ResponseAlternativeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -817,7 +832,8 @@ export namespace Prisma {
     Tag: 'Tag',
     CollectionTag: 'CollectionTag',
     QuestionTag: 'QuestionTag',
-    QuestionResponse: 'QuestionResponse'
+    QuestionResponse: 'QuestionResponse',
+    ResponseAlternative: 'ResponseAlternative'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -836,7 +852,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "collection" | "question" | "questionType" | "alternative" | "questionCollection" | "collectionPermissionType" | "collectionUserAccess" | "questionUserAccess" | "collectionLike" | "questionLike" | "tag" | "collectionTag" | "questionTag" | "questionResponse"
+      modelProps: "user" | "collection" | "question" | "questionType" | "alternative" | "questionCollection" | "collectionPermissionType" | "collectionUserAccess" | "questionUserAccess" | "collectionLike" | "questionLike" | "tag" | "collectionTag" | "questionTag" | "questionResponse" | "responseAlternative"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1950,6 +1966,80 @@ export namespace Prisma {
           }
         }
       }
+      ResponseAlternative: {
+        payload: Prisma.$ResponseAlternativePayload<ExtArgs>
+        fields: Prisma.ResponseAlternativeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ResponseAlternativeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ResponseAlternativeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>
+          }
+          findFirst: {
+            args: Prisma.ResponseAlternativeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ResponseAlternativeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>
+          }
+          findMany: {
+            args: Prisma.ResponseAlternativeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>[]
+          }
+          create: {
+            args: Prisma.ResponseAlternativeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>
+          }
+          createMany: {
+            args: Prisma.ResponseAlternativeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ResponseAlternativeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>[]
+          }
+          delete: {
+            args: Prisma.ResponseAlternativeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>
+          }
+          update: {
+            args: Prisma.ResponseAlternativeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>
+          }
+          deleteMany: {
+            args: Prisma.ResponseAlternativeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ResponseAlternativeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ResponseAlternativeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>[]
+          }
+          upsert: {
+            args: Prisma.ResponseAlternativeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResponseAlternativePayload>
+          }
+          aggregate: {
+            args: Prisma.ResponseAlternativeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateResponseAlternative>
+          }
+          groupBy: {
+            args: Prisma.ResponseAlternativeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ResponseAlternativeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ResponseAlternativeCountArgs<ExtArgs>
+            result: $Utils.Optional<ResponseAlternativeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2049,6 +2139,7 @@ export namespace Prisma {
     collectionTag?: CollectionTagOmit
     questionTag?: QuestionTagOmit
     questionResponse?: QuestionResponseOmit
+    responseAlternative?: ResponseAlternativeOmit
   }
 
   /* Types for Logging */
@@ -2402,11 +2493,11 @@ export namespace Prisma {
    */
 
   export type AlternativeCountOutputType = {
-    responses: number
+    selected_in: number
   }
 
   export type AlternativeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    responses?: boolean | AlternativeCountOutputTypeCountResponsesArgs
+    selected_in?: boolean | AlternativeCountOutputTypeCountSelected_inArgs
   }
 
   // Custom InputTypes
@@ -2423,8 +2514,8 @@ export namespace Prisma {
   /**
    * AlternativeCountOutputType without action
    */
-  export type AlternativeCountOutputTypeCountResponsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: QuestionResponseWhereInput
+  export type AlternativeCountOutputTypeCountSelected_inArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResponseAlternativeWhereInput
   }
 
 
@@ -2505,6 +2596,37 @@ export namespace Prisma {
    */
   export type TagCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QuestionTagWhereInput
+  }
+
+
+  /**
+   * Count Type QuestionResponseCountOutputType
+   */
+
+  export type QuestionResponseCountOutputType = {
+    selected_alternatives: number
+  }
+
+  export type QuestionResponseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    selected_alternatives?: boolean | QuestionResponseCountOutputTypeCountSelected_alternativesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QuestionResponseCountOutputType without action
+   */
+  export type QuestionResponseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestionResponseCountOutputType
+     */
+    select?: QuestionResponseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QuestionResponseCountOutputType without action
+   */
+  export type QuestionResponseCountOutputTypeCountSelected_alternativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResponseAlternativeWhereInput
   }
 
 
@@ -7549,7 +7671,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    responses?: boolean | Alternative$responsesArgs<ExtArgs>
+    selected_in?: boolean | Alternative$selected_inArgs<ExtArgs>
     _count?: boolean | AlternativeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["alternative"]>
 
@@ -7585,7 +7707,7 @@ export namespace Prisma {
   export type AlternativeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "is_correct" | "question_id" | "created_at" | "updated_at", ExtArgs["result"]["alternative"]>
   export type AlternativeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    responses?: boolean | Alternative$responsesArgs<ExtArgs>
+    selected_in?: boolean | Alternative$selected_inArgs<ExtArgs>
     _count?: boolean | AlternativeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AlternativeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7599,7 +7721,7 @@ export namespace Prisma {
     name: "Alternative"
     objects: {
       question: Prisma.$QuestionPayload<ExtArgs>
-      responses: Prisma.$QuestionResponsePayload<ExtArgs>[]
+      selected_in: Prisma.$ResponseAlternativePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8003,7 +8125,7 @@ export namespace Prisma {
   export interface Prisma__AlternativeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     question<T extends QuestionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestionDefaultArgs<ExtArgs>>): Prisma__QuestionClient<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    responses<T extends Alternative$responsesArgs<ExtArgs> = {}>(args?: Subset<T, Alternative$responsesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    selected_in<T extends Alternative$selected_inArgs<ExtArgs> = {}>(args?: Subset<T, Alternative$selected_inArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8435,27 +8557,27 @@ export namespace Prisma {
   }
 
   /**
-   * Alternative.responses
+   * Alternative.selected_in
    */
-  export type Alternative$responsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Alternative$selected_inArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the QuestionResponse
+     * Select specific fields to fetch from the ResponseAlternative
      */
-    select?: QuestionResponseSelect<ExtArgs> | null
+    select?: ResponseAlternativeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the QuestionResponse
+     * Omit specific fields from the ResponseAlternative
      */
-    omit?: QuestionResponseOmit<ExtArgs> | null
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: QuestionResponseInclude<ExtArgs> | null
-    where?: QuestionResponseWhereInput
-    orderBy?: QuestionResponseOrderByWithRelationInput | QuestionResponseOrderByWithRelationInput[]
-    cursor?: QuestionResponseWhereUniqueInput
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    where?: ResponseAlternativeWhereInput
+    orderBy?: ResponseAlternativeOrderByWithRelationInput | ResponseAlternativeOrderByWithRelationInput[]
+    cursor?: ResponseAlternativeWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: QuestionResponseScalarFieldEnum | QuestionResponseScalarFieldEnum[]
+    distinct?: ResponseAlternativeScalarFieldEnum | ResponseAlternativeScalarFieldEnum[]
   }
 
   /**
@@ -18176,80 +18298,90 @@ export namespace Prisma {
 
   export type QuestionResponseAvgAggregateOutputType = {
     response_time: number | null
+    attempt_number: number | null
   }
 
   export type QuestionResponseSumAggregateOutputType = {
     response_time: number | null
+    attempt_number: number | null
   }
 
   export type QuestionResponseMinAggregateOutputType = {
     id: string | null
     user_id: string | null
     question_id: string | null
-    alternative_id: string | null
     collection_id: string | null
     response_time: number | null
     answered_at: Date | null
+    attempt_number: number | null
+    is_final: boolean | null
   }
 
   export type QuestionResponseMaxAggregateOutputType = {
     id: string | null
     user_id: string | null
     question_id: string | null
-    alternative_id: string | null
     collection_id: string | null
     response_time: number | null
     answered_at: Date | null
+    attempt_number: number | null
+    is_final: boolean | null
   }
 
   export type QuestionResponseCountAggregateOutputType = {
     id: number
     user_id: number
     question_id: number
-    alternative_id: number
     collection_id: number
     response_time: number
     answered_at: number
+    attempt_number: number
+    is_final: number
     _all: number
   }
 
 
   export type QuestionResponseAvgAggregateInputType = {
     response_time?: true
+    attempt_number?: true
   }
 
   export type QuestionResponseSumAggregateInputType = {
     response_time?: true
+    attempt_number?: true
   }
 
   export type QuestionResponseMinAggregateInputType = {
     id?: true
     user_id?: true
     question_id?: true
-    alternative_id?: true
     collection_id?: true
     response_time?: true
     answered_at?: true
+    attempt_number?: true
+    is_final?: true
   }
 
   export type QuestionResponseMaxAggregateInputType = {
     id?: true
     user_id?: true
     question_id?: true
-    alternative_id?: true
     collection_id?: true
     response_time?: true
     answered_at?: true
+    attempt_number?: true
+    is_final?: true
   }
 
   export type QuestionResponseCountAggregateInputType = {
     id?: true
     user_id?: true
     question_id?: true
-    alternative_id?: true
     collection_id?: true
     response_time?: true
     answered_at?: true
+    attempt_number?: true
+    is_final?: true
     _all?: true
   }
 
@@ -18343,10 +18475,11 @@ export namespace Prisma {
     id: string
     user_id: string
     question_id: string
-    alternative_id: string
     collection_id: string | null
     response_time: number | null
     answered_at: Date
+    attempt_number: number
+    is_final: boolean
     _count: QuestionResponseCountAggregateOutputType | null
     _avg: QuestionResponseAvgAggregateOutputType | null
     _sum: QuestionResponseSumAggregateOutputType | null
@@ -18372,27 +18505,29 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     question_id?: boolean
-    alternative_id?: boolean
     collection_id?: boolean
     response_time?: boolean
     answered_at?: boolean
+    attempt_number?: boolean
+    is_final?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
     collection?: boolean | QuestionResponse$collectionArgs<ExtArgs>
+    selected_alternatives?: boolean | QuestionResponse$selected_alternativesArgs<ExtArgs>
+    _count?: boolean | QuestionResponseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questionResponse"]>
 
   export type QuestionResponseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
     question_id?: boolean
-    alternative_id?: boolean
     collection_id?: boolean
     response_time?: boolean
     answered_at?: boolean
+    attempt_number?: boolean
+    is_final?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
     collection?: boolean | QuestionResponse$collectionArgs<ExtArgs>
   }, ExtArgs["result"]["questionResponse"]>
 
@@ -18400,13 +18535,13 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     question_id?: boolean
-    alternative_id?: boolean
     collection_id?: boolean
     response_time?: boolean
     answered_at?: boolean
+    attempt_number?: boolean
+    is_final?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
     collection?: boolean | QuestionResponse$collectionArgs<ExtArgs>
   }, ExtArgs["result"]["questionResponse"]>
 
@@ -18414,29 +18549,29 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     question_id?: boolean
-    alternative_id?: boolean
     collection_id?: boolean
     response_time?: boolean
     answered_at?: boolean
+    attempt_number?: boolean
+    is_final?: boolean
   }
 
-  export type QuestionResponseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "question_id" | "alternative_id" | "collection_id" | "response_time" | "answered_at", ExtArgs["result"]["questionResponse"]>
+  export type QuestionResponseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "question_id" | "collection_id" | "response_time" | "answered_at" | "attempt_number" | "is_final", ExtArgs["result"]["questionResponse"]>
   export type QuestionResponseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
     collection?: boolean | QuestionResponse$collectionArgs<ExtArgs>
+    selected_alternatives?: boolean | QuestionResponse$selected_alternativesArgs<ExtArgs>
+    _count?: boolean | QuestionResponseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type QuestionResponseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
     collection?: boolean | QuestionResponse$collectionArgs<ExtArgs>
   }
   export type QuestionResponseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
-    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
     collection?: boolean | QuestionResponse$collectionArgs<ExtArgs>
   }
 
@@ -18445,17 +18580,18 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       question: Prisma.$QuestionPayload<ExtArgs>
-      alternative: Prisma.$AlternativePayload<ExtArgs>
       collection: Prisma.$CollectionPayload<ExtArgs> | null
+      selected_alternatives: Prisma.$ResponseAlternativePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       user_id: string
       question_id: string
-      alternative_id: string
       collection_id: string | null
       response_time: number | null
       answered_at: Date
+      attempt_number: number
+      is_final: boolean
     }, ExtArgs["result"]["questionResponse"]>
     composites: {}
   }
@@ -18852,8 +18988,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     question<T extends QuestionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestionDefaultArgs<ExtArgs>>): Prisma__QuestionClient<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    alternative<T extends AlternativeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AlternativeDefaultArgs<ExtArgs>>): Prisma__AlternativeClient<$Result.GetResult<Prisma.$AlternativePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     collection<T extends QuestionResponse$collectionArgs<ExtArgs> = {}>(args?: Subset<T, QuestionResponse$collectionArgs<ExtArgs>>): Prisma__CollectionClient<$Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    selected_alternatives<T extends QuestionResponse$selected_alternativesArgs<ExtArgs> = {}>(args?: Subset<T, QuestionResponse$selected_alternativesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18886,10 +19022,11 @@ export namespace Prisma {
     readonly id: FieldRef<"QuestionResponse", 'String'>
     readonly user_id: FieldRef<"QuestionResponse", 'String'>
     readonly question_id: FieldRef<"QuestionResponse", 'String'>
-    readonly alternative_id: FieldRef<"QuestionResponse", 'String'>
     readonly collection_id: FieldRef<"QuestionResponse", 'String'>
     readonly response_time: FieldRef<"QuestionResponse", 'Int'>
     readonly answered_at: FieldRef<"QuestionResponse", 'DateTime'>
+    readonly attempt_number: FieldRef<"QuestionResponse", 'Int'>
+    readonly is_final: FieldRef<"QuestionResponse", 'Boolean'>
   }
     
 
@@ -19305,6 +19442,30 @@ export namespace Prisma {
   }
 
   /**
+   * QuestionResponse.selected_alternatives
+   */
+  export type QuestionResponse$selected_alternativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    where?: ResponseAlternativeWhereInput
+    orderBy?: ResponseAlternativeOrderByWithRelationInput | ResponseAlternativeOrderByWithRelationInput[]
+    cursor?: ResponseAlternativeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ResponseAlternativeScalarFieldEnum | ResponseAlternativeScalarFieldEnum[]
+  }
+
+  /**
    * QuestionResponse without action
    */
   export type QuestionResponseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19320,6 +19481,1046 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: QuestionResponseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ResponseAlternative
+   */
+
+  export type AggregateResponseAlternative = {
+    _count: ResponseAlternativeCountAggregateOutputType | null
+    _min: ResponseAlternativeMinAggregateOutputType | null
+    _max: ResponseAlternativeMaxAggregateOutputType | null
+  }
+
+  export type ResponseAlternativeMinAggregateOutputType = {
+    id: string | null
+    response_id: string | null
+    alternative_id: string | null
+  }
+
+  export type ResponseAlternativeMaxAggregateOutputType = {
+    id: string | null
+    response_id: string | null
+    alternative_id: string | null
+  }
+
+  export type ResponseAlternativeCountAggregateOutputType = {
+    id: number
+    response_id: number
+    alternative_id: number
+    _all: number
+  }
+
+
+  export type ResponseAlternativeMinAggregateInputType = {
+    id?: true
+    response_id?: true
+    alternative_id?: true
+  }
+
+  export type ResponseAlternativeMaxAggregateInputType = {
+    id?: true
+    response_id?: true
+    alternative_id?: true
+  }
+
+  export type ResponseAlternativeCountAggregateInputType = {
+    id?: true
+    response_id?: true
+    alternative_id?: true
+    _all?: true
+  }
+
+  export type ResponseAlternativeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ResponseAlternative to aggregate.
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResponseAlternatives to fetch.
+     */
+    orderBy?: ResponseAlternativeOrderByWithRelationInput | ResponseAlternativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ResponseAlternativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResponseAlternatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResponseAlternatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ResponseAlternatives
+    **/
+    _count?: true | ResponseAlternativeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ResponseAlternativeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ResponseAlternativeMaxAggregateInputType
+  }
+
+  export type GetResponseAlternativeAggregateType<T extends ResponseAlternativeAggregateArgs> = {
+        [P in keyof T & keyof AggregateResponseAlternative]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateResponseAlternative[P]>
+      : GetScalarType<T[P], AggregateResponseAlternative[P]>
+  }
+
+
+
+
+  export type ResponseAlternativeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResponseAlternativeWhereInput
+    orderBy?: ResponseAlternativeOrderByWithAggregationInput | ResponseAlternativeOrderByWithAggregationInput[]
+    by: ResponseAlternativeScalarFieldEnum[] | ResponseAlternativeScalarFieldEnum
+    having?: ResponseAlternativeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ResponseAlternativeCountAggregateInputType | true
+    _min?: ResponseAlternativeMinAggregateInputType
+    _max?: ResponseAlternativeMaxAggregateInputType
+  }
+
+  export type ResponseAlternativeGroupByOutputType = {
+    id: string
+    response_id: string
+    alternative_id: string
+    _count: ResponseAlternativeCountAggregateOutputType | null
+    _min: ResponseAlternativeMinAggregateOutputType | null
+    _max: ResponseAlternativeMaxAggregateOutputType | null
+  }
+
+  type GetResponseAlternativeGroupByPayload<T extends ResponseAlternativeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ResponseAlternativeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ResponseAlternativeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ResponseAlternativeGroupByOutputType[P]>
+            : GetScalarType<T[P], ResponseAlternativeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ResponseAlternativeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    response_id?: boolean
+    alternative_id?: boolean
+    response?: boolean | QuestionResponseDefaultArgs<ExtArgs>
+    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["responseAlternative"]>
+
+  export type ResponseAlternativeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    response_id?: boolean
+    alternative_id?: boolean
+    response?: boolean | QuestionResponseDefaultArgs<ExtArgs>
+    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["responseAlternative"]>
+
+  export type ResponseAlternativeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    response_id?: boolean
+    alternative_id?: boolean
+    response?: boolean | QuestionResponseDefaultArgs<ExtArgs>
+    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["responseAlternative"]>
+
+  export type ResponseAlternativeSelectScalar = {
+    id?: boolean
+    response_id?: boolean
+    alternative_id?: boolean
+  }
+
+  export type ResponseAlternativeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "response_id" | "alternative_id", ExtArgs["result"]["responseAlternative"]>
+  export type ResponseAlternativeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    response?: boolean | QuestionResponseDefaultArgs<ExtArgs>
+    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
+  }
+  export type ResponseAlternativeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    response?: boolean | QuestionResponseDefaultArgs<ExtArgs>
+    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
+  }
+  export type ResponseAlternativeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    response?: boolean | QuestionResponseDefaultArgs<ExtArgs>
+    alternative?: boolean | AlternativeDefaultArgs<ExtArgs>
+  }
+
+  export type $ResponseAlternativePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ResponseAlternative"
+    objects: {
+      response: Prisma.$QuestionResponsePayload<ExtArgs>
+      alternative: Prisma.$AlternativePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      response_id: string
+      alternative_id: string
+    }, ExtArgs["result"]["responseAlternative"]>
+    composites: {}
+  }
+
+  type ResponseAlternativeGetPayload<S extends boolean | null | undefined | ResponseAlternativeDefaultArgs> = $Result.GetResult<Prisma.$ResponseAlternativePayload, S>
+
+  type ResponseAlternativeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ResponseAlternativeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ResponseAlternativeCountAggregateInputType | true
+    }
+
+  export interface ResponseAlternativeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ResponseAlternative'], meta: { name: 'ResponseAlternative' } }
+    /**
+     * Find zero or one ResponseAlternative that matches the filter.
+     * @param {ResponseAlternativeFindUniqueArgs} args - Arguments to find a ResponseAlternative
+     * @example
+     * // Get one ResponseAlternative
+     * const responseAlternative = await prisma.responseAlternative.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ResponseAlternativeFindUniqueArgs>(args: SelectSubset<T, ResponseAlternativeFindUniqueArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ResponseAlternative that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ResponseAlternativeFindUniqueOrThrowArgs} args - Arguments to find a ResponseAlternative
+     * @example
+     * // Get one ResponseAlternative
+     * const responseAlternative = await prisma.responseAlternative.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ResponseAlternativeFindUniqueOrThrowArgs>(args: SelectSubset<T, ResponseAlternativeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ResponseAlternative that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeFindFirstArgs} args - Arguments to find a ResponseAlternative
+     * @example
+     * // Get one ResponseAlternative
+     * const responseAlternative = await prisma.responseAlternative.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ResponseAlternativeFindFirstArgs>(args?: SelectSubset<T, ResponseAlternativeFindFirstArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ResponseAlternative that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeFindFirstOrThrowArgs} args - Arguments to find a ResponseAlternative
+     * @example
+     * // Get one ResponseAlternative
+     * const responseAlternative = await prisma.responseAlternative.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ResponseAlternativeFindFirstOrThrowArgs>(args?: SelectSubset<T, ResponseAlternativeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ResponseAlternatives that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ResponseAlternatives
+     * const responseAlternatives = await prisma.responseAlternative.findMany()
+     * 
+     * // Get first 10 ResponseAlternatives
+     * const responseAlternatives = await prisma.responseAlternative.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const responseAlternativeWithIdOnly = await prisma.responseAlternative.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ResponseAlternativeFindManyArgs>(args?: SelectSubset<T, ResponseAlternativeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ResponseAlternative.
+     * @param {ResponseAlternativeCreateArgs} args - Arguments to create a ResponseAlternative.
+     * @example
+     * // Create one ResponseAlternative
+     * const ResponseAlternative = await prisma.responseAlternative.create({
+     *   data: {
+     *     // ... data to create a ResponseAlternative
+     *   }
+     * })
+     * 
+     */
+    create<T extends ResponseAlternativeCreateArgs>(args: SelectSubset<T, ResponseAlternativeCreateArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ResponseAlternatives.
+     * @param {ResponseAlternativeCreateManyArgs} args - Arguments to create many ResponseAlternatives.
+     * @example
+     * // Create many ResponseAlternatives
+     * const responseAlternative = await prisma.responseAlternative.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ResponseAlternativeCreateManyArgs>(args?: SelectSubset<T, ResponseAlternativeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ResponseAlternatives and returns the data saved in the database.
+     * @param {ResponseAlternativeCreateManyAndReturnArgs} args - Arguments to create many ResponseAlternatives.
+     * @example
+     * // Create many ResponseAlternatives
+     * const responseAlternative = await prisma.responseAlternative.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ResponseAlternatives and only return the `id`
+     * const responseAlternativeWithIdOnly = await prisma.responseAlternative.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ResponseAlternativeCreateManyAndReturnArgs>(args?: SelectSubset<T, ResponseAlternativeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ResponseAlternative.
+     * @param {ResponseAlternativeDeleteArgs} args - Arguments to delete one ResponseAlternative.
+     * @example
+     * // Delete one ResponseAlternative
+     * const ResponseAlternative = await prisma.responseAlternative.delete({
+     *   where: {
+     *     // ... filter to delete one ResponseAlternative
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ResponseAlternativeDeleteArgs>(args: SelectSubset<T, ResponseAlternativeDeleteArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ResponseAlternative.
+     * @param {ResponseAlternativeUpdateArgs} args - Arguments to update one ResponseAlternative.
+     * @example
+     * // Update one ResponseAlternative
+     * const responseAlternative = await prisma.responseAlternative.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ResponseAlternativeUpdateArgs>(args: SelectSubset<T, ResponseAlternativeUpdateArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ResponseAlternatives.
+     * @param {ResponseAlternativeDeleteManyArgs} args - Arguments to filter ResponseAlternatives to delete.
+     * @example
+     * // Delete a few ResponseAlternatives
+     * const { count } = await prisma.responseAlternative.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ResponseAlternativeDeleteManyArgs>(args?: SelectSubset<T, ResponseAlternativeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ResponseAlternatives.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ResponseAlternatives
+     * const responseAlternative = await prisma.responseAlternative.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ResponseAlternativeUpdateManyArgs>(args: SelectSubset<T, ResponseAlternativeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ResponseAlternatives and returns the data updated in the database.
+     * @param {ResponseAlternativeUpdateManyAndReturnArgs} args - Arguments to update many ResponseAlternatives.
+     * @example
+     * // Update many ResponseAlternatives
+     * const responseAlternative = await prisma.responseAlternative.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ResponseAlternatives and only return the `id`
+     * const responseAlternativeWithIdOnly = await prisma.responseAlternative.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ResponseAlternativeUpdateManyAndReturnArgs>(args: SelectSubset<T, ResponseAlternativeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ResponseAlternative.
+     * @param {ResponseAlternativeUpsertArgs} args - Arguments to update or create a ResponseAlternative.
+     * @example
+     * // Update or create a ResponseAlternative
+     * const responseAlternative = await prisma.responseAlternative.upsert({
+     *   create: {
+     *     // ... data to create a ResponseAlternative
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ResponseAlternative we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ResponseAlternativeUpsertArgs>(args: SelectSubset<T, ResponseAlternativeUpsertArgs<ExtArgs>>): Prisma__ResponseAlternativeClient<$Result.GetResult<Prisma.$ResponseAlternativePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ResponseAlternatives.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeCountArgs} args - Arguments to filter ResponseAlternatives to count.
+     * @example
+     * // Count the number of ResponseAlternatives
+     * const count = await prisma.responseAlternative.count({
+     *   where: {
+     *     // ... the filter for the ResponseAlternatives we want to count
+     *   }
+     * })
+    **/
+    count<T extends ResponseAlternativeCountArgs>(
+      args?: Subset<T, ResponseAlternativeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ResponseAlternativeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ResponseAlternative.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ResponseAlternativeAggregateArgs>(args: Subset<T, ResponseAlternativeAggregateArgs>): Prisma.PrismaPromise<GetResponseAlternativeAggregateType<T>>
+
+    /**
+     * Group by ResponseAlternative.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResponseAlternativeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ResponseAlternativeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ResponseAlternativeGroupByArgs['orderBy'] }
+        : { orderBy?: ResponseAlternativeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ResponseAlternativeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetResponseAlternativeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ResponseAlternative model
+   */
+  readonly fields: ResponseAlternativeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ResponseAlternative.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ResponseAlternativeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    response<T extends QuestionResponseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestionResponseDefaultArgs<ExtArgs>>): Prisma__QuestionResponseClient<$Result.GetResult<Prisma.$QuestionResponsePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    alternative<T extends AlternativeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AlternativeDefaultArgs<ExtArgs>>): Prisma__AlternativeClient<$Result.GetResult<Prisma.$AlternativePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ResponseAlternative model
+   */
+  interface ResponseAlternativeFieldRefs {
+    readonly id: FieldRef<"ResponseAlternative", 'String'>
+    readonly response_id: FieldRef<"ResponseAlternative", 'String'>
+    readonly alternative_id: FieldRef<"ResponseAlternative", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ResponseAlternative findUnique
+   */
+  export type ResponseAlternativeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * Filter, which ResponseAlternative to fetch.
+     */
+    where: ResponseAlternativeWhereUniqueInput
+  }
+
+  /**
+   * ResponseAlternative findUniqueOrThrow
+   */
+  export type ResponseAlternativeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * Filter, which ResponseAlternative to fetch.
+     */
+    where: ResponseAlternativeWhereUniqueInput
+  }
+
+  /**
+   * ResponseAlternative findFirst
+   */
+  export type ResponseAlternativeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * Filter, which ResponseAlternative to fetch.
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResponseAlternatives to fetch.
+     */
+    orderBy?: ResponseAlternativeOrderByWithRelationInput | ResponseAlternativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ResponseAlternatives.
+     */
+    cursor?: ResponseAlternativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResponseAlternatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResponseAlternatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ResponseAlternatives.
+     */
+    distinct?: ResponseAlternativeScalarFieldEnum | ResponseAlternativeScalarFieldEnum[]
+  }
+
+  /**
+   * ResponseAlternative findFirstOrThrow
+   */
+  export type ResponseAlternativeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * Filter, which ResponseAlternative to fetch.
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResponseAlternatives to fetch.
+     */
+    orderBy?: ResponseAlternativeOrderByWithRelationInput | ResponseAlternativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ResponseAlternatives.
+     */
+    cursor?: ResponseAlternativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResponseAlternatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResponseAlternatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ResponseAlternatives.
+     */
+    distinct?: ResponseAlternativeScalarFieldEnum | ResponseAlternativeScalarFieldEnum[]
+  }
+
+  /**
+   * ResponseAlternative findMany
+   */
+  export type ResponseAlternativeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * Filter, which ResponseAlternatives to fetch.
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResponseAlternatives to fetch.
+     */
+    orderBy?: ResponseAlternativeOrderByWithRelationInput | ResponseAlternativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ResponseAlternatives.
+     */
+    cursor?: ResponseAlternativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResponseAlternatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResponseAlternatives.
+     */
+    skip?: number
+    distinct?: ResponseAlternativeScalarFieldEnum | ResponseAlternativeScalarFieldEnum[]
+  }
+
+  /**
+   * ResponseAlternative create
+   */
+  export type ResponseAlternativeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ResponseAlternative.
+     */
+    data: XOR<ResponseAlternativeCreateInput, ResponseAlternativeUncheckedCreateInput>
+  }
+
+  /**
+   * ResponseAlternative createMany
+   */
+  export type ResponseAlternativeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ResponseAlternatives.
+     */
+    data: ResponseAlternativeCreateManyInput | ResponseAlternativeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ResponseAlternative createManyAndReturn
+   */
+  export type ResponseAlternativeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * The data used to create many ResponseAlternatives.
+     */
+    data: ResponseAlternativeCreateManyInput | ResponseAlternativeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ResponseAlternative update
+   */
+  export type ResponseAlternativeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ResponseAlternative.
+     */
+    data: XOR<ResponseAlternativeUpdateInput, ResponseAlternativeUncheckedUpdateInput>
+    /**
+     * Choose, which ResponseAlternative to update.
+     */
+    where: ResponseAlternativeWhereUniqueInput
+  }
+
+  /**
+   * ResponseAlternative updateMany
+   */
+  export type ResponseAlternativeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ResponseAlternatives.
+     */
+    data: XOR<ResponseAlternativeUpdateManyMutationInput, ResponseAlternativeUncheckedUpdateManyInput>
+    /**
+     * Filter which ResponseAlternatives to update
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * Limit how many ResponseAlternatives to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ResponseAlternative updateManyAndReturn
+   */
+  export type ResponseAlternativeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * The data used to update ResponseAlternatives.
+     */
+    data: XOR<ResponseAlternativeUpdateManyMutationInput, ResponseAlternativeUncheckedUpdateManyInput>
+    /**
+     * Filter which ResponseAlternatives to update
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * Limit how many ResponseAlternatives to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ResponseAlternative upsert
+   */
+  export type ResponseAlternativeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ResponseAlternative to update in case it exists.
+     */
+    where: ResponseAlternativeWhereUniqueInput
+    /**
+     * In case the ResponseAlternative found by the `where` argument doesn't exist, create a new ResponseAlternative with this data.
+     */
+    create: XOR<ResponseAlternativeCreateInput, ResponseAlternativeUncheckedCreateInput>
+    /**
+     * In case the ResponseAlternative was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ResponseAlternativeUpdateInput, ResponseAlternativeUncheckedUpdateInput>
+  }
+
+  /**
+   * ResponseAlternative delete
+   */
+  export type ResponseAlternativeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
+    /**
+     * Filter which ResponseAlternative to delete.
+     */
+    where: ResponseAlternativeWhereUniqueInput
+  }
+
+  /**
+   * ResponseAlternative deleteMany
+   */
+  export type ResponseAlternativeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ResponseAlternatives to delete
+     */
+    where?: ResponseAlternativeWhereInput
+    /**
+     * Limit how many ResponseAlternatives to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ResponseAlternative without action
+   */
+  export type ResponseAlternativeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResponseAlternative
+     */
+    select?: ResponseAlternativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ResponseAlternative
+     */
+    omit?: ResponseAlternativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResponseAlternativeInclude<ExtArgs> | null
   }
 
 
@@ -19493,13 +20694,23 @@ export namespace Prisma {
     id: 'id',
     user_id: 'user_id',
     question_id: 'question_id',
-    alternative_id: 'alternative_id',
     collection_id: 'collection_id',
     response_time: 'response_time',
-    answered_at: 'answered_at'
+    answered_at: 'answered_at',
+    attempt_number: 'attempt_number',
+    is_final: 'is_final'
   };
 
   export type QuestionResponseScalarFieldEnum = (typeof QuestionResponseScalarFieldEnum)[keyof typeof QuestionResponseScalarFieldEnum]
+
+
+  export const ResponseAlternativeScalarFieldEnum: {
+    id: 'id',
+    response_id: 'response_id',
+    alternative_id: 'alternative_id'
+  };
+
+  export type ResponseAlternativeScalarFieldEnum = (typeof ResponseAlternativeScalarFieldEnum)[keyof typeof ResponseAlternativeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -19906,7 +21117,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Alternative"> | Date | string
     updated_at?: DateTimeFilter<"Alternative"> | Date | string
     question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
-    responses?: QuestionResponseListRelationFilter
+    selected_in?: ResponseAlternativeListRelationFilter
   }
 
   export type AlternativeOrderByWithRelationInput = {
@@ -19917,7 +21128,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     question?: QuestionOrderByWithRelationInput
-    responses?: QuestionResponseOrderByRelationAggregateInput
+    selected_in?: ResponseAlternativeOrderByRelationAggregateInput
   }
 
   export type AlternativeWhereUniqueInput = Prisma.AtLeast<{
@@ -19931,7 +21142,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Alternative"> | Date | string
     updated_at?: DateTimeFilter<"Alternative"> | Date | string
     question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
-    responses?: QuestionResponseListRelationFilter
+    selected_in?: ResponseAlternativeListRelationFilter
   }, "id">
 
   export type AlternativeOrderByWithAggregationInput = {
@@ -20471,28 +21682,30 @@ export namespace Prisma {
     id?: StringFilter<"QuestionResponse"> | string
     user_id?: StringFilter<"QuestionResponse"> | string
     question_id?: StringFilter<"QuestionResponse"> | string
-    alternative_id?: StringFilter<"QuestionResponse"> | string
     collection_id?: StringNullableFilter<"QuestionResponse"> | string | null
     response_time?: IntNullableFilter<"QuestionResponse"> | number | null
     answered_at?: DateTimeFilter<"QuestionResponse"> | Date | string
+    attempt_number?: IntFilter<"QuestionResponse"> | number
+    is_final?: BoolFilter<"QuestionResponse"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
-    alternative?: XOR<AlternativeScalarRelationFilter, AlternativeWhereInput>
     collection?: XOR<CollectionNullableScalarRelationFilter, CollectionWhereInput> | null
+    selected_alternatives?: ResponseAlternativeListRelationFilter
   }
 
   export type QuestionResponseOrderByWithRelationInput = {
     id?: SortOrder
     user_id?: SortOrder
     question_id?: SortOrder
-    alternative_id?: SortOrder
     collection_id?: SortOrderInput | SortOrder
     response_time?: SortOrderInput | SortOrder
     answered_at?: SortOrder
+    attempt_number?: SortOrder
+    is_final?: SortOrder
     user?: UserOrderByWithRelationInput
     question?: QuestionOrderByWithRelationInput
-    alternative?: AlternativeOrderByWithRelationInput
     collection?: CollectionOrderByWithRelationInput
+    selected_alternatives?: ResponseAlternativeOrderByRelationAggregateInput
   }
 
   export type QuestionResponseWhereUniqueInput = Prisma.AtLeast<{
@@ -20502,24 +21715,26 @@ export namespace Prisma {
     NOT?: QuestionResponseWhereInput | QuestionResponseWhereInput[]
     user_id?: StringFilter<"QuestionResponse"> | string
     question_id?: StringFilter<"QuestionResponse"> | string
-    alternative_id?: StringFilter<"QuestionResponse"> | string
     collection_id?: StringNullableFilter<"QuestionResponse"> | string | null
     response_time?: IntNullableFilter<"QuestionResponse"> | number | null
     answered_at?: DateTimeFilter<"QuestionResponse"> | Date | string
+    attempt_number?: IntFilter<"QuestionResponse"> | number
+    is_final?: BoolFilter<"QuestionResponse"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
-    alternative?: XOR<AlternativeScalarRelationFilter, AlternativeWhereInput>
     collection?: XOR<CollectionNullableScalarRelationFilter, CollectionWhereInput> | null
+    selected_alternatives?: ResponseAlternativeListRelationFilter
   }, "id">
 
   export type QuestionResponseOrderByWithAggregationInput = {
     id?: SortOrder
     user_id?: SortOrder
     question_id?: SortOrder
-    alternative_id?: SortOrder
     collection_id?: SortOrderInput | SortOrder
     response_time?: SortOrderInput | SortOrder
     answered_at?: SortOrder
+    attempt_number?: SortOrder
+    is_final?: SortOrder
     _count?: QuestionResponseCountOrderByAggregateInput
     _avg?: QuestionResponseAvgOrderByAggregateInput
     _max?: QuestionResponseMaxOrderByAggregateInput
@@ -20534,10 +21749,60 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"QuestionResponse"> | string
     user_id?: StringWithAggregatesFilter<"QuestionResponse"> | string
     question_id?: StringWithAggregatesFilter<"QuestionResponse"> | string
-    alternative_id?: StringWithAggregatesFilter<"QuestionResponse"> | string
     collection_id?: StringNullableWithAggregatesFilter<"QuestionResponse"> | string | null
     response_time?: IntNullableWithAggregatesFilter<"QuestionResponse"> | number | null
     answered_at?: DateTimeWithAggregatesFilter<"QuestionResponse"> | Date | string
+    attempt_number?: IntWithAggregatesFilter<"QuestionResponse"> | number
+    is_final?: BoolWithAggregatesFilter<"QuestionResponse"> | boolean
+  }
+
+  export type ResponseAlternativeWhereInput = {
+    AND?: ResponseAlternativeWhereInput | ResponseAlternativeWhereInput[]
+    OR?: ResponseAlternativeWhereInput[]
+    NOT?: ResponseAlternativeWhereInput | ResponseAlternativeWhereInput[]
+    id?: StringFilter<"ResponseAlternative"> | string
+    response_id?: StringFilter<"ResponseAlternative"> | string
+    alternative_id?: StringFilter<"ResponseAlternative"> | string
+    response?: XOR<QuestionResponseScalarRelationFilter, QuestionResponseWhereInput>
+    alternative?: XOR<AlternativeScalarRelationFilter, AlternativeWhereInput>
+  }
+
+  export type ResponseAlternativeOrderByWithRelationInput = {
+    id?: SortOrder
+    response_id?: SortOrder
+    alternative_id?: SortOrder
+    response?: QuestionResponseOrderByWithRelationInput
+    alternative?: AlternativeOrderByWithRelationInput
+  }
+
+  export type ResponseAlternativeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    response_id_alternative_id?: ResponseAlternativeResponse_idAlternative_idCompoundUniqueInput
+    AND?: ResponseAlternativeWhereInput | ResponseAlternativeWhereInput[]
+    OR?: ResponseAlternativeWhereInput[]
+    NOT?: ResponseAlternativeWhereInput | ResponseAlternativeWhereInput[]
+    response_id?: StringFilter<"ResponseAlternative"> | string
+    alternative_id?: StringFilter<"ResponseAlternative"> | string
+    response?: XOR<QuestionResponseScalarRelationFilter, QuestionResponseWhereInput>
+    alternative?: XOR<AlternativeScalarRelationFilter, AlternativeWhereInput>
+  }, "id" | "response_id_alternative_id">
+
+  export type ResponseAlternativeOrderByWithAggregationInput = {
+    id?: SortOrder
+    response_id?: SortOrder
+    alternative_id?: SortOrder
+    _count?: ResponseAlternativeCountOrderByAggregateInput
+    _max?: ResponseAlternativeMaxOrderByAggregateInput
+    _min?: ResponseAlternativeMinOrderByAggregateInput
+  }
+
+  export type ResponseAlternativeScalarWhereWithAggregatesInput = {
+    AND?: ResponseAlternativeScalarWhereWithAggregatesInput | ResponseAlternativeScalarWhereWithAggregatesInput[]
+    OR?: ResponseAlternativeScalarWhereWithAggregatesInput[]
+    NOT?: ResponseAlternativeScalarWhereWithAggregatesInput | ResponseAlternativeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ResponseAlternative"> | string
+    response_id?: StringWithAggregatesFilter<"ResponseAlternative"> | string
+    alternative_id?: StringWithAggregatesFilter<"ResponseAlternative"> | string
   }
 
   export type UserCreateInput = {
@@ -20869,7 +22134,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     question: QuestionCreateNestedOneWithoutAlternativesInput
-    responses?: QuestionResponseCreateNestedManyWithoutAlternativeInput
+    selected_in?: ResponseAlternativeCreateNestedManyWithoutAlternativeInput
   }
 
   export type AlternativeUncheckedCreateInput = {
@@ -20879,7 +22144,7 @@ export namespace Prisma {
     question_id: string
     created_at?: Date | string
     updated_at?: Date | string
-    responses?: QuestionResponseUncheckedCreateNestedManyWithoutAlternativeInput
+    selected_in?: ResponseAlternativeUncheckedCreateNestedManyWithoutAlternativeInput
   }
 
   export type AlternativeUpdateInput = {
@@ -20889,7 +22154,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionUpdateOneRequiredWithoutAlternativesNestedInput
-    responses?: QuestionResponseUpdateManyWithoutAlternativeNestedInput
+    selected_in?: ResponseAlternativeUpdateManyWithoutAlternativeNestedInput
   }
 
   export type AlternativeUncheckedUpdateInput = {
@@ -20899,7 +22164,7 @@ export namespace Prisma {
     question_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    responses?: QuestionResponseUncheckedUpdateManyWithoutAlternativeNestedInput
+    selected_in?: ResponseAlternativeUncheckedUpdateManyWithoutAlternativeNestedInput
   }
 
   export type AlternativeCreateManyInput = {
@@ -21384,66 +22649,118 @@ export namespace Prisma {
     id?: string
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
     user: UserCreateNestedOneWithoutQuestion_responsesInput
     question: QuestionCreateNestedOneWithoutResponsesInput
-    alternative: AlternativeCreateNestedOneWithoutResponsesInput
     collection?: CollectionCreateNestedOneWithoutResponsesInput
+    selected_alternatives?: ResponseAlternativeCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseUncheckedCreateInput = {
     id?: string
     user_id: string
     question_id: string
-    alternative_id: string
     collection_id?: string | null
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
+    selected_alternatives?: ResponseAlternativeUncheckedCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutQuestion_responsesNestedInput
     question?: QuestionUpdateOneRequiredWithoutResponsesNestedInput
-    alternative?: AlternativeUpdateOneRequiredWithoutResponsesNestedInput
     collection?: CollectionUpdateOneWithoutResponsesNestedInput
+    selected_alternatives?: ResponseAlternativeUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     collection_id?: NullableStringFieldUpdateOperationsInput | string | null
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+    selected_alternatives?: ResponseAlternativeUncheckedUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseCreateManyInput = {
     id?: string
     user_id: string
     question_id: string
-    alternative_id: string
     collection_id?: string | null
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
   }
 
   export type QuestionResponseUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type QuestionResponseUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     collection_id?: NullableStringFieldUpdateOperationsInput | string | null
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ResponseAlternativeCreateInput = {
+    id?: string
+    response: QuestionResponseCreateNestedOneWithoutSelected_alternativesInput
+    alternative: AlternativeCreateNestedOneWithoutSelected_inInput
+  }
+
+  export type ResponseAlternativeUncheckedCreateInput = {
+    id?: string
+    response_id: string
+    alternative_id: string
+  }
+
+  export type ResponseAlternativeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    response?: QuestionResponseUpdateOneRequiredWithoutSelected_alternativesNestedInput
+    alternative?: AlternativeUpdateOneRequiredWithoutSelected_inNestedInput
+  }
+
+  export type ResponseAlternativeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    response_id?: StringFieldUpdateOperationsInput | string
+    alternative_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ResponseAlternativeCreateManyInput = {
+    id?: string
+    response_id: string
+    alternative_id: string
+  }
+
+  export type ResponseAlternativeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ResponseAlternativeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    response_id?: StringFieldUpdateOperationsInput | string
+    alternative_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -21831,6 +23148,16 @@ export namespace Prisma {
     isNot?: QuestionWhereInput
   }
 
+  export type ResponseAlternativeListRelationFilter = {
+    every?: ResponseAlternativeWhereInput
+    some?: ResponseAlternativeWhereInput
+    none?: ResponseAlternativeWhereInput
+  }
+
+  export type ResponseAlternativeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AlternativeCountOrderByAggregateInput = {
     id?: SortOrder
     text?: SortOrder
@@ -22138,11 +23465,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type AlternativeScalarRelationFilter = {
-    is?: AlternativeWhereInput
-    isNot?: AlternativeWhereInput
-  }
-
   export type CollectionNullableScalarRelationFilter = {
     is?: CollectionWhereInput | null
     isNot?: CollectionWhereInput | null
@@ -22152,38 +23474,43 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     question_id?: SortOrder
-    alternative_id?: SortOrder
     collection_id?: SortOrder
     response_time?: SortOrder
     answered_at?: SortOrder
+    attempt_number?: SortOrder
+    is_final?: SortOrder
   }
 
   export type QuestionResponseAvgOrderByAggregateInput = {
     response_time?: SortOrder
+    attempt_number?: SortOrder
   }
 
   export type QuestionResponseMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     question_id?: SortOrder
-    alternative_id?: SortOrder
     collection_id?: SortOrder
     response_time?: SortOrder
     answered_at?: SortOrder
+    attempt_number?: SortOrder
+    is_final?: SortOrder
   }
 
   export type QuestionResponseMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     question_id?: SortOrder
-    alternative_id?: SortOrder
     collection_id?: SortOrder
     response_time?: SortOrder
     answered_at?: SortOrder
+    attempt_number?: SortOrder
+    is_final?: SortOrder
   }
 
   export type QuestionResponseSumOrderByAggregateInput = {
     response_time?: SortOrder
+    attempt_number?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -22200,6 +23527,39 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type QuestionResponseScalarRelationFilter = {
+    is?: QuestionResponseWhereInput
+    isNot?: QuestionResponseWhereInput
+  }
+
+  export type AlternativeScalarRelationFilter = {
+    is?: AlternativeWhereInput
+    isNot?: AlternativeWhereInput
+  }
+
+  export type ResponseAlternativeResponse_idAlternative_idCompoundUniqueInput = {
+    response_id: string
+    alternative_id: string
+  }
+
+  export type ResponseAlternativeCountOrderByAggregateInput = {
+    id?: SortOrder
+    response_id?: SortOrder
+    alternative_id?: SortOrder
+  }
+
+  export type ResponseAlternativeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    response_id?: SortOrder
+    alternative_id?: SortOrder
+  }
+
+  export type ResponseAlternativeMinOrderByAggregateInput = {
+    id?: SortOrder
+    response_id?: SortOrder
+    alternative_id?: SortOrder
   }
 
   export type CollectionCreateNestedManyWithoutAuthorInput = {
@@ -23072,18 +24432,18 @@ export namespace Prisma {
     connect?: QuestionWhereUniqueInput
   }
 
-  export type QuestionResponseCreateNestedManyWithoutAlternativeInput = {
-    create?: XOR<QuestionResponseCreateWithoutAlternativeInput, QuestionResponseUncheckedCreateWithoutAlternativeInput> | QuestionResponseCreateWithoutAlternativeInput[] | QuestionResponseUncheckedCreateWithoutAlternativeInput[]
-    connectOrCreate?: QuestionResponseCreateOrConnectWithoutAlternativeInput | QuestionResponseCreateOrConnectWithoutAlternativeInput[]
-    createMany?: QuestionResponseCreateManyAlternativeInputEnvelope
-    connect?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
+  export type ResponseAlternativeCreateNestedManyWithoutAlternativeInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutAlternativeInput, ResponseAlternativeUncheckedCreateWithoutAlternativeInput> | ResponseAlternativeCreateWithoutAlternativeInput[] | ResponseAlternativeUncheckedCreateWithoutAlternativeInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutAlternativeInput | ResponseAlternativeCreateOrConnectWithoutAlternativeInput[]
+    createMany?: ResponseAlternativeCreateManyAlternativeInputEnvelope
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
   }
 
-  export type QuestionResponseUncheckedCreateNestedManyWithoutAlternativeInput = {
-    create?: XOR<QuestionResponseCreateWithoutAlternativeInput, QuestionResponseUncheckedCreateWithoutAlternativeInput> | QuestionResponseCreateWithoutAlternativeInput[] | QuestionResponseUncheckedCreateWithoutAlternativeInput[]
-    connectOrCreate?: QuestionResponseCreateOrConnectWithoutAlternativeInput | QuestionResponseCreateOrConnectWithoutAlternativeInput[]
-    createMany?: QuestionResponseCreateManyAlternativeInputEnvelope
-    connect?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
+  export type ResponseAlternativeUncheckedCreateNestedManyWithoutAlternativeInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutAlternativeInput, ResponseAlternativeUncheckedCreateWithoutAlternativeInput> | ResponseAlternativeCreateWithoutAlternativeInput[] | ResponseAlternativeUncheckedCreateWithoutAlternativeInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutAlternativeInput | ResponseAlternativeCreateOrConnectWithoutAlternativeInput[]
+    createMany?: ResponseAlternativeCreateManyAlternativeInputEnvelope
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
   }
 
   export type QuestionUpdateOneRequiredWithoutAlternativesNestedInput = {
@@ -23094,32 +24454,32 @@ export namespace Prisma {
     update?: XOR<XOR<QuestionUpdateToOneWithWhereWithoutAlternativesInput, QuestionUpdateWithoutAlternativesInput>, QuestionUncheckedUpdateWithoutAlternativesInput>
   }
 
-  export type QuestionResponseUpdateManyWithoutAlternativeNestedInput = {
-    create?: XOR<QuestionResponseCreateWithoutAlternativeInput, QuestionResponseUncheckedCreateWithoutAlternativeInput> | QuestionResponseCreateWithoutAlternativeInput[] | QuestionResponseUncheckedCreateWithoutAlternativeInput[]
-    connectOrCreate?: QuestionResponseCreateOrConnectWithoutAlternativeInput | QuestionResponseCreateOrConnectWithoutAlternativeInput[]
-    upsert?: QuestionResponseUpsertWithWhereUniqueWithoutAlternativeInput | QuestionResponseUpsertWithWhereUniqueWithoutAlternativeInput[]
-    createMany?: QuestionResponseCreateManyAlternativeInputEnvelope
-    set?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    disconnect?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    delete?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    connect?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    update?: QuestionResponseUpdateWithWhereUniqueWithoutAlternativeInput | QuestionResponseUpdateWithWhereUniqueWithoutAlternativeInput[]
-    updateMany?: QuestionResponseUpdateManyWithWhereWithoutAlternativeInput | QuestionResponseUpdateManyWithWhereWithoutAlternativeInput[]
-    deleteMany?: QuestionResponseScalarWhereInput | QuestionResponseScalarWhereInput[]
+  export type ResponseAlternativeUpdateManyWithoutAlternativeNestedInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutAlternativeInput, ResponseAlternativeUncheckedCreateWithoutAlternativeInput> | ResponseAlternativeCreateWithoutAlternativeInput[] | ResponseAlternativeUncheckedCreateWithoutAlternativeInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutAlternativeInput | ResponseAlternativeCreateOrConnectWithoutAlternativeInput[]
+    upsert?: ResponseAlternativeUpsertWithWhereUniqueWithoutAlternativeInput | ResponseAlternativeUpsertWithWhereUniqueWithoutAlternativeInput[]
+    createMany?: ResponseAlternativeCreateManyAlternativeInputEnvelope
+    set?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    disconnect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    delete?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    update?: ResponseAlternativeUpdateWithWhereUniqueWithoutAlternativeInput | ResponseAlternativeUpdateWithWhereUniqueWithoutAlternativeInput[]
+    updateMany?: ResponseAlternativeUpdateManyWithWhereWithoutAlternativeInput | ResponseAlternativeUpdateManyWithWhereWithoutAlternativeInput[]
+    deleteMany?: ResponseAlternativeScalarWhereInput | ResponseAlternativeScalarWhereInput[]
   }
 
-  export type QuestionResponseUncheckedUpdateManyWithoutAlternativeNestedInput = {
-    create?: XOR<QuestionResponseCreateWithoutAlternativeInput, QuestionResponseUncheckedCreateWithoutAlternativeInput> | QuestionResponseCreateWithoutAlternativeInput[] | QuestionResponseUncheckedCreateWithoutAlternativeInput[]
-    connectOrCreate?: QuestionResponseCreateOrConnectWithoutAlternativeInput | QuestionResponseCreateOrConnectWithoutAlternativeInput[]
-    upsert?: QuestionResponseUpsertWithWhereUniqueWithoutAlternativeInput | QuestionResponseUpsertWithWhereUniqueWithoutAlternativeInput[]
-    createMany?: QuestionResponseCreateManyAlternativeInputEnvelope
-    set?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    disconnect?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    delete?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    connect?: QuestionResponseWhereUniqueInput | QuestionResponseWhereUniqueInput[]
-    update?: QuestionResponseUpdateWithWhereUniqueWithoutAlternativeInput | QuestionResponseUpdateWithWhereUniqueWithoutAlternativeInput[]
-    updateMany?: QuestionResponseUpdateManyWithWhereWithoutAlternativeInput | QuestionResponseUpdateManyWithWhereWithoutAlternativeInput[]
-    deleteMany?: QuestionResponseScalarWhereInput | QuestionResponseScalarWhereInput[]
+  export type ResponseAlternativeUncheckedUpdateManyWithoutAlternativeNestedInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutAlternativeInput, ResponseAlternativeUncheckedCreateWithoutAlternativeInput> | ResponseAlternativeCreateWithoutAlternativeInput[] | ResponseAlternativeUncheckedCreateWithoutAlternativeInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutAlternativeInput | ResponseAlternativeCreateOrConnectWithoutAlternativeInput[]
+    upsert?: ResponseAlternativeUpsertWithWhereUniqueWithoutAlternativeInput | ResponseAlternativeUpsertWithWhereUniqueWithoutAlternativeInput[]
+    createMany?: ResponseAlternativeCreateManyAlternativeInputEnvelope
+    set?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    disconnect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    delete?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    update?: ResponseAlternativeUpdateWithWhereUniqueWithoutAlternativeInput | ResponseAlternativeUpdateWithWhereUniqueWithoutAlternativeInput[]
+    updateMany?: ResponseAlternativeUpdateManyWithWhereWithoutAlternativeInput | ResponseAlternativeUpdateManyWithWhereWithoutAlternativeInput[]
+    deleteMany?: ResponseAlternativeScalarWhereInput | ResponseAlternativeScalarWhereInput[]
   }
 
   export type QuestionCreateNestedOneWithoutCollectionsInput = {
@@ -23526,16 +24886,24 @@ export namespace Prisma {
     connect?: QuestionWhereUniqueInput
   }
 
-  export type AlternativeCreateNestedOneWithoutResponsesInput = {
-    create?: XOR<AlternativeCreateWithoutResponsesInput, AlternativeUncheckedCreateWithoutResponsesInput>
-    connectOrCreate?: AlternativeCreateOrConnectWithoutResponsesInput
-    connect?: AlternativeWhereUniqueInput
-  }
-
   export type CollectionCreateNestedOneWithoutResponsesInput = {
     create?: XOR<CollectionCreateWithoutResponsesInput, CollectionUncheckedCreateWithoutResponsesInput>
     connectOrCreate?: CollectionCreateOrConnectWithoutResponsesInput
     connect?: CollectionWhereUniqueInput
+  }
+
+  export type ResponseAlternativeCreateNestedManyWithoutResponseInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutResponseInput, ResponseAlternativeUncheckedCreateWithoutResponseInput> | ResponseAlternativeCreateWithoutResponseInput[] | ResponseAlternativeUncheckedCreateWithoutResponseInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutResponseInput | ResponseAlternativeCreateOrConnectWithoutResponseInput[]
+    createMany?: ResponseAlternativeCreateManyResponseInputEnvelope
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+  }
+
+  export type ResponseAlternativeUncheckedCreateNestedManyWithoutResponseInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutResponseInput, ResponseAlternativeUncheckedCreateWithoutResponseInput> | ResponseAlternativeCreateWithoutResponseInput[] | ResponseAlternativeUncheckedCreateWithoutResponseInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutResponseInput | ResponseAlternativeCreateOrConnectWithoutResponseInput[]
+    createMany?: ResponseAlternativeCreateManyResponseInputEnvelope
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -23562,14 +24930,6 @@ export namespace Prisma {
     update?: XOR<XOR<QuestionUpdateToOneWithWhereWithoutResponsesInput, QuestionUpdateWithoutResponsesInput>, QuestionUncheckedUpdateWithoutResponsesInput>
   }
 
-  export type AlternativeUpdateOneRequiredWithoutResponsesNestedInput = {
-    create?: XOR<AlternativeCreateWithoutResponsesInput, AlternativeUncheckedCreateWithoutResponsesInput>
-    connectOrCreate?: AlternativeCreateOrConnectWithoutResponsesInput
-    upsert?: AlternativeUpsertWithoutResponsesInput
-    connect?: AlternativeWhereUniqueInput
-    update?: XOR<XOR<AlternativeUpdateToOneWithWhereWithoutResponsesInput, AlternativeUpdateWithoutResponsesInput>, AlternativeUncheckedUpdateWithoutResponsesInput>
-  }
-
   export type CollectionUpdateOneWithoutResponsesNestedInput = {
     create?: XOR<CollectionCreateWithoutResponsesInput, CollectionUncheckedCreateWithoutResponsesInput>
     connectOrCreate?: CollectionCreateOrConnectWithoutResponsesInput
@@ -23578,6 +24938,62 @@ export namespace Prisma {
     delete?: CollectionWhereInput | boolean
     connect?: CollectionWhereUniqueInput
     update?: XOR<XOR<CollectionUpdateToOneWithWhereWithoutResponsesInput, CollectionUpdateWithoutResponsesInput>, CollectionUncheckedUpdateWithoutResponsesInput>
+  }
+
+  export type ResponseAlternativeUpdateManyWithoutResponseNestedInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutResponseInput, ResponseAlternativeUncheckedCreateWithoutResponseInput> | ResponseAlternativeCreateWithoutResponseInput[] | ResponseAlternativeUncheckedCreateWithoutResponseInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutResponseInput | ResponseAlternativeCreateOrConnectWithoutResponseInput[]
+    upsert?: ResponseAlternativeUpsertWithWhereUniqueWithoutResponseInput | ResponseAlternativeUpsertWithWhereUniqueWithoutResponseInput[]
+    createMany?: ResponseAlternativeCreateManyResponseInputEnvelope
+    set?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    disconnect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    delete?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    update?: ResponseAlternativeUpdateWithWhereUniqueWithoutResponseInput | ResponseAlternativeUpdateWithWhereUniqueWithoutResponseInput[]
+    updateMany?: ResponseAlternativeUpdateManyWithWhereWithoutResponseInput | ResponseAlternativeUpdateManyWithWhereWithoutResponseInput[]
+    deleteMany?: ResponseAlternativeScalarWhereInput | ResponseAlternativeScalarWhereInput[]
+  }
+
+  export type ResponseAlternativeUncheckedUpdateManyWithoutResponseNestedInput = {
+    create?: XOR<ResponseAlternativeCreateWithoutResponseInput, ResponseAlternativeUncheckedCreateWithoutResponseInput> | ResponseAlternativeCreateWithoutResponseInput[] | ResponseAlternativeUncheckedCreateWithoutResponseInput[]
+    connectOrCreate?: ResponseAlternativeCreateOrConnectWithoutResponseInput | ResponseAlternativeCreateOrConnectWithoutResponseInput[]
+    upsert?: ResponseAlternativeUpsertWithWhereUniqueWithoutResponseInput | ResponseAlternativeUpsertWithWhereUniqueWithoutResponseInput[]
+    createMany?: ResponseAlternativeCreateManyResponseInputEnvelope
+    set?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    disconnect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    delete?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    connect?: ResponseAlternativeWhereUniqueInput | ResponseAlternativeWhereUniqueInput[]
+    update?: ResponseAlternativeUpdateWithWhereUniqueWithoutResponseInput | ResponseAlternativeUpdateWithWhereUniqueWithoutResponseInput[]
+    updateMany?: ResponseAlternativeUpdateManyWithWhereWithoutResponseInput | ResponseAlternativeUpdateManyWithWhereWithoutResponseInput[]
+    deleteMany?: ResponseAlternativeScalarWhereInput | ResponseAlternativeScalarWhereInput[]
+  }
+
+  export type QuestionResponseCreateNestedOneWithoutSelected_alternativesInput = {
+    create?: XOR<QuestionResponseCreateWithoutSelected_alternativesInput, QuestionResponseUncheckedCreateWithoutSelected_alternativesInput>
+    connectOrCreate?: QuestionResponseCreateOrConnectWithoutSelected_alternativesInput
+    connect?: QuestionResponseWhereUniqueInput
+  }
+
+  export type AlternativeCreateNestedOneWithoutSelected_inInput = {
+    create?: XOR<AlternativeCreateWithoutSelected_inInput, AlternativeUncheckedCreateWithoutSelected_inInput>
+    connectOrCreate?: AlternativeCreateOrConnectWithoutSelected_inInput
+    connect?: AlternativeWhereUniqueInput
+  }
+
+  export type QuestionResponseUpdateOneRequiredWithoutSelected_alternativesNestedInput = {
+    create?: XOR<QuestionResponseCreateWithoutSelected_alternativesInput, QuestionResponseUncheckedCreateWithoutSelected_alternativesInput>
+    connectOrCreate?: QuestionResponseCreateOrConnectWithoutSelected_alternativesInput
+    upsert?: QuestionResponseUpsertWithoutSelected_alternativesInput
+    connect?: QuestionResponseWhereUniqueInput
+    update?: XOR<XOR<QuestionResponseUpdateToOneWithWhereWithoutSelected_alternativesInput, QuestionResponseUpdateWithoutSelected_alternativesInput>, QuestionResponseUncheckedUpdateWithoutSelected_alternativesInput>
+  }
+
+  export type AlternativeUpdateOneRequiredWithoutSelected_inNestedInput = {
+    create?: XOR<AlternativeCreateWithoutSelected_inInput, AlternativeUncheckedCreateWithoutSelected_inInput>
+    connectOrCreate?: AlternativeCreateOrConnectWithoutSelected_inInput
+    upsert?: AlternativeUpsertWithoutSelected_inInput
+    connect?: AlternativeWhereUniqueInput
+    update?: XOR<XOR<AlternativeUpdateToOneWithWhereWithoutSelected_inInput, AlternativeUpdateWithoutSelected_inInput>, AlternativeUncheckedUpdateWithoutSelected_inInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -23938,18 +25354,22 @@ export namespace Prisma {
     id?: string
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
     question: QuestionCreateNestedOneWithoutResponsesInput
-    alternative: AlternativeCreateNestedOneWithoutResponsesInput
     collection?: CollectionCreateNestedOneWithoutResponsesInput
+    selected_alternatives?: ResponseAlternativeCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseUncheckedCreateWithoutUserInput = {
     id?: string
     question_id: string
-    alternative_id: string
     collection_id?: string | null
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
+    selected_alternatives?: ResponseAlternativeUncheckedCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseCreateOrConnectWithoutUserInput = {
@@ -24153,10 +25573,11 @@ export namespace Prisma {
     id?: StringFilter<"QuestionResponse"> | string
     user_id?: StringFilter<"QuestionResponse"> | string
     question_id?: StringFilter<"QuestionResponse"> | string
-    alternative_id?: StringFilter<"QuestionResponse"> | string
     collection_id?: StringNullableFilter<"QuestionResponse"> | string | null
     response_time?: IntNullableFilter<"QuestionResponse"> | number | null
     answered_at?: DateTimeFilter<"QuestionResponse"> | Date | string
+    attempt_number?: IntFilter<"QuestionResponse"> | number
+    is_final?: BoolFilter<"QuestionResponse"> | boolean
   }
 
   export type UserCreateWithoutCollections_createdInput = {
@@ -24286,18 +25707,22 @@ export namespace Prisma {
     id?: string
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
     user: UserCreateNestedOneWithoutQuestion_responsesInput
     question: QuestionCreateNestedOneWithoutResponsesInput
-    alternative: AlternativeCreateNestedOneWithoutResponsesInput
+    selected_alternatives?: ResponseAlternativeCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseUncheckedCreateWithoutCollectionInput = {
     id?: string
     user_id: string
     question_id: string
-    alternative_id: string
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
+    selected_alternatives?: ResponseAlternativeUncheckedCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseCreateOrConnectWithoutCollectionInput = {
@@ -24490,7 +25915,7 @@ export namespace Prisma {
     is_correct?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    responses?: QuestionResponseCreateNestedManyWithoutAlternativeInput
+    selected_in?: ResponseAlternativeCreateNestedManyWithoutAlternativeInput
   }
 
   export type AlternativeUncheckedCreateWithoutQuestionInput = {
@@ -24499,7 +25924,7 @@ export namespace Prisma {
     is_correct?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    responses?: QuestionResponseUncheckedCreateNestedManyWithoutAlternativeInput
+    selected_in?: ResponseAlternativeUncheckedCreateNestedManyWithoutAlternativeInput
   }
 
   export type AlternativeCreateOrConnectWithoutQuestionInput = {
@@ -24619,18 +26044,22 @@ export namespace Prisma {
     id?: string
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
     user: UserCreateNestedOneWithoutQuestion_responsesInput
-    alternative: AlternativeCreateNestedOneWithoutResponsesInput
     collection?: CollectionCreateNestedOneWithoutResponsesInput
+    selected_alternatives?: ResponseAlternativeCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseUncheckedCreateWithoutQuestionInput = {
     id?: string
     user_id: string
-    alternative_id: string
     collection_id?: string | null
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
+    selected_alternatives?: ResponseAlternativeUncheckedCreateNestedManyWithoutResponseInput
   }
 
   export type QuestionResponseCreateOrConnectWithoutQuestionInput = {
@@ -24921,31 +26350,23 @@ export namespace Prisma {
     create: XOR<QuestionCreateWithoutAlternativesInput, QuestionUncheckedCreateWithoutAlternativesInput>
   }
 
-  export type QuestionResponseCreateWithoutAlternativeInput = {
+  export type ResponseAlternativeCreateWithoutAlternativeInput = {
     id?: string
-    response_time?: number | null
-    answered_at?: Date | string
-    user: UserCreateNestedOneWithoutQuestion_responsesInput
-    question: QuestionCreateNestedOneWithoutResponsesInput
-    collection?: CollectionCreateNestedOneWithoutResponsesInput
+    response: QuestionResponseCreateNestedOneWithoutSelected_alternativesInput
   }
 
-  export type QuestionResponseUncheckedCreateWithoutAlternativeInput = {
+  export type ResponseAlternativeUncheckedCreateWithoutAlternativeInput = {
     id?: string
-    user_id: string
-    question_id: string
-    collection_id?: string | null
-    response_time?: number | null
-    answered_at?: Date | string
+    response_id: string
   }
 
-  export type QuestionResponseCreateOrConnectWithoutAlternativeInput = {
-    where: QuestionResponseWhereUniqueInput
-    create: XOR<QuestionResponseCreateWithoutAlternativeInput, QuestionResponseUncheckedCreateWithoutAlternativeInput>
+  export type ResponseAlternativeCreateOrConnectWithoutAlternativeInput = {
+    where: ResponseAlternativeWhereUniqueInput
+    create: XOR<ResponseAlternativeCreateWithoutAlternativeInput, ResponseAlternativeUncheckedCreateWithoutAlternativeInput>
   }
 
-  export type QuestionResponseCreateManyAlternativeInputEnvelope = {
-    data: QuestionResponseCreateManyAlternativeInput | QuestionResponseCreateManyAlternativeInput[]
+  export type ResponseAlternativeCreateManyAlternativeInputEnvelope = {
+    data: ResponseAlternativeCreateManyAlternativeInput | ResponseAlternativeCreateManyAlternativeInput[]
     skipDuplicates?: boolean
   }
 
@@ -24994,20 +26415,29 @@ export namespace Prisma {
     responses?: QuestionResponseUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
-  export type QuestionResponseUpsertWithWhereUniqueWithoutAlternativeInput = {
-    where: QuestionResponseWhereUniqueInput
-    update: XOR<QuestionResponseUpdateWithoutAlternativeInput, QuestionResponseUncheckedUpdateWithoutAlternativeInput>
-    create: XOR<QuestionResponseCreateWithoutAlternativeInput, QuestionResponseUncheckedCreateWithoutAlternativeInput>
+  export type ResponseAlternativeUpsertWithWhereUniqueWithoutAlternativeInput = {
+    where: ResponseAlternativeWhereUniqueInput
+    update: XOR<ResponseAlternativeUpdateWithoutAlternativeInput, ResponseAlternativeUncheckedUpdateWithoutAlternativeInput>
+    create: XOR<ResponseAlternativeCreateWithoutAlternativeInput, ResponseAlternativeUncheckedCreateWithoutAlternativeInput>
   }
 
-  export type QuestionResponseUpdateWithWhereUniqueWithoutAlternativeInput = {
-    where: QuestionResponseWhereUniqueInput
-    data: XOR<QuestionResponseUpdateWithoutAlternativeInput, QuestionResponseUncheckedUpdateWithoutAlternativeInput>
+  export type ResponseAlternativeUpdateWithWhereUniqueWithoutAlternativeInput = {
+    where: ResponseAlternativeWhereUniqueInput
+    data: XOR<ResponseAlternativeUpdateWithoutAlternativeInput, ResponseAlternativeUncheckedUpdateWithoutAlternativeInput>
   }
 
-  export type QuestionResponseUpdateManyWithWhereWithoutAlternativeInput = {
-    where: QuestionResponseScalarWhereInput
-    data: XOR<QuestionResponseUpdateManyMutationInput, QuestionResponseUncheckedUpdateManyWithoutAlternativeInput>
+  export type ResponseAlternativeUpdateManyWithWhereWithoutAlternativeInput = {
+    where: ResponseAlternativeScalarWhereInput
+    data: XOR<ResponseAlternativeUpdateManyMutationInput, ResponseAlternativeUncheckedUpdateManyWithoutAlternativeInput>
+  }
+
+  export type ResponseAlternativeScalarWhereInput = {
+    AND?: ResponseAlternativeScalarWhereInput | ResponseAlternativeScalarWhereInput[]
+    OR?: ResponseAlternativeScalarWhereInput[]
+    NOT?: ResponseAlternativeScalarWhereInput | ResponseAlternativeScalarWhereInput[]
+    id?: StringFilter<"ResponseAlternative"> | string
+    response_id?: StringFilter<"ResponseAlternative"> | string
+    alternative_id?: StringFilter<"ResponseAlternative"> | string
   }
 
   export type QuestionCreateWithoutCollectionsInput = {
@@ -26334,29 +27764,6 @@ export namespace Prisma {
     create: XOR<QuestionCreateWithoutResponsesInput, QuestionUncheckedCreateWithoutResponsesInput>
   }
 
-  export type AlternativeCreateWithoutResponsesInput = {
-    id?: string
-    text: string
-    is_correct?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    question: QuestionCreateNestedOneWithoutAlternativesInput
-  }
-
-  export type AlternativeUncheckedCreateWithoutResponsesInput = {
-    id?: string
-    text: string
-    is_correct?: boolean
-    question_id: string
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type AlternativeCreateOrConnectWithoutResponsesInput = {
-    where: AlternativeWhereUniqueInput
-    create: XOR<AlternativeCreateWithoutResponsesInput, AlternativeUncheckedCreateWithoutResponsesInput>
-  }
-
   export type CollectionCreateWithoutResponsesInput = {
     id?: string
     title: string
@@ -26388,6 +27795,26 @@ export namespace Prisma {
   export type CollectionCreateOrConnectWithoutResponsesInput = {
     where: CollectionWhereUniqueInput
     create: XOR<CollectionCreateWithoutResponsesInput, CollectionUncheckedCreateWithoutResponsesInput>
+  }
+
+  export type ResponseAlternativeCreateWithoutResponseInput = {
+    id?: string
+    alternative: AlternativeCreateNestedOneWithoutSelected_inInput
+  }
+
+  export type ResponseAlternativeUncheckedCreateWithoutResponseInput = {
+    id?: string
+    alternative_id: string
+  }
+
+  export type ResponseAlternativeCreateOrConnectWithoutResponseInput = {
+    where: ResponseAlternativeWhereUniqueInput
+    create: XOR<ResponseAlternativeCreateWithoutResponseInput, ResponseAlternativeUncheckedCreateWithoutResponseInput>
+  }
+
+  export type ResponseAlternativeCreateManyResponseInputEnvelope = {
+    data: ResponseAlternativeCreateManyResponseInput | ResponseAlternativeCreateManyResponseInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutQuestion_responsesInput = {
@@ -26474,35 +27901,6 @@ export namespace Prisma {
     tags?: QuestionTagUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
-  export type AlternativeUpsertWithoutResponsesInput = {
-    update: XOR<AlternativeUpdateWithoutResponsesInput, AlternativeUncheckedUpdateWithoutResponsesInput>
-    create: XOR<AlternativeCreateWithoutResponsesInput, AlternativeUncheckedCreateWithoutResponsesInput>
-    where?: AlternativeWhereInput
-  }
-
-  export type AlternativeUpdateToOneWithWhereWithoutResponsesInput = {
-    where?: AlternativeWhereInput
-    data: XOR<AlternativeUpdateWithoutResponsesInput, AlternativeUncheckedUpdateWithoutResponsesInput>
-  }
-
-  export type AlternativeUpdateWithoutResponsesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text?: StringFieldUpdateOperationsInput | string
-    is_correct?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    question?: QuestionUpdateOneRequiredWithoutAlternativesNestedInput
-  }
-
-  export type AlternativeUncheckedUpdateWithoutResponsesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text?: StringFieldUpdateOperationsInput | string
-    is_correct?: BoolFieldUpdateOperationsInput | boolean
-    question_id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type CollectionUpsertWithoutResponsesInput = {
     update: XOR<CollectionUpdateWithoutResponsesInput, CollectionUncheckedUpdateWithoutResponsesInput>
     create: XOR<CollectionCreateWithoutResponsesInput, CollectionUncheckedCreateWithoutResponsesInput>
@@ -26540,6 +27938,134 @@ export namespace Prisma {
     permissions?: CollectionUserAccessUncheckedUpdateManyWithoutCollectionNestedInput
     likes?: CollectionLikeUncheckedUpdateManyWithoutCollectionNestedInput
     tags?: CollectionTagUncheckedUpdateManyWithoutCollectionNestedInput
+  }
+
+  export type ResponseAlternativeUpsertWithWhereUniqueWithoutResponseInput = {
+    where: ResponseAlternativeWhereUniqueInput
+    update: XOR<ResponseAlternativeUpdateWithoutResponseInput, ResponseAlternativeUncheckedUpdateWithoutResponseInput>
+    create: XOR<ResponseAlternativeCreateWithoutResponseInput, ResponseAlternativeUncheckedCreateWithoutResponseInput>
+  }
+
+  export type ResponseAlternativeUpdateWithWhereUniqueWithoutResponseInput = {
+    where: ResponseAlternativeWhereUniqueInput
+    data: XOR<ResponseAlternativeUpdateWithoutResponseInput, ResponseAlternativeUncheckedUpdateWithoutResponseInput>
+  }
+
+  export type ResponseAlternativeUpdateManyWithWhereWithoutResponseInput = {
+    where: ResponseAlternativeScalarWhereInput
+    data: XOR<ResponseAlternativeUpdateManyMutationInput, ResponseAlternativeUncheckedUpdateManyWithoutResponseInput>
+  }
+
+  export type QuestionResponseCreateWithoutSelected_alternativesInput = {
+    id?: string
+    response_time?: number | null
+    answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
+    user: UserCreateNestedOneWithoutQuestion_responsesInput
+    question: QuestionCreateNestedOneWithoutResponsesInput
+    collection?: CollectionCreateNestedOneWithoutResponsesInput
+  }
+
+  export type QuestionResponseUncheckedCreateWithoutSelected_alternativesInput = {
+    id?: string
+    user_id: string
+    question_id: string
+    collection_id?: string | null
+    response_time?: number | null
+    answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
+  }
+
+  export type QuestionResponseCreateOrConnectWithoutSelected_alternativesInput = {
+    where: QuestionResponseWhereUniqueInput
+    create: XOR<QuestionResponseCreateWithoutSelected_alternativesInput, QuestionResponseUncheckedCreateWithoutSelected_alternativesInput>
+  }
+
+  export type AlternativeCreateWithoutSelected_inInput = {
+    id?: string
+    text: string
+    is_correct?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    question: QuestionCreateNestedOneWithoutAlternativesInput
+  }
+
+  export type AlternativeUncheckedCreateWithoutSelected_inInput = {
+    id?: string
+    text: string
+    is_correct?: boolean
+    question_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AlternativeCreateOrConnectWithoutSelected_inInput = {
+    where: AlternativeWhereUniqueInput
+    create: XOR<AlternativeCreateWithoutSelected_inInput, AlternativeUncheckedCreateWithoutSelected_inInput>
+  }
+
+  export type QuestionResponseUpsertWithoutSelected_alternativesInput = {
+    update: XOR<QuestionResponseUpdateWithoutSelected_alternativesInput, QuestionResponseUncheckedUpdateWithoutSelected_alternativesInput>
+    create: XOR<QuestionResponseCreateWithoutSelected_alternativesInput, QuestionResponseUncheckedCreateWithoutSelected_alternativesInput>
+    where?: QuestionResponseWhereInput
+  }
+
+  export type QuestionResponseUpdateToOneWithWhereWithoutSelected_alternativesInput = {
+    where?: QuestionResponseWhereInput
+    data: XOR<QuestionResponseUpdateWithoutSelected_alternativesInput, QuestionResponseUncheckedUpdateWithoutSelected_alternativesInput>
+  }
+
+  export type QuestionResponseUpdateWithoutSelected_alternativesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    response_time?: NullableIntFieldUpdateOperationsInput | number | null
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutQuestion_responsesNestedInput
+    question?: QuestionUpdateOneRequiredWithoutResponsesNestedInput
+    collection?: CollectionUpdateOneWithoutResponsesNestedInput
+  }
+
+  export type QuestionResponseUncheckedUpdateWithoutSelected_alternativesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    question_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: NullableStringFieldUpdateOperationsInput | string | null
+    response_time?: NullableIntFieldUpdateOperationsInput | number | null
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AlternativeUpsertWithoutSelected_inInput = {
+    update: XOR<AlternativeUpdateWithoutSelected_inInput, AlternativeUncheckedUpdateWithoutSelected_inInput>
+    create: XOR<AlternativeCreateWithoutSelected_inInput, AlternativeUncheckedCreateWithoutSelected_inInput>
+    where?: AlternativeWhereInput
+  }
+
+  export type AlternativeUpdateToOneWithWhereWithoutSelected_inInput = {
+    where?: AlternativeWhereInput
+    data: XOR<AlternativeUpdateWithoutSelected_inInput, AlternativeUncheckedUpdateWithoutSelected_inInput>
+  }
+
+  export type AlternativeUpdateWithoutSelected_inInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    question?: QuestionUpdateOneRequiredWithoutAlternativesNestedInput
+  }
+
+  export type AlternativeUncheckedUpdateWithoutSelected_inInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    question_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionCreateManyAuthorInput = {
@@ -26593,10 +28119,11 @@ export namespace Prisma {
   export type QuestionResponseCreateManyUserInput = {
     id?: string
     question_id: string
-    alternative_id: string
     collection_id?: string | null
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
   }
 
   export type CollectionUpdateWithoutAuthorInput = {
@@ -26769,27 +28296,32 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
     question?: QuestionUpdateOneRequiredWithoutResponsesNestedInput
-    alternative?: AlternativeUpdateOneRequiredWithoutResponsesNestedInput
     collection?: CollectionUpdateOneWithoutResponsesNestedInput
+    selected_alternatives?: ResponseAlternativeUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     collection_id?: NullableStringFieldUpdateOperationsInput | string | null
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+    selected_alternatives?: ResponseAlternativeUncheckedUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     collection_id?: NullableStringFieldUpdateOperationsInput | string | null
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type QuestionCollectionCreateManyCollectionInput = {
@@ -26821,9 +28353,10 @@ export namespace Prisma {
     id?: string
     user_id: string
     question_id: string
-    alternative_id: string
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
   }
 
   export type QuestionCollectionUpdateWithoutCollectionInput = {
@@ -26905,27 +28438,32 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutQuestion_responsesNestedInput
     question?: QuestionUpdateOneRequiredWithoutResponsesNestedInput
-    alternative?: AlternativeUpdateOneRequiredWithoutResponsesNestedInput
+    selected_alternatives?: ResponseAlternativeUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateWithoutCollectionInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+    selected_alternatives?: ResponseAlternativeUncheckedUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateManyWithoutCollectionInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type QuestionCollectionCreateManyQuestionInput = {
@@ -26964,10 +28502,11 @@ export namespace Prisma {
   export type QuestionResponseCreateManyQuestionInput = {
     id?: string
     user_id: string
-    alternative_id: string
     collection_id?: string | null
     response_time?: number | null
     answered_at?: Date | string
+    attempt_number?: number
+    is_final?: boolean
   }
 
   export type QuestionCollectionUpdateWithoutQuestionInput = {
@@ -26991,7 +28530,7 @@ export namespace Prisma {
     is_correct?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    responses?: QuestionResponseUpdateManyWithoutAlternativeNestedInput
+    selected_in?: ResponseAlternativeUpdateManyWithoutAlternativeNestedInput
   }
 
   export type AlternativeUncheckedUpdateWithoutQuestionInput = {
@@ -27000,7 +28539,7 @@ export namespace Prisma {
     is_correct?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    responses?: QuestionResponseUncheckedUpdateManyWithoutAlternativeNestedInput
+    selected_in?: ResponseAlternativeUncheckedUpdateManyWithoutAlternativeNestedInput
   }
 
   export type AlternativeUncheckedUpdateManyWithoutQuestionInput = {
@@ -27075,27 +28614,32 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutQuestion_responsesNestedInput
-    alternative?: AlternativeUpdateOneRequiredWithoutResponsesNestedInput
     collection?: CollectionUpdateOneWithoutResponsesNestedInput
+    selected_alternatives?: ResponseAlternativeUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateWithoutQuestionInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     collection_id?: NullableStringFieldUpdateOperationsInput | string | null
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
+    selected_alternatives?: ResponseAlternativeUncheckedUpdateManyWithoutResponseNestedInput
   }
 
   export type QuestionResponseUncheckedUpdateManyWithoutQuestionInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    alternative_id?: StringFieldUpdateOperationsInput | string
     collection_id?: NullableStringFieldUpdateOperationsInput | string | null
     response_time?: NullableIntFieldUpdateOperationsInput | number | null
     answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_number?: IntFieldUpdateOperationsInput | number
+    is_final?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type QuestionCreateManyTypeInput = {
@@ -27154,40 +28698,24 @@ export namespace Prisma {
     author_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type QuestionResponseCreateManyAlternativeInput = {
+  export type ResponseAlternativeCreateManyAlternativeInput = {
     id?: string
-    user_id: string
-    question_id: string
-    collection_id?: string | null
-    response_time?: number | null
-    answered_at?: Date | string
+    response_id: string
   }
 
-  export type QuestionResponseUpdateWithoutAlternativeInput = {
+  export type ResponseAlternativeUpdateWithoutAlternativeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    response_time?: NullableIntFieldUpdateOperationsInput | number | null
-    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutQuestion_responsesNestedInput
-    question?: QuestionUpdateOneRequiredWithoutResponsesNestedInput
-    collection?: CollectionUpdateOneWithoutResponsesNestedInput
+    response?: QuestionResponseUpdateOneRequiredWithoutSelected_alternativesNestedInput
   }
 
-  export type QuestionResponseUncheckedUpdateWithoutAlternativeInput = {
+  export type ResponseAlternativeUncheckedUpdateWithoutAlternativeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    user_id?: StringFieldUpdateOperationsInput | string
-    question_id?: StringFieldUpdateOperationsInput | string
-    collection_id?: NullableStringFieldUpdateOperationsInput | string | null
-    response_time?: NullableIntFieldUpdateOperationsInput | number | null
-    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    response_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type QuestionResponseUncheckedUpdateManyWithoutAlternativeInput = {
+  export type ResponseAlternativeUncheckedUpdateManyWithoutAlternativeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    user_id?: StringFieldUpdateOperationsInput | string
-    question_id?: StringFieldUpdateOperationsInput | string
-    collection_id?: NullableStringFieldUpdateOperationsInput | string | null
-    response_time?: NullableIntFieldUpdateOperationsInput | number | null
-    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    response_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type CollectionUserAccessCreateManyPermission_typeInput = {
@@ -27300,6 +28828,26 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     question_id?: StringFieldUpdateOperationsInput | string
     assigned_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResponseAlternativeCreateManyResponseInput = {
+    id?: string
+    alternative_id: string
+  }
+
+  export type ResponseAlternativeUpdateWithoutResponseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    alternative?: AlternativeUpdateOneRequiredWithoutSelected_inNestedInput
+  }
+
+  export type ResponseAlternativeUncheckedUpdateWithoutResponseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    alternative_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ResponseAlternativeUncheckedUpdateManyWithoutResponseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    alternative_id?: StringFieldUpdateOperationsInput | string
   }
 
 

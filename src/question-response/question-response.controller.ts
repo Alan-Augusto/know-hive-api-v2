@@ -78,4 +78,28 @@ export class QuestionResponseController {
   remove(@Param('id') id: string) {
     return this.questionResponseService.remove(id);
   }
+
+  @Get('attempts/:userId/:questionId')
+  @ApiParam({ name: 'userId', description: 'ID do usuário' })
+  @ApiParam({ name: 'questionId', description: 'ID da questão' })
+  @ApiQuery({ name: 'collectionId', required: false, description: 'ID da coleção (opcional)' })
+  getUserAttempts(
+    @Param('userId') userId: string,
+    @Param('questionId') questionId: string,
+    @Query('collectionId') collectionId?: string
+  ) {
+    return this.questionResponseService.getUserAttempts(userId, questionId, collectionId);
+  }
+
+  @Get('final/:userId/:questionId')
+  @ApiParam({ name: 'userId', description: 'ID do usuário' })
+  @ApiParam({ name: 'questionId', description: 'ID da questão' })
+  @ApiQuery({ name: 'collectionId', required: false, description: 'ID da coleção (opcional)' })
+  getFinalResponse(
+    @Param('userId') userId: string,
+    @Param('questionId') questionId: string,
+    @Query('collectionId') collectionId?: string
+  ) {
+    return this.questionResponseService.getFinalResponse(userId, questionId, collectionId);
+  }
 }

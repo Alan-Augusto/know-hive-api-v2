@@ -234,10 +234,17 @@ exports.Prisma.QuestionResponseScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   question_id: 'question_id',
-  alternative_id: 'alternative_id',
   collection_id: 'collection_id',
   response_time: 'response_time',
-  answered_at: 'answered_at'
+  answered_at: 'answered_at',
+  attempt_number: 'attempt_number',
+  is_final: 'is_final'
+};
+
+exports.Prisma.ResponseAlternativeScalarFieldEnum = {
+  id: 'id',
+  response_id: 'response_id',
+  alternative_id: 'alternative_id'
 };
 
 exports.Prisma.SortOrder = {
@@ -271,7 +278,8 @@ exports.Prisma.ModelName = {
   Tag: 'Tag',
   CollectionTag: 'CollectionTag',
   QuestionTag: 'QuestionTag',
-  QuestionResponse: 'QuestionResponse'
+  QuestionResponse: 'QuestionResponse',
+  ResponseAlternative: 'ResponseAlternative'
 };
 
 /**
