@@ -748,6 +748,13 @@ export class QuestionResponseService {
     const responses = await this.prisma.questionResponse.findMany({
       where: { collection_id: collectionId },
       include: {
+        question: {
+          select: {
+            id: true,
+            title: true,
+            statement: true,
+          },
+        },
         selected_alternatives: {
           include: {
             alternative: {
@@ -763,11 +770,33 @@ export class QuestionResponseService {
     const totalResponses = responses.length;
     let correctResponses = 0;
 
+    // Estatísticas por questão
+    const questionStatsMap: Record<string, {
+      question_id: string;
+      question_title: string;
+      question_statement: string;
+      total_responses: number;
+      correct_responses: number;
+    }> = {};
+
     responses.forEach(response => {
       const selectedAlternatives = response.selected_alternatives.map(sa => sa.alternative);
-      const isCorrect = selectedAlternatives.every(alt => alt.is_correct) && 
-                       selectedAlternatives.length > 0;
+      const isCorrect = selectedAlternatives.every(alt => alt.is_correct) &&
+                        selectedAlternatives.length > 0;
       if (isCorrect) correctResponses++;
+
+      const qid = response.question.id;
+      if (!questionStatsMap[qid]) {
+        questionStatsMap[qid] = {
+          question_id: qid,
+          question_title: response.question.title,
+          question_statement: response.question.statement,
+          total_responses: 0,
+          correct_responses: 0,
+        };
+      }
+      questionStatsMap[qid].total_responses++;
+      if (isCorrect) questionStatsMap[qid].correct_responses++;
     });
 
     const totalTime = responses.reduce((sum, r) => sum + (r.response_time || 0), 0);
@@ -781,6 +810,7 @@ export class QuestionResponseService {
       accuracy_percentage: totalResponses > 0 ? (correctResponses / totalResponses) * 100 : 0,
       total_time_seconds: totalTime,
       average_time_seconds: averageTime,
+      question_stats: Object.values(questionStatsMap),
     };
   }
 }
