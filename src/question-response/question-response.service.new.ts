@@ -46,8 +46,8 @@ export class QuestionResponseService {
     }
 
     // Validação específica por tipo de questão
-    if (question.type.name === 'Verdadeiro ou Falso' && alternative_ids.length > 1) {
-      throw new BadRequestException('Questões de Verdadeiro ou Falso devem ter apenas uma alternativa selecionada');
+    if (question.type.name === 'Múltipla Escolha' && alternative_ids.length > 1) {
+      throw new BadRequestException('Questões de Múltipla Escolha devem ter apenas uma alternativa selecionada');
     }
 
     // Se collection_id foi fornecido, verificar se existe
