@@ -14,9 +14,10 @@ import { AuthModule } from './auth/auth.module';
 import { MediaModule } from './media/media.module';
 import { RelQuestionUserAccessModule } from './rel-question-user-access/rel-question-user-access.module';
 import { TagsModule } from './tags/tags.module';
+import { QuestionResponseModule } from './question-response/question-response.module';
 
 @Module({
-  imports: [UsersModule, CollectionsModule, QuestionsModule, QuestionTypesModule, AlternativesModule, RelQuestionCollectionModule, CollectionPermissionTypeModule, RelCollectionUserAccessModule, AuthModule, MediaModule, RelQuestionUserAccessModule, TagsModule],
+  imports: [UsersModule, CollectionsModule, QuestionsModule, QuestionTypesModule, AlternativesModule, RelQuestionCollectionModule, CollectionPermissionTypeModule, RelCollectionUserAccessModule, AuthModule, MediaModule, RelQuestionUserAccessModule, TagsModule, QuestionResponseModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

@@ -26,6 +26,7 @@ model User {
   questions_access    QuestionUserAccess[] // Nova relação
   collection_likes    CollectionLike[]     // Nova relação para likes de coleções
   question_likes      QuestionLike[]       // Nova relação para likes de questões
+  question_responses  QuestionResponse[]   // Nova relação para respostas às questões
 }
 
 model Collection {
@@ -41,6 +42,7 @@ model Collection {
   permissions CollectionUserAccess[]
   likes       CollectionLike[]       // Nova relação para likes
   tags        CollectionTag[]        // Nova relação para tags
+  responses   QuestionResponse[]     // Nova relação para respostas no contexto da coleção
 }
 
 model Question {
@@ -60,6 +62,7 @@ model Question {
   permissions  QuestionUserAccess[] // Nova relação
   likes        QuestionLike[]       // Nova relação para likes
   tags         QuestionTag[]        // Nova relação para tags
+  responses    QuestionResponse[]   // Nova relação para respostas
 }
 
 model QuestionType {
@@ -75,6 +78,7 @@ model Alternative {
   is_correct  Boolean  @default(false) // Indica se esta é a alternativa correta
   question_id String
   question    Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
+  responses   QuestionResponse[] // Nova relação para respostas
 
   created_at DateTime @default(now()) // Opcional: se quiser saber quando a alternativa foi criada
   updated_at DateTime @updatedAt // Opcional: se quiser saber quando foi atualizada
@@ -189,4 +193,27 @@ model QuestionTag {
   @@unique([question_id, tag_id]) // Garante que uma tag não pode ser atribuída duas vezes à mesma questão
   @@index([question_id]) // Index para otimizar a busca de tags por questão
   @@index([tag_id]) // Index para otimizar a busca de questões por tag
+}
+
+model QuestionResponse {
+  id            String      @id @default(uuid())
+  user_id       String
+  question_id   String
+  alternative_id String
+  collection_id String?     // Opcional: Se a resposta foi dada no contexto de uma coleção
+  response_time Int?        // Tempo em segundos para responder (opcional)
+  answered_at   DateTime    @default(now())
+  
+  // Relações
+  user          User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  question      Question    @relation(fields: [question_id], references: [id], onDelete: Cascade)
+  alternative   Alternative @relation(fields: [alternative_id], references: [id], onDelete: Cascade)
+  collection    Collection? @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+
+  // Índices para otimização
+  @@index([user_id]) // Para buscar respostas de um usuário
+  @@index([question_id]) // Para buscar respostas de uma questão
+  @@index([collection_id]) // Para buscar respostas de uma coleção
+  @@index([user_id, collection_id]) // Para buscar progresso do usuário em uma coleção
+  @@index([answered_at]) // Para ordenação temporal
 }

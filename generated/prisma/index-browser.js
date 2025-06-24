@@ -230,6 +230,16 @@ exports.Prisma.QuestionTagScalarFieldEnum = {
   assigned_at: 'assigned_at'
 };
 
+exports.Prisma.QuestionResponseScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  question_id: 'question_id',
+  alternative_id: 'alternative_id',
+  collection_id: 'collection_id',
+  response_time: 'response_time',
+  answered_at: 'answered_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -260,7 +270,8 @@ exports.Prisma.ModelName = {
   QuestionLike: 'QuestionLike',
   Tag: 'Tag',
   CollectionTag: 'CollectionTag',
-  QuestionTag: 'QuestionTag'
+  QuestionTag: 'QuestionTag',
+  QuestionResponse: 'QuestionResponse'
 };
 
 /**
