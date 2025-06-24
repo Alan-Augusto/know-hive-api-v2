@@ -140,7 +140,7 @@ export class UsersService {
     const responses = await this.prisma.questionResponse.findMany({
       where: {
         user_id: userId,
-        is_final: true
+        // is_final: true
       },
       include: {
         selected_alternatives: {
@@ -150,6 +150,8 @@ export class UsersService {
         }
       }
     });
+
+    console.log(`Total responses found: ${responses}`);
 
     const total = responses.length;
     let correct = 0;
