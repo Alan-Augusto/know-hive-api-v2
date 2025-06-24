@@ -205,17 +205,36 @@ export class CollectionsService {
   }
 
   async findOne(id: string) {
+    // Get question IDs for the collection
     const questions = await this.prisma.questionCollection.findMany({
       where: { collection_id: id },
       select: { question_id: true }
     });
 
+    // Get the collection with tags and full questions
     const collection = await this.prisma.collection.findUnique({
       where: { id },
       include: {
         tags: {
           include: {
             tag: true
+          }
+        },
+        questions: {
+          include: {
+            question: {
+              include: {
+                type: true,
+                alternatives: true,
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    profile_picture: true
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -226,7 +245,8 @@ export class CollectionsService {
     return {
       ...collection,
       questions_ids: questions.map(q => q.question_id),
-      tags: collection.tags.map(t => t.tag.name)
+      tags: collection.tags.map(t => t.tag.name),
+      questions: collection.questions.map(qc => qc.question)
     };
   }
 
