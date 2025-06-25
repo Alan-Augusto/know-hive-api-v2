@@ -282,37 +282,112 @@ export class UsersService {
       is_liked: question.likes.length > 0
     }));
   }
-
   private async getRecentCollections(userId: string): Promise<RecentItemDto[]> {
-    const collections = await this.prisma.collection.findMany({
+    // Primeiro, buscar coleções respondidas mais recentemente
+    const recentlyAnsweredCollections = await this.prisma.collection.findMany({
       where: {
-        OR: [
-          { author_id: userId }, // Coleções criadas pelo usuário
-          { 
-            permissions: {
-              some: { user_id: userId }
-            }
-          }, // Coleções compartilhadas com o usuário
-          { is_public: true } // Coleções públicas
-        ]
-      },      include: {
+        responses: {
+          some: {
+            user_id: userId
+          }
+        }
+      },
+      include: {
         author: {
           select: { name: true, profile_picture: true }
+        },
+        tags: {
+          select: { tag: true }
+        },
+        responses: {
+          where: { user_id: userId },
+          orderBy: { answered_at: 'desc' },
+          take: 1,
+          select: { answered_at: true }
         },
         likes: {
           where: { user_id: userId },
           select: { id: true }
         }
       },
-      orderBy: { created_at: 'desc' },
+      orderBy: {
+        responses: {
+          _count: 'desc'
+        }
+      },
       take: 5
-    });    return collections.map(collection => ({
+    });
+
+    // Ordenar as coleções respondidas pela data da resposta mais recente
+    const sortedAnsweredCollections = recentlyAnsweredCollections.sort((a, b) => {
+      const aLastResponse = a.responses[0]?.answered_at || new Date(0);
+      const bLastResponse = b.responses[0]?.answered_at || new Date(0);
+      return bLastResponse.getTime() - aLastResponse.getTime();
+    });
+
+    let allCollections = sortedAnsweredCollections.map(collection => ({
+      ...collection,
+      lastResponseDate: collection.responses[0]?.answered_at
+    }));
+    
+    // Se não temos 5 coleções respondidas, buscar coleções criadas recentemente para completar
+    if (allCollections.length < 5) {
+      const answeredCollectionIds = allCollections.map(c => c.id);
+      
+      const recentlyCreatedCollections = await this.prisma.collection.findMany({
+        where: {
+          AND: [
+            {
+              id: {
+                notIn: answeredCollectionIds
+              }
+            },
+            {
+              OR: [
+                { author_id: userId }, // Coleções criadas pelo usuário
+                { 
+                  permissions: {
+                    some: { user_id: userId }
+                  }
+                }, // Coleções compartilhadas com o usuário
+                { is_public: true } // Coleções públicas
+              ]
+            }
+          ]
+        },
+        include: {
+          author: {
+            select: { name: true, profile_picture: true }
+          },
+          tags: {
+            select: { tag: true }
+          },
+          likes: {
+            where: { user_id: userId },
+            select: { id: true }
+          }
+        },
+        orderBy: { created_at: 'desc' },
+        take: 5 - allCollections.length
+      });
+
+      const createdCollectionsWithResponse = recentlyCreatedCollections.map(collection => ({
+        ...collection,
+        responses: [] as { answered_at: Date }[],
+        lastResponseDate: undefined
+      }));
+
+      allCollections = [...allCollections, ...createdCollectionsWithResponse];
+    }
+
+    return allCollections.map(collection => ({
       id: collection.id,
       title: collection.title,
-      date: collection.created_at,
+      date: collection.lastResponseDate || collection.created_at,
       author_name: collection.author.name,
+      tags: collection.tags?.map(t => t.tag.name) || [],
       profile_picture: collection.author.profile_picture,
-      type: 'collection' as const,
+      type: collection.lastResponseDate ? 'respondida' : 'criada',
       is_owned: collection.author_id === userId,
       is_liked: collection.likes.length > 0
     }));
