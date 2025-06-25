@@ -7,17 +7,29 @@ export class RecentItemDto {
   @ApiProperty({ example: 'Título da questão ou coleção' })
   title: string;
 
+  @ApiProperty({ example: 'Enunciado da questão', required: false })
+  statment?: string;
+
   @ApiProperty({ example: '2025-06-24T10:30:00Z' })
   created_at: Date;
 
   @ApiProperty({ example: 'João Silva' })
   author_name?: string;
 
+  @ApiProperty({ example: ['Matemática', 'Álgebra'], type: [String], required: false })
+  tags?: string[];
+
+  @ApiProperty({ example: 'https://example.com/profile.jpg', required: false })
+  profile_picture?: string;
+
   @ApiProperty({ example: 'question' })
   type: 'question' | 'collection';
 
   @ApiProperty({ example: false })
   is_owned: boolean;
+
+  @ApiProperty({ example: true })
+  is_liked: boolean;
 }
 
 export class TagStatisticDto {

@@ -177,38 +177,109 @@ export class UsersService {
       correct,
       accuracy: Math.round(accuracy * 100) / 100 // Arredondar para 2 casas decimais
     };
-  }
-
-  private async getRecentQuestions(userId: string): Promise<RecentItemDto[]> {
-    const questions = await this.prisma.question.findMany({
+  }  private async getRecentQuestions(userId: string): Promise<RecentItemDto[]> {
+    // Primeiro, buscar questões respondidas mais recentemente
+    const recentlyAnsweredQuestions = await this.prisma.question.findMany({
       where: {
-        OR: [
-          { author_id: userId }, // Questões criadas pelo usuário
-          { 
-            permissions: {
-              some: { user_id: userId }
-            }
-          }, // Questões compartilhadas com o usuário
-          { is_public: true } // Questões públicas
-        ]
+        responses: {
+          some: {
+            user_id: userId
+          }
+        }
       },
       include: {
         author: {
           select: { name: true, profile_picture: true }
+        },        tags: {
+          select: { tag: true }
+        },
+        responses: {
+          where: { user_id: userId },
+          orderBy: { answered_at: 'desc' },
+          take: 1,
+          select: { answered_at: true }
+        },
+        likes: {
+          where: { user_id: userId },
+          select: { id: true }
         }
       },
-      orderBy: { created_at: 'desc' },
+      orderBy: {
+        responses: {
+          _count: 'desc'
+        }
+      },
       take: 5
     });
 
-    return questions.map(question => ({
+    // Ordenar as questões respondidas pela data da resposta mais recente
+    const sortedAnsweredQuestions = recentlyAnsweredQuestions.sort((a, b) => {
+      const aLastResponse = a.responses[0]?.answered_at || new Date(0);
+      const bLastResponse = b.responses[0]?.answered_at || new Date(0);
+      return bLastResponse.getTime() - aLastResponse.getTime();
+    });
+
+    let allQuestions = sortedAnsweredQuestions.map(question => ({
+      ...question,
+      lastResponseDate: question.responses[0]?.answered_at
+    }));
+    
+    // Se não temos 5 questões respondidas, buscar questões criadas recentemente para completar
+    if (allQuestions.length < 5) {
+      const answeredQuestionIds = allQuestions.map(q => q.id);
+      
+      const recentlyCreatedQuestions = await this.prisma.question.findMany({
+        where: {
+          AND: [
+            {
+              id: {
+                notIn: answeredQuestionIds
+              }
+            },
+            {
+              OR: [
+                { author_id: userId }, // Questões criadas pelo usuário
+                { 
+                  permissions: {
+                    some: { user_id: userId }
+                  }
+                }, // Questões compartilhadas com o usuário
+                { is_public: true } // Questões públicas
+              ]
+            }
+          ]
+        },        include: {
+          author: {
+            select: { name: true, profile_picture: true }
+          },
+          tags: {
+            select: { tag: true }
+          },
+          likes: {
+            where: { user_id: userId },
+            select: { id: true }
+          }
+        },
+        orderBy: { created_at: 'desc' },
+        take: 5 - allQuestions.length
+      });      const createdQuestionsWithResponse = recentlyCreatedQuestions.map(question => ({
+        ...question,
+        responses: [] as { answered_at: Date }[],
+        lastResponseDate: undefined
+      }));
+
+      allQuestions = [...allQuestions, ...createdQuestionsWithResponse];
+    }    return allQuestions.map(question => ({
       id: question.id,
       title: question.title,
+      statment: question.statement,
       created_at: question.created_at,
       author_name: question.author.name,
+      tags: question.tags.map(t => t.tag.name),
       profile_picture: question.author.profile_picture,
       type: 'question' as const,
-      is_owned: question.author_id === userId
+      is_owned: question.author_id === userId,
+      is_liked: question.likes.length > 0
     }));
   }
 
@@ -224,24 +295,26 @@ export class UsersService {
           }, // Coleções compartilhadas com o usuário
           { is_public: true } // Coleções públicas
         ]
-      },
-      include: {
+      },      include: {
         author: {
           select: { name: true, profile_picture: true }
+        },
+        likes: {
+          where: { user_id: userId },
+          select: { id: true }
         }
       },
       orderBy: { created_at: 'desc' },
       take: 5
-    });
-
-    return collections.map(collection => ({
+    });    return collections.map(collection => ({
       id: collection.id,
       title: collection.title,
       created_at: collection.created_at,
       author_name: collection.author.name,
       profile_picture: collection.author.profile_picture,
       type: 'collection' as const,
-      is_owned: collection.author_id === userId
+      is_owned: collection.author_id === userId,
+      is_liked: collection.likes.length > 0
     }));
   }
 
