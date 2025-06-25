@@ -273,11 +273,11 @@ export class UsersService {
       id: question.id,
       title: question.title,
       statment: question.statement,
-      created_at: question.created_at,
+      date: question.lastResponseDate || question.created_at,
       author_name: question.author.name,
       tags: question.tags.map(t => t.tag.name),
       profile_picture: question.author.profile_picture,
-      type: 'question' as const,
+      type: question.lastResponseDate ? 'respondida' : 'criada',
       is_owned: question.author_id === userId,
       is_liked: question.likes.length > 0
     }));
@@ -309,7 +309,7 @@ export class UsersService {
     });    return collections.map(collection => ({
       id: collection.id,
       title: collection.title,
-      created_at: collection.created_at,
+      date: collection.created_at,
       author_name: collection.author.name,
       profile_picture: collection.author.profile_picture,
       type: 'collection' as const,
