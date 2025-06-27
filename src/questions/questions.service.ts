@@ -147,42 +147,6 @@ export class QuestionsService {
     }));
   }
 
-  async findLikedByUser(userId: string) {
-    const questions = await this.prisma.question.findMany({
-      where: {
-        likes: {
-          some: {
-            user_id: userId
-          }
-        },
-        is_public: true
-      },
-      include: {
-        type: true,
-        author: {
-          select: {
-            name: true,
-            profile_picture: true
-          }
-        },
-        likes: {
-          where: {
-            user_id: userId
-          },
-          select: {
-            id: true
-          }
-        }
-      }
-    });
-
-    return questions.map(q => ({
-      ...q,
-      is_liked: q.likes.length > 0,
-      likes: undefined // remove likes array from response
-    }));
-  }
-
   async findOne(id: string) {
     const question = await this.prisma.question.findUnique({
       where: {

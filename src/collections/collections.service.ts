@@ -139,38 +139,6 @@ export class CollectionsService {
     }));
   }
 
-  async findLikedByUser(userId: string) {
-    const collections = await this.prisma.collection.findMany({
-      where: {
-        likes: {
-          some: {
-            user_id: userId
-          }
-        }
-      },
-      include: {
-        author: {
-          select: {
-            name: true,
-            profile_picture: true
-          }
-        },
-        likes: {
-          where: {
-            user_id: userId
-          }
-        }
-      }
-    });
-
-    // Add is_liked field to each collection
-    return collections.map(collection => ({
-      ...collection,
-      is_liked: collection.likes.length > 0,
-      likes: undefined // Remove likes array from response
-    }));
-  }
-
   async findByUser(userId: string) {
     const collections = await this.prisma.collection.findMany({
       where: {

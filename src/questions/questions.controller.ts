@@ -38,11 +38,6 @@ export class QuestionsController {
     return this.questionsService.findAllForUser(userId);
   }
 
-  @Get('liked-by-user/:userId')
-  findLikedByUser(@Param('userId') userId: string) {
-    return this.questionsService.findLikedByUser(userId);
-  }
-
   @Get('user/:userId')
   findByUser(@Param('userId') userId: string) {
     return this.questionsService.findByUser(userId);

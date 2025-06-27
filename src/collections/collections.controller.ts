@@ -39,11 +39,6 @@ export class CollectionsController {
     return this.collectionsService.findAllForUser(userId);
   }
 
-  @Get('liked-by-user/:userId')
-  findLikedByUser(@Param('userId') userId: string) {
-    return this.collectionsService.findLikedByUser(userId);
-  }
-
   @Get('user/:userId')
   findByUser(@Param('userId') userId: string) {
     return this.collectionsService.findByUser(userId);
