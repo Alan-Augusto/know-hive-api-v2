@@ -60,11 +60,6 @@ export class RelQuestionUserAccessService {
   }
 
   async grantAccess(giverUserId: string, questionId:string, receiverEmail: string, accessTypeId: number) {
-    console.log('Granting access:', {
-      questionId,
-      receiverEmail,
-      accessTypeId,
-    });
     const receiver = await this.prisma.user.findUnique({
       where: { email: receiverEmail },
     });

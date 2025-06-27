@@ -3,6 +3,7 @@ import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { CreateCollectionWithQuestionsDto } from './dto/create-collection-with-questions.dto';
 import { LikeCollectionDto } from './dto/like-collection.dto';
+import { SearchCollectionsDto } from './dto/search-collections.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { TagsService } from '../tags/tags.service';
 
@@ -114,6 +115,38 @@ export class CollectionsService {
     const collections = await this.prisma.collection.findMany({
       where: {
         is_public: true
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            profile_picture: true
+          }
+        },
+        likes: {
+          where: {
+            user_id: userId
+          }
+        }
+      }
+    });
+
+    // Add is_liked field to each collection
+    return collections.map(collection => ({
+      ...collection,
+      is_liked: collection.likes.length > 0,
+      likes: undefined // Remove likes array from response
+    }));
+  }
+
+  async findLikedByUser(userId: string) {
+    const collections = await this.prisma.collection.findMany({
+      where: {
+        likes: {
+          some: {
+            user_id: userId
+          }
+        }
       },
       include: {
         author: {
@@ -301,5 +334,88 @@ export class CollectionsService {
       });
       return { liked: true, message: 'Like adicionado com sucesso' };
     }
+  }
+
+  async searchPublicCollections(searchCollectionsDto: SearchCollectionsDto) {
+    const { searchTerm, userId } = searchCollectionsDto;
+
+    const collections = await this.prisma.collection.findMany({
+      where: {
+        AND: [
+          {
+            is_public: true,
+          },
+          {
+            author_id: {
+              not: userId,
+            },
+          },
+          {
+            OR: [
+              {
+                title: {
+                  contains: searchTerm,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                description: {
+                  contains: searchTerm,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                tags: {
+                  some: {
+                    tag: {
+                      name: {
+                        contains: searchTerm,
+                        mode: 'insensitive',
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        likes: {
+          where: {
+            user_id: userId
+          }
+        },
+        _count: {
+          select: {
+            questions: true,
+            likes: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
+
+    // Add is_liked field to each collection and transform tags to array of strings
+    return collections.map(collection => ({
+      ...collection,
+      is_liked: collection.likes.length > 0,
+      likes: undefined, // Remove likes array from response
+      tags: collection.tags.map(t => t.tag.name)
+    }));
   }
 }

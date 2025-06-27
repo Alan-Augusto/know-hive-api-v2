@@ -4,6 +4,7 @@ import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { CreateCollectionWithQuestionsDto } from './dto/create-collection-with-questions.dto';
 import { LikeCollectionDto } from './dto/like-collection.dto';
+import { SearchCollectionsDto } from './dto/search-collections.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { TagsService } from '../tags/tags.service';
 import { AssignTagsDto } from '../tags/dto/assign-tags.dto';
@@ -36,6 +37,11 @@ export class CollectionsController {
   @Get('all-for-user/:userId')
   findAllForUser(@Param('userId') userId: string) {
     return this.collectionsService.findAllForUser(userId);
+  }
+
+  @Get('liked-by-user/:userId')
+  findLikedByUser(@Param('userId') userId: string) {
+    return this.collectionsService.findLikedByUser(userId);
   }
 
   @Get('user/:userId')
@@ -78,5 +84,11 @@ export class CollectionsController {
   @Delete(':id/tags/:tagId')
   removeTag(@Param('id') id: string, @Param('tagId') tagId: string) {
     return this.tagsService.removeTagFromCollection(id, tagId);
+  }
+
+  @Post('search')
+  @ApiBody({ type: SearchCollectionsDto })
+  searchPublicCollections(@Body() searchCollectionsDto: SearchCollectionsDto) {
+    return this.collectionsService.searchPublicCollections(searchCollectionsDto);
   }
 }

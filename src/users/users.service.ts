@@ -151,8 +151,6 @@ export class UsersService {
       }
     });
 
-    console.log(`Total responses found: ${responses}`);
-
     const total = responses.length;
     let correct = 0;
 
@@ -435,7 +433,7 @@ export class UsersService {
     // Converter para array e ordenar por contagem (descendente)
     return Array.from(tagCounts.values())
       .sort((a, b) => b.count - a.count)
-      .slice(0, 5)
+      .slice(0, 12)
       .map(tag => ({
         id: tag.id,
         name: tag.name,

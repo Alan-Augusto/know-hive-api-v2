@@ -4,6 +4,7 @@ import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
 import { LikeQuestionDto } from './dto/like-question.dto';
+import { SearchQuestionsDto } from './dto/search-questions.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { TagsService } from '../tags/tags.service';
 import { AssignTagsDto } from '../tags/dto/assign-tags.dto';
@@ -35,6 +36,11 @@ export class QuestionsController {
   @Get('all-for-user/:userId')
   findAllForUser(@Param('userId') userId: string) {
     return this.questionsService.findAllForUser(userId);
+  }
+
+  @Get('liked-by-user/:userId')
+  findLikedByUser(@Param('userId') userId: string) {
+    return this.questionsService.findLikedByUser(userId);
   }
 
   @Get('user/:userId')
@@ -75,5 +81,11 @@ export class QuestionsController {
   @Delete(':id/tags/:tagId')
   removeTag(@Param('id') id: string, @Param('tagId') tagId: string) {
     return this.tagsService.removeTagFromQuestion(id, tagId);
+  }
+
+  @Post('search')
+  @ApiBody({ type: SearchQuestionsDto })
+  searchPublicQuestions(@Body() searchQuestionsDto: SearchQuestionsDto) {
+    return this.questionsService.searchPublicQuestions(searchQuestionsDto);
   }
 }

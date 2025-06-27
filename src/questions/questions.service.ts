@@ -3,6 +3,7 @@ import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CreateQuestionWithAlternativesDto } from './dto/create-question-with-alternatives.dto';
 import { LikeQuestionDto } from './dto/like-question.dto';
+import { SearchQuestionsDto } from './dto/search-questions.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { TagsService } from '../tags/tags.service';
 
@@ -118,6 +119,42 @@ export class QuestionsService {
   async findAllForUser(userId: string) {
     const questions = await this.prisma.question.findMany({
       where: {
+        is_public: true
+      },
+      include: {
+        type: true,
+        author: {
+          select: {
+            name: true,
+            profile_picture: true
+          }
+        },
+        likes: {
+          where: {
+            user_id: userId
+          },
+          select: {
+            id: true
+          }
+        }
+      }
+    });
+
+    return questions.map(q => ({
+      ...q,
+      is_liked: q.likes.length > 0,
+      likes: undefined // remove likes array from response
+    }));
+  }
+
+  async findLikedByUser(userId: string) {
+    const questions = await this.prisma.question.findMany({
+      where: {
+        likes: {
+          some: {
+            user_id: userId
+          }
+        },
         is_public: true
       },
       include: {
@@ -321,5 +358,92 @@ export class QuestionsService {
       });
       return { liked: true, message: 'Like adicionado com sucesso' };
     }
+  }
+
+  async searchPublicQuestions(searchQuestionsDto: SearchQuestionsDto) {
+    const { searchTerm, userId } = searchQuestionsDto;
+
+    const questions = await this.prisma.question.findMany({
+      where: {
+        AND: [
+          {
+            is_public: true,
+          },
+          {
+            author_id: {
+              not: userId,
+            },
+          },
+          {
+            OR: [
+              {
+                title: {
+                  contains: searchTerm,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                statement: {
+                  contains: searchTerm,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                tags: {
+                  some: {
+                    tag: {
+                      name: {
+                        contains: searchTerm,
+                        mode: 'insensitive',
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        type: true,
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        alternatives: true,
+        likes: {
+          where: {
+            user_id: userId,
+          },
+          select: {
+            id: true,
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+            responses: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
+
+    return questions.map(question => ({
+      ...question,
+      is_liked: question.likes.length > 0,
+      tags: question.tags.map((t: any) => t.tag.name),
+      likes: undefined, // Remove likes array from response
+    }));
   }
 }
