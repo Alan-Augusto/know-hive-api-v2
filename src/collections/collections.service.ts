@@ -154,6 +154,14 @@ export class CollectionsService {
                 user_id: userId
               }
             }
+          },
+          // Coleções que o usuário deu like (mesmo se não públicas)
+          {
+            likes: {
+              some: {
+                user_id: userId
+              }
+            }
           }
         ]
       },
@@ -197,10 +205,11 @@ export class CollectionsService {
       }
     });
 
-    // Add is_liked field to each collection
+    // Add is_liked and shared_with_me fields to each collection
     return collections.map(collection => ({
       ...collection,
       is_liked: collection.likes.length > 0,
+      shared_with_me: collection.permissions.length > 0 && collection.author_id !== userId,
       likes: undefined // Remove likes array from response
     }));
   }

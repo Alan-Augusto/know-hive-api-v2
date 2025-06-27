@@ -247,6 +247,14 @@ export class QuestionsService {
                 user_id: userId
               }
             }
+          },
+          // Questões que o usuário deu like (mesmo que não sejam públicas)
+          {
+            likes: {
+              some: {
+                user_id: userId
+              }
+            }
           }
         ]
       },
@@ -283,11 +291,13 @@ export class QuestionsService {
         ...question,
         is_liked: question.likes.length > 0,
         likes_count: question._count.likes,
+        shared_with_me: question.author_id !== userId && question.permissions.length > 0,
         likes: undefined, // Remove likes array from response
         _count: undefined // Remove _count from response
       }))
     );
   }
+
   async like(likeQuestionDto: LikeQuestionDto) {
     const { user_id, question_id } = likeQuestionDto;
 
